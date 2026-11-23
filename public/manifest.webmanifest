@@ -1,6 +1,6 @@
 {
-  "name": "Labour Attendance / கூலி வருகை",
-  "short_name": "Attendance",
+  "name": "Day Attendance / நாள் வருகை",
+  "short_name": "Day Attendance",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
