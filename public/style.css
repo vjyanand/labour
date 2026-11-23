@@ -56,3 +56,13 @@ tfoot td{font-weight:700;border-top:2px solid var(--g)}
 #toast.show{opacity:1}
 details summary{cursor:pointer;font-weight:600}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+select.big{padding:16px;font-weight:600;border:2px solid var(--g)}
+#att-list select{margin:4px 0 10px}
+
+.gridwrap{overflow-x:auto;background:#fff;border:1px solid var(--bd);border-radius:12px;margin-bottom:8px}
+table.grid{width:max-content;min-width:100%;font-size:13px}
+.grid th,.grid td{text-align:center;padding:7px 3px;min-width:28px}
+.grid .nm{position:sticky;left:0;background:#fff;text-align:left;min-width:110px;max-width:130px;z-index:1;box-shadow:1px 0 0 var(--bd)}
+.grid td.c{font-size:15px}
+.grid td.full{color:var(--g);font-weight:700}.grid td.am,.grid td.pm{color:#b26a00}.grid td.abs{color:var(--re)}
+.grid td:not(.c):not(.nm){white-space:nowrap;padding:7px 6px}

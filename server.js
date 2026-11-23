@@ -38,7 +38,7 @@ function sync(req, res) {
       if (!r || typeof r.k !== 'string') continue;
       const cur = db.records[r.k];
       if (!cur || r.u >= cur.u) { // last-write-wins
-        db.records[r.k] = { k: r.k, d: r.d, u: r.u, del: r.del ? 1 : 0, seq: ++db.seq };
+        db.records[r.k] = { k: r.k, d: r.d, u: r.u, del: r.del ? 1 : 0, b: String(r.b || ''), seq: ++db.seq };
         changed = true;
       }
     }
