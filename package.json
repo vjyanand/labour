@@ -3,6 +3,8 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
+    "build": "node scripts/version.mjs",
+    "prestart": "node scripts/version.mjs",
     "start": "node server.js"
   },
   "dependencies": {

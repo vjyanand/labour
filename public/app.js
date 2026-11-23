@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
     pushNo: 'Notifications are not supported here. On iPhone, add the app to the Home Screen first.', pushDenied: 'Notifications are blocked in the browser settings.',
     pushUnavail: 'Reminders need the online (Netlify) server.', remindSet: 'Reminders set', testSent: 'Test sent', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
@@ -37,7 +37,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
     pushNo: 'இங்கு அறிவிப்புகள் ஆதரிக்கப்படவில்லை. ஐபோனில் முதலில் செயலியை Home Screen-இல் சேர்க்கவும்.', pushDenied: 'உலாவி அமைப்புகளில் அறிவிப்புகள் தடுக்கப்பட்டுள்ளன.',
     pushUnavail: 'நினைவூட்டலுக்கு இணைய (Netlify) சர்வர் தேவை.', remindSet: 'நினைவூட்டல் அமைக்கப்பட்டது', testSent: 'சோதனை அனுப்பப்பட்டது', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
@@ -454,6 +454,19 @@ function logView() {
     (items.length ? items.map(r => `<div class="card"><div>${logText(r.d)}</div><div class="mu">${esc(r.b)} · ${fmtT(r.u)}</div></div>`).join('') : `<div class="empty">${esc(t('noLog'))}</div>`);
 }
 
+/* ---------- app version (public/version.json, written at build time) ---------- */
+let ver = null;
+async function loadVersion() {
+  try { const r = await fetch('version.json'); if (r.ok) { ver = await r.json(); if (tab === 'set') render(true); } } catch {}
+}
+const fmtD = d => d ? new Date(d).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+function verCard() {
+  if (!ver) return '';
+  return `<div class="card"><div class="row sp"><b>${esc(t('version'))}</b><span><code>${esc(ver.short || '—')}</code>${ver.dirty ? ` <span class="mu">+ ${esc(t('localChanges'))}</span>` : ''}</span></div>
+    <div class="mu">${esc(fmtD(ver.date))}${ver.built ? ` · ${esc(t('built'))} ${esc(fmtT(Date.parse(ver.built)))}` : ''}</div>
+    ${ver.log && ver.log.length ? `<details style="margin-top:8px"><summary>${esc(t('changeLog'))}</summary>${ver.log.map(c => `<div style="padding:6px 0;border-bottom:1px solid var(--bd)"><div>${esc(c.s)}</div><div class="mu"><code>${esc(c.h)}</code> · ${esc(fmtD(c.d))}</div></div>`).join('')}</details>` : ''}</div>`;
+}
+
 /* ---------- settings ---------- */
 function setView() {
   return `<div class="card"><label style="margin-top:0">${esc(t('yourName'))}</label><input id="uname" value="${esc(meta.user)}">
@@ -470,6 +483,7 @@ function setView() {
       <label>${esc(t('key'))}</label><input id="key" type="password" value="${esc(meta.key)}">
       <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? new Date(meta.lastSync).toLocaleString() : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
       <button class="btn full" data-act="sync">⟳ ${esc(t('syncNow'))}</button></div>
+    ${verCard()}
     <p class="mu">${esc(t('installHint'))}</p>`;
 }
 
@@ -550,6 +564,7 @@ function askName() {
   await load();
   render();
   askName();
+  loadVersion();
   if (remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
   if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
