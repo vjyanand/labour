@@ -1,0 +1,7 @@
+{
+  "name": "labour-attendance",
+  "private": true,
+  "type": "commonjs",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "@netlify/blobs": "^8.1.0" }
+}
