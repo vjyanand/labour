@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', tally: 'Tally', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
     addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
     log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
@@ -39,7 +39,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', noFuture: 'எதிர்கால தேதிக்கு பதிவு செய்ய முடியாது', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', tally: 'மொத்த கணக்கு', noFuture: 'எதிர்கால தேதிக்கு பதிவு செய்ய முடியாது', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
     addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு பதிவு இல்லை', confirmExp: 'இந்த பதிவை நீக்கவா?', grandTotal: 'மொத்த செலவு', date: 'தேதி',
     log_inc_add: 'வருமானம் சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_inc_edit: 'வருமானம் திருத்தப்பட்டது: {desc} {amt} ({date})', log_inc_del: 'வருமானம் நீக்கப்பட்டது: {desc} {amt} ({date})', log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
@@ -465,13 +465,13 @@ function repView() {
   return toggle + `<div class="card two">
     <div><label>${esc(t('from'))}</label><input type="date" id="rf" value="${repFrom}" max="${today()}"></div>
     <div><label>${esc(t('to'))}</label><input type="date" id="rt" value="${repTo}" max="${today()}"></div></div>` +
-    (rows.length || exps.length || incs.length ? (rows.length ? `<div class="card"><table>
+    (rows.length || exps.length || incs.length ? (rows.length ? `<div class="secthead">👷 ${esc(t('wages'))}</div><div class="card"><table>
       <thead><tr><th>${esc(t('name'))}</th><th>${esc(t('fullDays'))}</th><th>${esc(t('halfDays'))}</th><th>${esc(t('pay'))}</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td class="g${r.g}">${esc(r.name)}</td><td>${r.full}</td><td>${r.half}</td><td>${money(r.pay)}</td></tr>`).join('')}</tbody>
       <tfoot><tr><td>${esc(t('total'))}</td><td>${tot.full}</td><td>${tot.half}</td><td>${money(tot.pay)}</td></tr></tfoot></table></div>` : '') +
-      (exps.length ? `<div class="card"><b>🧾 ${esc(t('expenses'))}</b>${expTable(exps)}</div>` : '') +
-      (incs.length ? `<div class="card"><b>💰 ${esc(t('income'))}</b>${expTable(incs, 'amt-in')}</div>` : '') +
-      `<div class="card"><table><tbody>
+      (exps.length ? `<div class="secthead">🧾 ${esc(t('expenses'))}</div><div class="card">${expTable(exps)}</div>` : '') +
+      (incs.length ? `<div class="secthead">💰 ${esc(t('income'))}</div><div class="card">${expTable(incs, 'amt-in')}</div>` : '') +
+      `<div class="secthead">🧮 ${esc(t('tally'))}</div><div class="card"><table><tbody>
         <tr><td>${esc(t('wages'))}</td><td>${money(tot.pay)}</td></tr><tr><td>${esc(t('expenses'))}</td><td>${money(exTot)}</td></tr>
         <tr class="sum"><td>${esc(t('grandTotal'))}</td><td>${money(cost)}</td></tr>
         <tr><td>${esc(t('income'))}</td><td class="amt-in">${money(inTot)}</td></tr>
@@ -522,23 +522,32 @@ function gridView() {
       if (at) { const f = factor(at.s); eq += f; pay += f * at.rate; colPay[i] += f * at.rate; return `<td class="c ${at.s}" data-act="goday" data-v="${d}">${SYM[at.s]}</td>`; }
       return dayMembers(d).has(l.id) ? `<td class="c" data-act="goday" data-v="${d}">●</td>` : '<td class="c"></td>';
     }).join('');
-    return `<tr><td class="nm g${l.g}">${esc(l.name)}</td>${cells}<td><b>${eq}</b></td><td>${money(pay)}</td></tr>`;
+    return `<tr><td class="nm g${l.g}">${esc(l.name)}</td><td><b>${eq}</b></td><td>${money(pay)}</td>${cells}</tr>`;
   }).join('');
   const loc = lang === 'ta' ? 'ta-IN' : 'en-IN', fd = (d, o) => new Date(d + 'T00:00:00').toLocaleDateString(loc, o);
   const heading = gridSpan === 'week' ? `${fd(days[0], { day: 'numeric', month: 'short' })} – ${fd(days[6], { day: 'numeric', month: 'short', year: 'numeric' })}`
     : `${fd(`${y}-${pad(m)}-01`, { month: 'long', year: 'numeric' })} · ${a}–${b}`;
   const tot = colPay.reduce((p, q) => p + q, 0), exTot = colExp.reduce((p, q) => p + q, 0), inTot = colInc.reduce((p, q) => p + q, 0);
-  const small = (arr, act) => arr.map((p, i) => `<td class="c" style="font-size:10px"${act ? ` data-act="goexp" data-v="${days[i]}"` : ''}>${p ? Math.round(p) : ''}</td>`).join('');
+  const dayHead = days.map(d => `<th>${gridSpan === 'week' ? `${esc(fd(d, { weekday: 'short' }))}<br>` : ''}${+d.slice(8)}</th>`).join('');
+  const small = (arr, act) => arr.map((p, i) => `<td class="c" style="font-size:10px"${act ? ` data-act="goexp" data-v="${days[i]}"` : ''}>${p ? (p < 0 ? '−' : '') + Math.abs(Math.round(p)) : ''}</td>`).join('');
   return `<div class="row" style="margin-bottom:10px"><div class="gsel three grow"><button class="${gridSpan === 'week' ? 'on' : ''}" data-act="span" data-v="week">${esc(t('weekSpan'))}</button><button class="${gridSpan === '15' ? 'on' : ''}" data-act="span" data-v="15">${esc(t('span15'))}</button><button class="${gridSpan === 'month' ? 'on' : ''}" data-act="span" data-v="month">${esc(t('spanMonth'))}</button></div></div>
   <div class="date"><button class="btn sec" data-act="shift" data-v="-1">‹</button><div class="grow card" style="margin:0;text-align:center;font-weight:600">${esc(heading)}</div><button class="btn sec" data-act="shift" data-v="1">›</button></div>` +
-  (rows.length || exps.length || incs.length ? `<div class="gridwrap"><table class="grid"><thead><tr><th class="nm">${esc(t('name'))}</th>${days.map(d => `<th>${gridSpan === 'week' ? `${esc(fd(d, { weekday: 'short' }))}<br>` : ''}${+d.slice(8)}</th>`).join('')}<th>${esc(t('days'))}</th><th>${esc(t('pay'))}</th></tr></thead>
-    <tbody>${body}</tbody>
-    <tfoot><tr><td class="nm">${esc(t('wages'))}</td>${small(colPay)}<td></td><td>${money(tot)}</td></tr>
-      <tr><td class="nm">${esc(t('expenses'))}</td>${small(colExp, true)}<td></td><td>${money(exTot)}</td></tr>
-      <tr><td class="nm">${esc(t('grandTotal'))}</td>${small(colPay.map((p, i) => p + colExp[i]))}<td></td><td>${money(tot + exTot)}</td></tr>
-      <tr><td class="nm">${esc(t('income'))}</td>${small(colInc, true)}<td></td><td class="amt-in">${money(inTot)}</td></tr>
-      <tr><td class="nm">${esc(t('net'))}</td>${small(colPay.map((p, i) => colInc[i] - p - colExp[i]))}<td></td><td class="${inTot - tot - exTot < 0 ? 'amt-ex' : 'amt-in'}">${money(inTot - tot - exTot)}</td></tr></tfoot></table></div>
-    <p class="mu">${esc(t('legend'))}</p>` + (exps.length ? `<div class="card"><b>🧾 ${esc(t('expenses'))}</b>${expTable(exps)}</div>` : '') + (incs.length ? `<div class="card"><b>💰 ${esc(t('income'))}</b>${expTable(incs, 'amt-in')}</div>` : '') : `<div class="empty">${esc(t('noRecords'))}</div>`);
+  (rows.length || exps.length || incs.length ? `
+    <div class="secthead">👷 ${esc(t('wages'))}</div>
+    ${rows.length ? `<div class="gridwrap"><table class="grid"><thead><tr><th class="nm">${esc(t('name'))}</th><th>${esc(t('days'))}</th><th>${esc(t('pay'))}</th>${dayHead}</tr></thead>
+      <tbody>${body}</tbody>
+      <tfoot><tr><td class="nm">${esc(t('total'))}</td><td></td><td>${money(tot)}</td>${small(colPay)}</tr></tfoot></table></div>
+      <p class="mu">${esc(t('legend'))}</p>` : `<div class="empty">${esc(t('noRecords'))}</div>`}
+    ${exps.length ? `<div class="secthead">🧾 ${esc(t('expenses'))}</div><div class="card">${expTable(exps)}</div>` : ''}
+    ${incs.length ? `<div class="secthead">💰 ${esc(t('income'))}</div><div class="card">${expTable(incs, 'amt-in')}</div>` : ''}
+    <div class="secthead">🧮 ${esc(t('tally'))}</div>
+    <div class="gridwrap"><table class="grid"><thead><tr><th class="nm"></th><th>${esc(t('total'))}</th>${dayHead}</tr></thead><tbody>
+      <tr><td class="nm">${esc(t('wages'))}</td><td>${money(tot)}</td>${small(colPay)}</tr>
+      <tr><td class="nm">${esc(t('expenses'))}</td><td>${money(exTot)}</td>${small(colExp, true)}</tr>
+      <tr class="sum"><td class="nm">${esc(t('grandTotal'))}</td><td>${money(tot + exTot)}</td>${small(colPay.map((p, i) => p + colExp[i]))}</tr>
+      <tr><td class="nm">${esc(t('income'))}</td><td class="amt-in">${money(inTot)}</td>${small(colInc, true)}</tr>
+      <tr class="sum"><td class="nm">${esc(t('net'))}</td><td class="${inTot - tot - exTot < 0 ? 'amt-ex' : 'amt-in'}">${money(inTot - tot - exTot)}</td>${small(colPay.map((p, i) => colInc[i] - p - colExp[i]))}</tr>
+    </tbody></table></div>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 function exportCSV() {
   const rows = reportRows(), exps = expRecs(repFrom, repTo), incs = incRecs(repFrom, repTo), wagesTot = rows.reduce((s, r) => s + r.pay, 0);
