@@ -16,8 +16,8 @@ h1{font-size:18px;margin:0}
 nav{position:fixed;bottom:0;left:0;right:0;display:flex;gap:2px;background:#fff;border-top:1px solid var(--bd);padding:4px 4px calc(4px + env(safe-area-inset-bottom));z-index:5}
 nav button{position:relative;flex:1;border:0;background:none;border-radius:12px;padding:7px 2px 6px;font-size:11px;color:var(--mu);display:flex;flex-direction:column;align-items:center;gap:2px}
 nav button span{font-size:20px}
-nav button.on{background:var(--gl);color:var(--g);font-weight:700}
-nav button.on::before{content:"";position:absolute;top:0;left:28%;right:28%;height:3px;border-radius:0 0 3px 3px;background:var(--g)}
+nav button.on{background:#eaf5ea;color:#388e3c;font-weight:700}
+nav button.on::before{content:"";position:absolute;top:0;left:28%;right:28%;height:3px;border-radius:0 0 3px 3px;background:#4caf50}
 
 /* ===== Layout helpers, cards, text ===== */
 .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:10px}
