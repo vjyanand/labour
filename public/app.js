@@ -535,10 +535,10 @@ function gridRange() {
   const [a, b] = gridSpan === 'month' ? [1, last] : dd <= 15 ? [1, 15] : [16, last];
   return { y, m, a, b };
 }
-// week = Monday to Sunday containing the anchor date
+// week = Sunday to Saturday containing the anchor date
 function gridDays() {
   if (gridSpan === 'week') {
-    const d = new Date(gridAnchor + 'T00:00:00'); d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+    const d = new Date(gridAnchor + 'T00:00:00'); d.setDate(d.getDate() - d.getDay());
     return Array.from({ length: 7 }, (_, i) => addDays(ymd(d), i));
   }
   const { y, m, a, b } = gridRange(), days = [];
