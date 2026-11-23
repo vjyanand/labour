@@ -67,3 +67,6 @@ table.grid{width:max-content;min-width:100%;font-size:13px}
 .grid td.full{color:var(--g);font-weight:700}.grid td.am,.grid td.pm{color:#b26a00}.grid td.abs{color:var(--re)}
 .grid td:not(.c):not(.nm){white-space:nowrap;padding:7px 6px}
 .stats{grid-template-columns:repeat(4,1fr)}.stats b{font-size:16px}.stats small{font-size:11px}
+.gM{color:#1565c0}.gF{color:#d81b60}
+.name.gM,.name.gF,.grid .nm.gM,.grid .nm.gF,td.gM,td.gF{font-weight:700}
+.legend{margin:0 0 8px}

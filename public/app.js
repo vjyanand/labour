@@ -252,6 +252,7 @@ function drawAttList() {
   for (const l of all) { const a = attOf(date, l.id); if (a) { const f = factor(a.s); if (f) present++; dayEq += f; pay += f * a.rate; } }
   const inList = new Set(ids);
   const avail = labourers().filter(l => l.active !== false && !inList.has(l.id)).sort((a, b) => a.name.localeCompare(b.name));
+  const legend = `<p class="mu legend"><span class="gM">●</span> ${esc(t('M'))} &nbsp; <span class="gF">●</span> ${esc(t('F'))}</p>`;
   const picker = avail.length ? `<select id="addsel" class="${all.length ? '' : 'big'}"><option value="">${esc(t('addPerson'))}</option>${avail.map(l => `<option value="${l.id}">${esc(l.name)} (${esc(t(l.g))})</option>`).join('')}</select>` : '';
   el.innerHTML = `
   <div class="stats">
@@ -259,10 +260,10 @@ function drawAttList() {
     <div><b>${present}</b><small>${esc(t('present'))}</small></div>
     <div><b>${dayEq}</b><small>${esc(t('dayEq'))}</small></div>
     <div><b>${money(pay)}</b><small>${esc(t('cost'))}</small></div>
-  </div>` + (from ? `<p class="mu">↩ ${esc(t('fromPrev'))} ${from}</p>` : '') + (list.length ? list.map(l => {
+  </div>` + legend + (from ? `<p class="mu">↩ ${esc(t('fromPrev'))} ${from}</p>` : '') + (list.length ? list.map(l => {
     const a = attOf(date, l.id), s = a && a.s;
     return `<div class="card">
-      <div class="row sp"><div><span class="name">${esc(l.name)}</span> <span class="badge ${l.g}">${esc(t(l.g))}</span></div>
+      <div class="row sp"><div><span class="name g${l.g}">${esc(l.name)}</span></div>
         <span class="row">${(() => { const pr = personRate(date, l); return `<button class="rate ${pr.ov ? 'ov' : ''}" data-act="rate" data-id="${l.id}">${money(pr.rate)}${pr.ov ? ' ★' : ''} ✎</button>${a && factor(a.s) && factor(a.s) < 1 ? `<span class="mu">= ${money(pr.rate * factor(a.s))}</span>` : ''}`; })()}
           <button class="rate" data-act="rmday" data-id="${l.id}" aria-label="${esc(t('remove'))}">✕</button></span>
       </div>
@@ -278,10 +279,10 @@ function lastBy(k) { const r = recs.get(k); return r && r.b ? `<div class="mu" s
 /* ---------- labour management ---------- */
 function labView() {
   const list = labourers().sort((a, b) => a.name.localeCompare(b.name));
-  return (list.length ? list.map(l => `
+  return `<p class="mu legend"><span class="gM">●</span> ${esc(t('M'))} &nbsp; <span class="gF">●</span> ${esc(t('F'))}</p>` + (list.length ? list.map(l => `
     <div class="card" style="${l.active === false ? 'opacity:.7' : ''}">
       <div class="row sp" data-act="editlab" data-id="${l.id}">
-        <div><span class="name">${esc(l.name)}</span> <span class="badge ${l.g}">${esc(t(l.g))}</span>
+        <div><span class="name g${l.g}">${esc(l.name)}</span>
           ${l.active === false ? `<span class="mu">· ${esc(t('inactive'))}</span>` : ''}
           <div class="mu">${esc(l.phone || '')}</div></div>
         <b>${money(l.wage)}</b>
@@ -344,7 +345,7 @@ function repView() {
     <div><label>${esc(t('to'))}</label><input type="date" id="rt" value="${repTo}"></div></div>` +
     (rows.length ? `<div class="card"><table>
       <thead><tr><th>${esc(t('name'))}</th><th>${esc(t('fullDays'))}</th><th>${esc(t('halfDays'))}</th><th>${esc(t('pay'))}</th></tr></thead>
-      <tbody>${rows.map(r => `<tr><td>${esc(r.name)} <span class="badge ${r.g}">${esc(t(r.g))}</span></td><td>${r.full}</td><td>${r.half}</td><td>${money(r.pay)}</td></tr>`).join('')}</tbody>
+      <tbody>${rows.map(r => `<tr><td class="g${r.g}">${esc(r.name)}</td><td>${r.full}</td><td>${r.half}</td><td>${money(r.pay)}</td></tr>`).join('')}</tbody>
       <tfoot><tr><td>${esc(t('total'))}</td><td>${tot.full}</td><td>${tot.half}</td><td>${money(tot.pay)}</td></tr></tfoot></table></div>
       <button class="btn sec full" data-act="csv">⬇ ${esc(t('export'))}</button>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
@@ -374,7 +375,7 @@ function gridView() {
       if (at) { const f = factor(at.s); eq += f; pay += f * at.rate; colPay[i] += f * at.rate; return `<td class="c ${at.s}" data-act="goday" data-v="${d}">${SYM[at.s]}</td>`; }
       return dayMembers(d).has(l.id) ? `<td class="c" data-act="goday" data-v="${d}">●</td>` : '<td class="c"></td>';
     }).join('');
-    return `<tr><td class="nm">${esc(l.name)} <span class="badge ${l.g}">${esc(t(l.g))}</span></td>${cells}<td><b>${eq}</b></td><td>${money(pay)}</td></tr>`;
+    return `<tr><td class="nm g${l.g}">${esc(l.name)}</td>${cells}<td><b>${eq}</b></td><td>${money(pay)}</td></tr>`;
   }).join('');
   const title = new Date(y, m - 1, 1).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { month: 'long', year: 'numeric' });
   const tot = colPay.reduce((p, q) => p + q, 0);
