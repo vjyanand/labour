@@ -1,4 +1,4 @@
-const CACHE = 'labour-v21';
+const CACHE = 'labour-v23';
 const SHELL = ['./', 'index.html', 'app.js', 'style.css', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', e => {
@@ -11,12 +11,18 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).pathname.startsWith('/api/')) return;
-  // stale-while-revalidate: instant offline load, refresh in background
-  e.respondWith(caches.open(CACHE).then(async c => {
-    const hit = await c.match(req, { ignoreSearch: true });
-    const net = fetch(req).then(r => { if (r.ok) c.put(req, r.clone()); return r; }).catch(() => hit);
-    return hit || net;
-  }));
+  // network-first so a new version shows up on the very next open; falls back to the cache when offline
+  // (or when the network takes more than 3 seconds), so the app still opens instantly with no signal
+  e.respondWith((async () => {
+    const c = await caches.open(CACHE);
+    try {
+      const r = await Promise.race([fetch(req), new Promise((_, no) => setTimeout(no, 3000))]);
+      if (r.ok) c.put(req, r.clone());
+      return r;
+    } catch {
+      return (await c.match(req, { ignoreSearch: true })) || Response.error();
+    }
+  })());
 });
 
 self.addEventListener('push', e => {

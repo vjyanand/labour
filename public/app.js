@@ -11,7 +11,7 @@ const I18N = {
     dayRate: 'Today\'s wage override', dayRateHint: 'Set a different full-day wage for all male/female labourers on this day. Leave blank for normal wages.',
     active: 'Currently working', noLabour: 'No labourers yet. Tap + to add.', markAll: 'Mark all full day',
     halfDays: 'Half', fullDays: 'Full', confirmDel: 'Delete this labourer? Past attendance is kept.',
-    server: 'Server address (blank = this site)', key: 'Sync key (if set on server)', syncFail: 'Sync failed, will retry',
+    server: 'Server address (blank = this site)', key: 'Sync key (if set on server)', syncFail: 'Sync failed, will retry', syncErrShort: 'Sync failed',
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
@@ -35,7 +35,7 @@ const I18N = {
     dayRate: 'இன்றைய கூலி மாற்றம்', dayRateHint: 'இந்த நாளுக்கு ஆண்/பெண் அனைவருக்கும் வேறு முழு நாள் கூலி அமைக்கவும். வழக்கமான கூலிக்கு காலியாக விடவும்.',
     active: 'தற்போது பணியில்', noLabour: 'தொழிலாளர் இல்லை. + அழுத்தி சேர்க்கவும்.', markAll: 'அனைவருக்கும் முழு நாள்',
     halfDays: 'அரை', fullDays: 'முழு', confirmDel: 'இந்த தொழிலாளரை நீக்கவா? முந்தைய வருகை பதிவுகள் இருக்கும்.',
-    server: 'சர்வர் முகவரி (காலி = இதே தளம்)', key: 'ஒத்திசைவு விசை (சர்வரில் இருந்தால்)', syncFail: 'ஒத்திசைவு தோல்வி, மீண்டும் முயற்சிக்கும்',
+    server: 'சர்வர் முகவரி (காலி = இதே தளம்)', key: 'ஒத்திசைவு விசை (சர்வரில் இருந்தால்)', syncFail: 'ஒத்திசைவு தோல்வி, மீண்டும் முயற்சிக்கும்', syncErrShort: 'ஒத்திசைவு தோல்வி',
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
@@ -176,37 +176,41 @@ function setDayRate(date, g, val) {
 }
 
 /* ---------- sync ---------- */
-let syncing = false, syncTimer, online = navigator.onLine, syncErr = false;
+let syncing = false, syncTimer, online = navigator.onLine, syncErr = false, syncMsg = '';
 const pendingCount = () => [...recs.values()].filter(r => r.dirty).length;
 function scheduleSync() { updateSyncBtn(); clearTimeout(syncTimer); syncTimer = setTimeout(sync, 1500); }
 async function sync(manual) {
   if (syncing) return;
   if (!navigator.onLine) { if (manual === true) toast(t('offline')); return; }
   syncing = true; syncErr = false; updateSyncBtn();
+  const url = (meta.server || '').replace(/\/$/, '') + '/api/sync';
   try {
     const sent = [...recs.values()].filter(r => r.dirty);
-    const res = await fetch((meta.server || '').replace(/\/$/, '') + '/api/sync', {
+    const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(meta.key ? { 'x-sync-key': meta.key } : {}) },
       body: JSON.stringify({ since: meta.since, records: sent.map(({ k, d, u, del, b }) => ({ k, d, u, del, b })) }),
     });
-    if (!res.ok) throw new Error(res.status);
-    const out = await res.json();
+    if (!res.ok) throw new Error('HTTP ' + res.status + (res.status === 404 ? ' (no sync server at this address)' : res.status === 401 ? ' (wrong sync key)' : ''));
+    const out = await res.json().catch(() => { throw new Error('unexpected reply (not the sync server)'); });
     for (const s of sent) { const cur = recs.get(s.k); if (cur && cur.u === s.u) { cur.dirty = 0; idbPut('rec', cur); } }
     for (const r of out.records) {
       const cur = recs.get(r.k);
       if (!cur || !cur.dirty) { const n = { k: r.k, d: r.d, u: r.u, del: r.del, b: r.b, dirty: 0 }; recs.set(r.k, n); idbPut('rec', n); }
     }
-    saveMeta('since', out.seq); saveMeta('lastSync', Date.now());
+    syncMsg = ''; saveMeta('since', out.seq); saveMeta('lastSync', Date.now());
     if (out.records.length && !document.querySelector('dialog[open]')) render(true);
-  } catch (e) { syncErr = true; if (manual === true) toast(t('syncFail')); }
-  syncing = false; updateSyncBtn();
+  } catch (e) {
+    syncErr = true; syncMsg = (e instanceof TypeError ? 'cannot reach server' : e.message) + ' — ' + url;
+    if (manual === true) toast(t('syncFail') + ' · ' + syncMsg.split(' — ')[0]);
+  }
+  syncing = false; updateSyncBtn(); if (tab === 'set' && !document.querySelector('dialog[open]')) render(true);
 }
 function updateSyncBtn() {
   const b = $('#syncbtn'), p = pendingCount();
-  b.className = 'sync ' + (!navigator.onLine ? 'off' : p || syncErr ? 'pend' : '');
+  b.className = 'sync ' + (!navigator.onLine ? 'off' : syncErr ? 'off' : p ? 'pend' : '');
   b.textContent = !navigator.onLine ? '⛔ ' + t('offline') + (p ? ` · ${p}` : '')
-    : syncing ? '⟳ …' : p ? `⟳ ${p} ${t('pending')}` : '✓ ' + t('synced');
+    : syncing ? '⟳ …' : syncErr ? '⚠ ' + t('syncErrShort') + (p ? ` · ${p}` : '') : p ? `⟳ ${p} ${t('pending')}` : '✓ ' + t('synced');
 }
 addEventListener('online', () => { updateSyncBtn(); sync(); });
 addEventListener('offline', updateSyncBtn);
@@ -564,6 +568,7 @@ function setView() {
       <button class="btn sec sm full" style="margin-top:8px;${!meta.lang ? 'font-weight:800;outline:2px solid var(--g)' : ''}" data-act="lang" data-v="">🌐 ${esc(t('auto'))}</button></div>
     <div class="card"><label style="margin-top:0">${esc(t('server'))}</label><input id="srv" value="${esc(meta.server)}" placeholder="https://example.com">
       <label>${esc(t('key'))}</label><input id="key" type="password" value="${esc(meta.key)}">
+      ${syncErr && syncMsg ? `<p style="color:var(--re);font-size:14px">⚠ ${esc(syncMsg)}</p>` : ''}
       <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? new Date(meta.lastSync).toLocaleString() : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
       <button class="btn full" data-act="sync">⟳ ${esc(t('syncNow'))}</button></div>
     ${verCard()}
