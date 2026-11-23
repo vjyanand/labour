@@ -89,7 +89,10 @@ async function load() {
 const saveMeta = (k, v) => { meta[k] = v; idbPut('meta', v, k); };
 // "today" comes from the server's clock when we have synced (corrects a wrong phone clock);
 // before the first sync, or if the server never answered, the phone's own date is the fallback
-const today = () => ymd(new Date(Date.now() + (meta.clockOffset || 0)));
+// The farm runs on Indian time: "today" is always the IST date, whatever timezone the phone is set to.
+const TZ = 'Asia/Kolkata';
+const istDate = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
+const today = () => istDate.format(new Date(Date.now() + (meta.clockOffset || 0)));
 function needName() { // nothing may be changed until this phone has a user name (it's stored with every change)
   if (meta.user) return;
   askName(); throw new Error('user name required');
@@ -323,7 +326,7 @@ function drawAttList() {
   }).join('') : `<div class="empty">${esc(all.length ? '' : avail.length ? t('emptyDay') : t('noLabour'))}</div>`) + picker;
 }
 
-const fmtT = u => new Date(u).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+const fmtT = u => new Date(u).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
 function lastBy(k) { const r = recs.get(k); return r && r.b ? `<div class="mu" style="margin-top:6px">✎ ${esc(t('lastBy'))} ${esc(r.b)} · ${fmtT(r.u)}</div>` : ''; }
 
 // a labourer with attendance marked in the last 60 days can't be deleted (make inactive instead)
@@ -564,7 +567,7 @@ async function pushSubscribe() { // create/refresh this phone's subscription and
     sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64((await kr.json()).key) });
   }
   const r = await fetch(apiUrl('/api/push/subscribe'), { method: 'POST', headers: apiHdr(), body: JSON.stringify({
-    sub: sub.toJSON(), times: [c.t1, c.t2].filter(Boolean), tz: Intl.DateTimeFormat().resolvedOptions().timeZone, lang, user: meta.user }) });
+    sub: sub.toJSON(), times: [c.t1, c.t2].filter(Boolean), tz: TZ, lang, user: meta.user }) });
   if (!r.ok) throw new Error('unavailable');
   return sub;
 }
@@ -615,7 +618,7 @@ let ver = null;
 async function loadVersion() {
   try { const r = await fetch('version.json'); if (r.ok) { ver = await r.json(); if (tab === 'set') render(true); } } catch {}
 }
-const fmtD = d => d ? new Date(d).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+const fmtD = d => d ? new Date(d).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ, day: '2-digit', month: 'short', year: 'numeric' }) : '';
 function verCard() {
   if (!ver) return '';
   return `<div class="card"><div class="row sp"><b>${esc(t('version'))}</b><span><code>${esc(ver.short || '—')}</code>${ver.dirty ? ` <span class="mu">+ ${esc(t('localChanges'))}</span>` : ''}</span></div>
@@ -661,7 +664,7 @@ function setView() {
     <div class="card"><label style="margin-top:0">${esc(t('server'))}</label><input id="srv" value="${esc(meta.server)}" placeholder="https://example.com">
       <label>${esc(t('key'))}</label><input id="key" type="password" value="${esc(meta.key)}">
       ${syncErr && syncMsg ? `<p style="color:var(--re);font-size:14px">⚠ ${esc(syncMsg)}</p>` : ''}
-      <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? new Date(meta.lastSync).toLocaleString() : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
+      <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? new Date(meta.lastSync).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ }) : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
       <button class="btn full" data-act="sync">⟳ ${esc(t('syncNow'))}</button></div>
     ${verCard()}
     <p class="mu">${esc(t('installHint'))}</p>`;
