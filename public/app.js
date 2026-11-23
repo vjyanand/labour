@@ -83,12 +83,18 @@ async function load() {
   lang = I18N[meta.lang] ? meta.lang : detectLang();
 }
 const saveMeta = (k, v) => { meta[k] = v; idbPut('meta', v, k); };
+function needName() { // nothing may be changed until this phone has a user name (it's stored with every change)
+  if (meta.user) return;
+  askName(); throw new Error('user name required');
+}
 function put(k, d, del = 0) {
+  needName();
   const r = { k, d, u: Date.now(), del, dirty: 1, b: meta.user };
   recs.set(k, r); idbPut('rec', r); scheduleSync(); return r;
 }
 // append-only audit trail: one unique record per action, synced like everything else, never deleted
 function audit(act, o) {
+  needName();
   const u = Date.now(), k = `G:${u}:${uid().slice(0, 6)}`;
   const r = { k, d: { act, ...o }, u, del: 0, dirty: 1, b: meta.user || '?' };
   recs.set(k, r); idbPut('rec', r); scheduleSync();
@@ -171,6 +177,7 @@ const pendingCount = () => [...recs.values()].filter(r => r.dirty).length;
 function scheduleSync() { updateSyncBtn(); clearTimeout(syncTimer); syncTimer = setTimeout(sync, 1500); }
 async function sync(manual) {
   if (syncing) return;
+  if (!meta.user) { if (manual === true) askName(); return; } // no name, no sync
   if (!navigator.onLine) { if (manual === true) toast(t('offline')); return; }
   syncing = true; syncErr = false; updateSyncBtn();
   try {
@@ -556,19 +563,23 @@ document.addEventListener('change', e => {
   else if (el.id === 'rf' || el.id === 'rt') { repFrom = $('#rf').value || repFrom; repTo = $('#rt').value || repTo; render(); }
   else if (el.id === 'logdate') { logDate = el.value; render(); }
   else if (el.id === 'rt1' || el.id === 'rt2') { saveMeta('remind', { ...remindCfg(), [el.id === 'rt1' ? 't1' : 't2']: el.value }); if (remindCfg().on) pushSubscribe().then(() => toast(t('remindSet'))).catch(() => toast(t('pushUnavail'))); }
-  else if (el.id === 'uname') { saveMeta('user', el.value.trim()); toast(t('saved')); }
+  else if (el.id === 'uname') { const n = el.value.trim(); if (!n) { el.value = meta.user; askName(); return; } saveMeta('user', n); toast(t('saved')); }
   else if (el.id === 'srv') saveMeta('server', el.value.trim());
   else if (el.id === 'key') saveMeta('key', el.value);
 });
 
 /* ---------- who is using this phone ---------- */
 function askName() {
-  if (meta.user) return;
-  const dlg = $('#dlg');
+  const dlg = $('#namedlg');
+  if (meta.user || dlg.open) return;
   dlg.innerHTML = `<form method="dialog" id="nameform"><h2>${esc(t('yourName'))}</h2><p class="mu">${esc(t('yourNameHint'))}</p>
     <input name="n" required autofocus><div class="row" style="margin-top:14px"><span class="grow"></span><button class="btn">${esc(t('save'))}</button></div></form>`;
   dlg.oncancel = e => { if (!meta.user) e.preventDefault(); };
-  $('#nameform').onsubmit = e => { const n = new FormData(e.target).get('n').trim(); if (!n) return e.preventDefault(); saveMeta('user', n); dlg.oncancel = null; };
+  $('#nameform').onsubmit = e => {
+    const n = new FormData(e.target).get('n').trim();
+    if (!n) return e.preventDefault();
+    saveMeta('user', n); dlg.oncancel = null; render(); toast(t('saved'));
+  };
   dlg.showModal();
 }
 
