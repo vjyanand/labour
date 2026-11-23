@@ -575,9 +575,28 @@ function verCard() {
     ${ver.log && ver.log.length ? `<details style="margin-top:8px"><summary>${esc(t('changeLog'))}</summary>${ver.log.map(c => `<div style="padding:6px 0;border-bottom:1px solid var(--bd)"><div>${esc(c.s)}</div><div class="mu"><code>${esc(c.h)}</code> · ${esc(fmtD(c.d))}</div></div>`).join('')}</details>` : ''}</div>`;
 }
 
+/* ---------- help for new users (English + Tamil). The sync key itself is deliberately NOT written here:
+   this site is public, so the key must be shared privately by the owner. ---------- */
+const HELP = {
+  en: ['Open <b>Settings</b> (⚙️, bottom right).',
+    'Type your name in the <b>Your name</b> box. It is saved with every change you make, so everyone can see who did what. You will also be asked for it the first time you mark attendance or change anything.',
+    'In the <b>Sync key</b> box, type the key the farm owner gave you. Leave <b>Server address</b> empty.',
+    'Tap <b>Sync now</b>. The top button should say <b>✓ Synced</b>. If it says <b>⚠ Sync failed</b>, read the reason shown under the box: <i>HTTP 401</i> means the key is wrong; <i>cannot reach server</i> means check your internet.',
+    'The app works without internet. Everything is saved on your phone and syncs by itself when the internet comes back.',
+    'Tip: in your browser menu choose <b>Add to Home screen</b> to install it like an app. Change language in Settings → Language.'],
+  ta: ['கீழே வலது பக்கம் உள்ள <b>அமைப்புகள்</b> (⚙️) தொடவும்.',
+    '<b>உங்கள் பெயர்</b> பெட்டியில் உங்கள் பெயரை எழுதவும். நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் இது சேமிக்கப்படும்; யார் என்ன செய்தார் என்று எல்லோருக்கும் தெரியும். முதல் முறை வருகை பதிவு செய்யும்போதும் பெயர் கேட்கப்படும்.',
+    '<b>ஒத்திசைவு விசை</b> பெட்டியில் பண்ணை உரிமையாளர் கொடுத்த விசையை எழுதவும். <b>சர்வர் முகவரி</b> பெட்டியை காலியாக விடவும்.',
+    '<b>இப்போது ஒத்திசை</b> தொடவும். மேலே <b>✓ ஒத்திசைந்தது</b> என்று வர வேண்டும். <b>⚠ ஒத்திசைவு தோல்வி</b> என்றால் பெட்டிக்கு கீழே உள்ள காரணத்தைப் பார்க்கவும்: <i>HTTP 401</i> என்றால் விசை தவறு; <i>cannot reach server</i> என்றால் இணையத்தைச் சரிபார்க்கவும்.',
+    'இணையம் இல்லாமலும் செயலி வேலை செய்யும். பதிவுகள் போனில் சேமிக்கப்பட்டு, இணையம் வந்ததும் தானாக ஒத்திசைக்கப்படும்.',
+    'குறிப்பு: உலாவி மெனுவில் <b>Add to Home screen</b> தேர்ந்தெடுத்து செயலியாக நிறுவலாம். மொழியை அமைப்புகள் → மொழி-யில் மாற்றலாம்.'],
+};
+const helpCard = () => `<details class="card" ${!meta.user || !meta.key ? 'open' : ''}><summary>❓ Help / உதவி</summary>
+  ${['en', 'ta'].sort(l => (l === lang ? -1 : 1)).map(l => `<h3 class="hh">${l === 'en' ? 'English' : 'தமிழ்'}</h3><ol class="help">${HELP[l].map(x => `<li>${x}</li>`).join('')}</ol>`).join('')}</details>`;
+
 /* ---------- settings ---------- */
 function setView() {
-  return `<div class="card"><label style="margin-top:0">${esc(t('yourName'))}</label><input id="uname" value="${esc(meta.user)}">
+  return helpCard() + `<div class="card"><label style="margin-top:0">${esc(t('yourName'))}</label><input id="uname" value="${esc(meta.user)}">
       <p class="mu" style="margin-bottom:0">${esc(t('yourNameHint'))}</p></div>
     ${(() => { const c = remindCfg(), on = c.on && pushOK() && Notification.permission === 'granted';
       return `<div class="card"><b>🔔 ${esc(t('remindTitle'))}</b><p class="mu">${esc(t('remindHint'))}</p>` + (!pushOK() ? `<p class="mu">${esc(t('pushNo'))}</p>` :
