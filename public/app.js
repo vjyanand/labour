@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
     pushNo: 'Notifications are not supported here. On iPhone, add the app to the Home Screen first.', pushDenied: 'Notifications are blocked in the browser settings.',
     pushUnavail: 'Reminders need the online (Netlify) server.', remindSet: 'Reminders set', testSent: 'Test sent', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
@@ -37,7 +37,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
     pushNo: 'இங்கு அறிவிப்புகள் ஆதரிக்கப்படவில்லை. ஐபோனில் முதலில் செயலியை Home Screen-இல் சேர்க்கவும்.', pushDenied: 'உலாவி அமைப்புகளில் அறிவிப்புகள் தடுக்கப்பட்டுள்ளன.',
     pushUnavail: 'நினைவூட்டலுக்கு இணைய (Netlify) சர்வர் தேவை.', remindSet: 'நினைவூட்டல் அமைக்கப்பட்டது', testSent: 'சோதனை அனுப்பப்பட்டது', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
@@ -275,6 +275,19 @@ function drawAttList() {
 const fmtT = u => new Date(u).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
 function lastBy(k) { const r = recs.get(k); return r && r.b ? `<div class="mu" style="margin-top:6px">✎ ${esc(t('lastBy'))} ${esc(r.b)} · ${fmtT(r.u)}</div>` : ''; }
 
+// a labourer with attendance marked in the last 60 days can't be deleted (make inactive instead)
+function deleteBlockedBy(id) {
+  const cutoff = addDays(ymd(new Date()), -60);
+  let last = '';
+  for (const r of live('A:')) if (r.d.lid === id && r.d.date >= cutoff && r.d.date > last) last = r.d.date;
+  return last;
+}
+function canDelete(id) {
+  const last = deleteBlockedBy(id);
+  if (last) alert(t('cannotDel').replace('{date}', last));
+  return !last;
+}
+
 /* ---------- labour management ---------- */
 function labView() {
   const list = labourers().sort((a, b) => a.name.localeCompare(b.name));
@@ -283,7 +296,7 @@ function labView() {
       <div class="row sp" data-act="editlab" data-id="${l.id}">
         <div><span class="name g${l.g}">${esc(l.name)}</span>
           ${l.active === false ? `<span class="mu">· ${esc(t('inactive'))}</span>` : ''}
-          <div class="mu">${esc(l.phone || '')}</div></div>
+          </div>
         <b>${money(l.wage)}</b>
       </div>
       <div class="row" style="margin-top:10px">
@@ -294,7 +307,7 @@ function labView() {
     `<button class="fab" data-act="addlab" aria-label="${esc(t('add'))}">+</button>`;
 }
 function labDialog(id) {
-  const l = id ? labById(id) : { name: '', g: 'M', phone: '', wage: '', active: true };
+  const l = id ? labById(id) : { name: '', g: 'M', wage: '', active: true };
   const dlg = $('#dlg');
   dlg.innerHTML = `<form method="dialog" id="labform">
     <h2>${esc(id ? t('edit') : t('add'))}</h2>
@@ -302,7 +315,6 @@ function labDialog(id) {
     <label>${esc(t('gender'))}</label>
     <div class="gsel"><button type="button" data-g="M" class="${l.g === 'M' ? 'on' : ''}">${esc(t('M'))}</button><button type="button" data-g="F" class="${l.g === 'F' ? 'on' : ''}">${esc(t('F'))}</button></div>
     <label>${esc(t('wage'))}</label><input name="wage" type="number" inputmode="decimal" min="0" required value="${l.wage}">
-    <label>${esc(t('phone'))}</label><input name="phone" type="tel" value="${esc(l.phone)}">
     <label class="row" style="color:var(--tx);font-size:16px"><input type="checkbox" name="active" style="width:auto" ${l.active !== false ? 'checked' : ''}> ${esc(t('active'))}</label>
     <div class="row" style="margin-top:14px">
       ${id ? `<button type="button" class="btn dng" id="lbdel">${esc(t('del'))}</button>` : ''}
@@ -311,10 +323,10 @@ function labDialog(id) {
   let g = l.g;
   dlg.querySelectorAll('[data-g]').forEach(b => b.onclick = () => { g = b.dataset.g; dlg.querySelectorAll('[data-g]').forEach(x => x.classList.toggle('on', x === b)); });
   $('#lbcancel').onclick = () => dlg.close();
-  if (id) $('#lbdel').onclick = () => { if (confirm(t('confirmDel'))) { put('L:' + id, recs.get('L:' + id).d, 1); audit('lab_del', { who: l.name }); dlg.close(); render(); } };
+  if (id) $('#lbdel').onclick = () => { if (!canDelete(id)) return; if (confirm(t('confirmDel'))) { put('L:' + id, recs.get('L:' + id).d, 1); audit('lab_del', { who: l.name }); dlg.close(); render(); } };
   $('#labform').onsubmit = e => {
     const f = new FormData(e.target);
-    const nd = { name: f.get('name').trim(), g, wage: +f.get('wage'), phone: f.get('phone').trim(), active: f.get('active') === 'on' };
+    const nd = { name: f.get('name').trim(), g, wage: +f.get('wage'), active: f.get('active') === 'on' };
     const chg = id ? Object.keys(nd).filter(k => String(nd[k]) !== String(l[k])).map(k => [k, l[k], nd[k]]) : [];
     put('L:' + (id || uid()), nd);
     if (!id) audit('lab_add', { who: nd.name }); else if (chg.length) audit('lab_edit', { who: nd.name, chg });
@@ -521,6 +533,7 @@ document.addEventListener('click', e => {
   }
   else if (act === 'dellab') {
     const l = labById(id);
+    if (!canDelete(id)) return;
     if (confirm(t('confirmDel'))) { put('L:' + id, recs.get('L:' + id).d, 1); audit('lab_del', { who: l.name }); render(); }
   }
   else if (act === 'addlab') labDialog();
