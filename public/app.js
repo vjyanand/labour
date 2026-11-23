@@ -238,12 +238,26 @@ function chrome() {
 const SLUG = { att: 'attendance', exp: 'accounts', rep: 'report', lab: 'labour', set: 'settings', log: 'log', help: 'help' };
 const TAB_OF = Object.fromEntries(Object.entries(SLUG).map(([k, v]) => [v, k]));
 let lastHash = '', attMode = 'mark';
-const hashFor = () => '#/' + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' + date : '') + (tab === 'att' && attMode === 'list' ? '/list' : '');
+const hashFor = () => '#/' + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' + date : '') + (tab === 'att' && attMode === 'list' ? '/list' : '')
+  + (tab === 'rep' ? (repMode === 'grid' ? `/grid/${gridSpan}/${gridAnchor}` : `/summary/${repFrom}/${repTo}`) : '');
 function readHash() {
   const p = location.hash.replace(/^#\/?/, '').split('/');
   tab = TAB_OF[p[0]] || 'att';
   if (/^\d{4}-\d\d-\d\d$/.test(p[1] || '')) date = p[1] > today() ? today() : p[1]; // never a future date
   if (tab === 'att') attMode = p[2] === 'list' ? 'list' : 'mark';
+  if (tab === 'rep') { // #/report/summary/<from>/<to>  or  #/report/grid/<week|15|month>/<any date in the period>
+    const isDate = x => /^\d{4}-\d\d-\d\d$/.test(x || ''), capped = x => (x > today() ? today() : x);
+    if (p[1] === 'grid') {
+      repMode = 'grid';
+      if (['week', '15', 'month'].includes(p[2])) gridSpan = p[2];
+      if (isDate(p[3])) gridAnchor = capped(p[3]);
+    } else if (p[1] === 'summary') {
+      repMode = 'sum';
+      if (isDate(p[2])) repFrom = p[2];
+      if (isDate(p[3])) repTo = capped(p[3]);
+      if (repFrom > repTo) repFrom = repTo;
+    }
+  }
 }
 addEventListener('popstate', () => { readHash(); lastHash = location.hash; render(); });
 function render(soft) {
@@ -767,10 +781,8 @@ addEventListener('error', e => { if (/user name required|future date/.test(e.mes
 /* ---------- boot ---------- */
 (async () => {
   await load();
+  date = today(); repTo = today(); gridAnchor = today(); repFrom = today().slice(0, 8) + '01'; // defaults; a link may override them
   readHash();
-  if (!/\d{4}-\d\d-\d\d/.test(location.hash)) date = today();
-  if (date > today()) date = today();
-  repTo = today(); gridAnchor = today(); repFrom = today().slice(0, 8) + '01';
   render();
   loadVersion();
   if (remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name
