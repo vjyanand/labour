@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Wage for this person today', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
     log_mark: '{who}: marked {s} on {date}', log_clear: '{who}: cleared mark on {date}', log_rate: '{who}: wage set to {rate} on {date}',
     log_dayrate: '{g} wage on {date} set to {rate}', log_addday: '{who}: added to {date}', log_rmday: '{who}: removed from {date}',
     log_lab_add: 'Labourer added: {who}', log_lab_edit: 'Labourer edited: {who} {chg}', log_lab_del: 'Labourer deleted: {who}', confirmRm: 'Remove this person from this day (their attendance for the day is deleted)?', summary: 'Summary', grid: 'Grid', span15: '15 days', spanMonth: 'Month', legend: '✓ full · ◐ morning · ◑ afternoon · ✗ absent · ● listed, not marked',
@@ -34,7 +34,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான கூலி', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
     log_mark: '{who}: {date} அன்று {s} குறிக்கப்பட்டது', log_clear: '{who}: {date} அன்று குறியீடு நீக்கப்பட்டது', log_rate: '{who}: {date} அன்று கூலி {rate} ஆக மாற்றப்பட்டது',
     log_dayrate: '{date} அன்று {g} கூலி {rate} ஆக அமைக்கப்பட்டது', log_addday: '{who}: {date} பட்டியலில் சேர்க்கப்பட்டது', log_rmday: '{who}: {date} பட்டியலில் இருந்து நீக்கப்பட்டது',
     log_lab_add: 'தொழிலாளர் சேர்க்கப்பட்டார்: {who}', log_lab_edit: 'தொழிலாளர் திருத்தப்பட்டது: {who} {chg}', log_lab_del: 'தொழிலாளர் நீக்கப்பட்டார்: {who}', confirmRm: 'இந்த நாளுக்கான பட்டியலில் இருந்து நீக்கவா? (இன்றைய வருகை பதிவும் நீக்கப்படும்)', summary: 'சுருக்கம்', grid: 'அட்டவணை', span15: '15 நாட்கள்', spanMonth: 'மாதம்', legend: '✓ முழு · ◐ காலை · ◑ மதியம் · ✗ வரவில்லை · ● பட்டியலில், குறிக்கவில்லை',
@@ -51,12 +51,14 @@ const addDays = (s, n) => { const d = new Date(s + 'T00:00:00'); d.setDate(d.get
 const money = n => '₹' + (Math.round(n * 100) / 100).toLocaleString('en-IN');
 const factor = s => (s === 'full' ? 1 : s === 'am' || s === 'pm' ? 0.5 : 0);
 let lang = 'en';
+// '' = follow the browser's language list; anything else is the user's explicit choice
+const detectLang = () => ((navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en']).map(l => String(l).toLowerCase()).find(l => l.startsWith('ta') || l.startsWith('en')) || 'en').startsWith('ta') ? 'ta' : 'en';
 const t = k => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
 
 /* ---------- storage (IndexedDB, everything cached in memory) ---------- */
 // record: {k, d:{...}, u:updatedAt, del:0|1, dirty:0|1}
 // keys:  L:<id> labourer | A:<date>:<labourId> attendance | R:<date>:<M|F> day wage override
-let idb; const recs = new Map(); const meta = { user: '', lang: 'en', since: 0, server: '', key: '', lastSync: 0 };
+let idb; const recs = new Map(); const meta = { user: '', lang: '', since: 0, server: '', key: '', lastSync: 0 };
 function openDB() {
   return new Promise((res, rej) => {
     const r = indexedDB.open('labour-db', 1);
@@ -72,7 +74,7 @@ async function load() {
   idb = await openDB();
   (await idbAll('rec')).forEach(r => recs.set(r.k, r));
   for (const k of Object.keys(meta)) { const v = await idbGet('meta', k); if (v !== undefined) meta[k] = v; }
-  lang = meta.lang;
+  lang = I18N[meta.lang] ? meta.lang : detectLang();
 }
 const saveMeta = (k, v) => { meta[k] = v; idbPut('meta', v, k); };
 function put(k, d, del = 0) {
@@ -192,7 +194,7 @@ const TABS = [['att', '📋', 'attendance'], ['lab', '👥', 'labour'], ['rep', 
 function toast(m) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), 1800); }
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
-  $('#title').textContent = t('app');
+  $('#title').textContent = t('app'); document.title = t('app');
   $('#nav').innerHTML = TABS.map(([k, ic, l]) => `<button data-act="tab" data-v="${k}" class="${tab === k || (tab === 'log' && k === 'set') ? 'on' : ''}"><span>${ic}</span>${esc(t(l))}</button>`).join('');
   updateSyncBtn();
 }
@@ -261,11 +263,17 @@ function lastBy(k) { const r = recs.get(k); return r && r.b ? `<div class="mu" s
 function labView() {
   const list = labourers().sort((a, b) => a.name.localeCompare(b.name));
   return (list.length ? list.map(l => `
-    <div class="card row sp" data-act="editlab" data-id="${l.id}">
-      <div><span class="name">${esc(l.name)}</span> <span class="badge ${l.g}">${esc(t(l.g))}</span>
-        ${l.active === false ? `<span class="mu">· ${esc(t('inactive'))}</span>` : ''}
-        <div class="mu">${esc(l.phone || '')}</div></div>
-      <b>${money(l.wage)}</b>
+    <div class="card" style="${l.active === false ? 'opacity:.7' : ''}">
+      <div class="row sp" data-act="editlab" data-id="${l.id}">
+        <div><span class="name">${esc(l.name)}</span> <span class="badge ${l.g}">${esc(t(l.g))}</span>
+          ${l.active === false ? `<span class="mu">· ${esc(t('inactive'))}</span>` : ''}
+          <div class="mu">${esc(l.phone || '')}</div></div>
+        <b>${money(l.wage)}</b>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn sec sm grow" data-act="toggleact" data-id="${l.id}">${esc(t(l.active === false ? 'activate' : 'deactivate'))}</button>
+        <button class="btn dng sm grow" data-act="dellab" data-id="${l.id}">${esc(t('del'))}</button>
+      </div>
     </div>`).join('') : `<div class="empty">${esc(t('noLabour'))}</div>`) +
     `<button class="fab" data-act="addlab" aria-label="${esc(t('add'))}">+</button>`;
 }
@@ -291,9 +299,9 @@ function labDialog(id) {
   $('#labform').onsubmit = e => {
     const f = new FormData(e.target);
     const nd = { name: f.get('name').trim(), g, wage: +f.get('wage'), phone: f.get('phone').trim(), active: f.get('active') === 'on' };
-    const chg = id ? Object.keys(nd).filter(k => String(nd[k]) !== String(l[k])).map(k => `${k}: ${l[k]} → ${nd[k]}`).join(', ') : '';
+    const chg = id ? Object.keys(nd).filter(k => String(nd[k]) !== String(l[k])).map(k => [k, l[k], nd[k]]) : [];
     put('L:' + (id || uid()), nd);
-    if (!id) audit('lab_add', { who: nd.name }); else if (chg) audit('lab_edit', { who: nd.name, chg: '(' + chg + ')' });
+    if (!id) audit('lab_add', { who: nd.name }); else if (chg.length) audit('lab_edit', { who: nd.name, chg });
     render(); toast(t('saved'));
   };
   dlg.showModal();
@@ -362,7 +370,7 @@ function gridView() {
     <p class="mu">${esc(t('legend'))}</p>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 function exportCSV() {
-  const lines = [['Name', 'Gender', 'Full days', 'Half days', 'Pay'], ...reportRows().map(r => [r.name, r.g, r.full, r.half, r.pay])]
+  const lines = [[t('name'), t('gender'), t('fullDays'), t('halfDays'), t('pay')], ...reportRows().map(r => [r.name, t(r.g), r.full, r.half, r.pay])]
     .map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], { type: 'text/csv' }));
@@ -371,8 +379,14 @@ function exportCSV() {
 
 /* ---------- audit log ---------- */
 let logDate = '';
+const FIELD = { name: 'name', g: 'gender', wage: 'wage', phone: 'phone', active: 'active' };
+function fmtChg(c) {
+  if (!Array.isArray(c)) return esc(c || ''); // entries written by older versions are plain text
+  const val = (k, x) => k === 'active' ? (x ? '✓' : '✗') : k === 'g' ? t(x) : x === '' || x == null ? '—' : x;
+  return '(' + c.map(([k, a, b]) => `${esc(t(FIELD[k] || k))}: ${esc(val(k, a))} → ${esc(val(k, b))}`).join(', ') + ')';
+}
 function logText(o) {
-  const v = { who: esc(o.who), s: esc(t(o.s)), date: o.date, rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: esc(o.chg || '') };
+  const v = { who: esc(o.who), s: esc(t(o.s)), date: o.date, rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: fmtChg(o.chg) };
   return (t('log_' + o.act)).replace(/\{(\w+)\}/g, (m, k) => v[k] ?? '');
 }
 function logView() {
@@ -388,7 +402,8 @@ function setView() {
       <p class="mu" style="margin-bottom:0">${esc(t('yourNameHint'))}</p></div>
     <button class="btn sec full" style="margin-bottom:10px" data-act="tab" data-v="log">🕘 ${esc(t('auditLog'))}</button>
     <div class="card"><label style="margin-top:0">${esc(t('language'))}</label>
-      <div class="gsel"><button class="${lang === 'en' ? 'on' : ''}" data-act="lang" data-v="en">English</button><button class="${lang === 'ta' ? 'on' : ''}" data-act="lang" data-v="ta">தமிழ்</button></div></div>
+      <div class="gsel"><button class="${meta.lang === 'en' ? 'on' : ''}" data-act="lang" data-v="en">English</button><button class="${meta.lang === 'ta' ? 'on' : ''}" data-act="lang" data-v="ta">தமிழ்</button></div>
+      <button class="btn sec sm full" style="margin-top:8px;${!meta.lang ? 'font-weight:800;outline:2px solid var(--g)' : ''}" data-act="lang" data-v="">🌐 ${esc(t('auto'))}</button></div>
     <div class="card"><label style="margin-top:0">${esc(t('server'))}</label><input id="srv" value="${esc(meta.server)}" placeholder="https://example.com">
       <label>${esc(t('key'))}</label><input id="key" type="password" value="${esc(meta.key)}">
       <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? new Date(meta.lastSync).toLocaleString() : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
@@ -421,11 +436,19 @@ document.addEventListener('click', e => {
     const a = attOf(date, id), n = prompt(t('rateFor'), a.rate);
     if (n !== null && n.trim() !== '' && !isNaN(+n)) { setPersonRate(date, id, +n); drawAttList(); }
   }
+  else if (act === 'toggleact') {
+    const l = labById(id), on = l.active === false;
+    put('L:' + id, { ...recs.get('L:' + id).d, active: on }); audit('lab_edit', { who: l.name, chg: [['active', !on, on]] }); render();
+  }
+  else if (act === 'dellab') {
+    const l = labById(id);
+    if (confirm(t('confirmDel'))) { put('L:' + id, recs.get('L:' + id).d, 1); audit('lab_del', { who: l.name }); render(); }
+  }
   else if (act === 'addlab') labDialog();
   else if (act === 'editlab') labDialog(id);
   else if (act === 'csv') exportCSV();
   else if (act === 'logall') { logDate = ''; render(); }
-  else if (act === 'lang') { lang = v; saveMeta('lang', v); render(); }
+  else if (act === 'lang') { saveMeta('lang', v); lang = v || detectLang(); render(); }
 });
 document.addEventListener('input', e => {
   if (e.target.id === 'q') { q = e.target.value; drawAttList(); }
