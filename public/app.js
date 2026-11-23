@@ -278,7 +278,7 @@ function render(soft) {
 
 /* ---------- attendance ---------- */
 const weekday = d => new Date(d + 'T00:00:00').toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { weekday: 'short' });
-const dateBar = () => `<div class="wd">${esc(weekday(date))}${date === today() ? ` · ${esc(t('today'))}` : ''}</div><div class="date">
+const dateBar = () => `<div class="wd"><span>${esc(weekday(date))}${date === today() ? ` · ${esc(t('today'))}` : ''}</span>${date !== today() ? `<button class="todaybtn" data-act="today">${esc(t('today'))}</button>` : ''}</div><div class="date">
     <button class="btn sec" data-act="day" data-v="-1">‹</button>
     <input type="date" id="date" value="${date}" max="${today()}">
     <button class="btn sec" data-act="day" data-v="1" ${date >= today() ? 'disabled' : ''}>›</button>
@@ -735,6 +735,7 @@ document.addEventListener('click', e => {
   const { act, v, id, s } = b.dataset;
   if (act === 'tab') { tab = v; render(); }
   else if (act === 'sync') sync(true);
+  else if (act === 'today') { date = today(); render(); }
   else if (act === 'day') { const n = addDays(date, +v); if (n > today()) return; date = n; render(); }
   else if (act === 'mark') { mark(date, id, s); drawAttList(); updateSyncBtn(); }
   else if (act === 'markall') { for (const id of dayList(date).ids) if (!attOf(date, id)) mark(date, id, 'full'); drawAttList(); }
