@@ -733,7 +733,7 @@ function setView() {
     <div class="card"><label style="margin-top:0">${esc(t('language'))}</label>
       <div class="gsel"><button class="${meta.lang === 'en' ? 'on' : ''}" data-act="lang" data-v="en">English</button><button class="${meta.lang === 'ta' ? 'on' : ''}" data-act="lang" data-v="ta">தமிழ்</button></div>
       <button class="btn sec sm full" style="margin-top:8px;${!meta.lang ? 'font-weight:800;outline:2px solid var(--g)' : ''}" data-act="lang" data-v="">🌐 ${esc(t('auto'))}</button></div>
-    <div class="card"><label style="margin-top:0">${esc(t('server'))}</label><input id="srv" value="${esc(meta.server)}" placeholder="https://example.com">
+    <div class="card" id="synccard"><label style="margin-top:0">${esc(t('server'))}</label><input id="srv" value="${esc(meta.server)}" placeholder="https://example.com">
       <label>${esc(t('key'))}</label><input id="key" type="password" value="${esc(meta.key)}">
       ${syncErr && syncMsg ? `<p style="color:var(--re);font-size:14px">⚠ ${esc(syncMsg)}</p>` : ''}
       <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? new Date(meta.lastSync).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ }) : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
@@ -748,6 +748,10 @@ document.addEventListener('click', e => {
   const { act, v, id, s } = b.dataset;
   if (act === 'tab') { tab = v; render(); }
   else if (act === 'sync') sync(true);
+  else if (act === 'syncbtn') {
+    if (syncErr) { tab = 'set'; render(); const c = $('#synccard'); if (c) { c.scrollIntoView({ block: 'center' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1600); } }
+    else sync(true);
+  }
   else if (act === 'today') { date = today(); render(); }
   else if (act === 'day') { const n = addDays(date, +v); if (n > today()) return; date = n; render(); }
   else if (act === 'mark') { mark(date, id, s); drawAttList(); updateSyncBtn(); }
