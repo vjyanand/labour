@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
     addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
     log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
@@ -39,7 +39,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
     addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு பதிவு இல்லை', confirmExp: 'இந்த பதிவை நீக்கவா?', grandTotal: 'மொத்த செலவு', date: 'தேதி',
     log_inc_add: 'வருமானம் சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_inc_edit: 'வருமானம் திருத்தப்பட்டது: {desc} {amt} ({date})', log_inc_del: 'வருமானம் நீக்கப்பட்டது: {desc} {amt} ({date})', log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
@@ -230,12 +230,13 @@ function chrome() {
 // every screen has its own URL: #/attendance/2026-11-22, #/accounts/<date>, #/report, #/labour, #/settings, #/help, #/log
 const SLUG = { att: 'attendance', exp: 'accounts', rep: 'report', lab: 'labour', set: 'settings', log: 'log', help: 'help' };
 const TAB_OF = Object.fromEntries(Object.entries(SLUG).map(([k, v]) => [v, k]));
-let lastHash = '';
-const hashFor = () => '#/' + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' + date : '');
+let lastHash = '', attMode = 'mark';
+const hashFor = () => '#/' + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' + date : '') + (tab === 'att' && attMode === 'list' ? '/list' : '');
 function readHash() {
   const p = location.hash.replace(/^#\/?/, '').split('/');
   tab = TAB_OF[p[0]] || 'att';
   if (/^\d{4}-\d\d-\d\d$/.test(p[1] || '')) date = p[1];
+  if (tab === 'att') attMode = p[2] === 'list' ? 'list' : 'mark';
 }
 addEventListener('popstate', () => { readHash(); lastHash = location.hash; render(); });
 function render(soft) {
@@ -261,23 +262,33 @@ const dateBar = () => `<div class="wd">${esc(weekday(date))}${date === ymd(new D
   </div>`;
 function attView() {
   const dr = g => dayRate(date, g);
+  const list = attMode === 'list';
   return `
   ${dateBar()}
-  <div class="row" style="margin-bottom:10px">
+  <div class="gsel" style="margin-bottom:10px"><button data-act="attmode" data-v="mark" class="${list ? '' : 'on'}">${esc(t('markMode'))}</button><button data-act="attmode" data-v="list" class="${list ? 'on' : ''}">${esc(t('listMode'))}</button></div>
+  ${list ? '' : `<div class="row" style="margin-bottom:10px">
     <input id="q" class="grow" type="search" placeholder="${esc(t('search'))}" value="${esc(q)}">
     <button class="btn sec" data-act="markall" style="white-space:nowrap">✓ ${esc(t('markAll'))}</button>
-  </div>
+  </div>`}
   <div id="att-list"></div>
-  <details class="card"><summary>💰 ${esc(t('dayRate'))}</summary>
+  ${list ? '' : `<details class="card"><summary>💰 ${esc(t('dayRate'))}</summary>
     <p class="mu">${esc(t('dayRateHint'))}</p>
     <div class="two">
       <div><label>${esc(t('M'))}</label><input type="number" inputmode="decimal" data-rate="M" value="${dr('M') ?? ''}" placeholder="${esc(t('normal'))}"></div>
       <div><label>${esc(t('F'))}</label><input type="number" inputmode="decimal" data-rate="F" value="${dr('F') ?? ''}" placeholder="${esc(t('normal'))}"></div>
     </div>
-  </details>`;
+  </details>`}`;
 }
 function drawAttList() {
   const el = $('#att-list'); if (!el) return;
+  if (attMode === 'list') { // quick view: only who came, no buttons
+    const rows = labourers().map(l => ({ l, a: attOf(date, l.id) })).filter(x => x.a && factor(x.a.s)).sort((p, q) => p.l.name.localeCompare(q.l.name));
+    const eq = rows.reduce((n, x) => n + factor(x.a.s), 0), tot = rows.reduce((n, x) => n + factor(x.a.s) * x.a.rate, 0);
+    el.innerHTML = rows.length ? `<div class="card"><div class="row sp" style="margin-bottom:6px"><b style="font-size:18px">${rows.length} ${esc(t('present'))}</b><span class="mu">${eq} ${esc(t('dayEq'))}</span></div>
+      ${rows.map(x => `<div class="row sp lrow"><span class="name g${x.l.g}">${esc(x.l.name)}</span><span class="mu">${esc(t(x.a.s))}</span><b>${money(factor(x.a.s) * x.a.rate)}</b></div>`).join('')}
+      <div class="row sp lrow" style="border-bottom:0"><b>${esc(t('total'))}</b><span></span><b>${money(tot)}</b></div></div>` : `<div class="empty">${esc(t('nobodyYet'))}</div>`;
+    return;
+  }
   const { ids, from } = dayList(date);
   const all = ids.map(labById).filter(Boolean);
   const list = all.filter(l => !q || l.name.toLowerCase().includes(q.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
@@ -651,6 +662,7 @@ document.addEventListener('click', e => {
     if (a) put(`A:${date}:${id}`, a, 1);
     put(`D:${date}:${id}`, { date, lid: id }, 1); drawAttList();
   }
+  else if (act === 'attmode') { attMode = v; render(); }
   else if (act === 'addexp') addExpense();
   else if (act === 'editexp') expDialog(id, b.dataset.k);
   else if (act === 'acct') { acctKind = v; render(); }
