@@ -1,4 +1,4 @@
-const CACHE = 'labour-v8';
+const CACHE = 'labour-v9';
 const SHELL = ['./', 'index.html', 'app.js', 'style.css', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', e => {
@@ -16,5 +16,17 @@ self.addEventListener('fetch', e => {
     const hit = await c.match(req, { ignoreSearch: true });
     const net = fetch(req).then(r => { if (r.ok) c.put(req, r.clone()); return r; }).catch(() => hit);
     return hit || net;
+  }));
+});
+
+self.addEventListener('push', e => {
+  let d = {}; try { d = e.data.json(); } catch {}
+  e.waitUntil(self.registration.showNotification(d.title || 'Attendance', { body: d.body || '', tag: 'reminder', data: { url: d.url || './' } }));
+});
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then(cs => {
+    for (const c of cs) if ('focus' in c) return c.focus();
+    return clients.openWindow(e.notification.data.url);
   }));
 });

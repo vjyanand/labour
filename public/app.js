@@ -15,7 +15,10 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
+    remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
+    pushNo: 'Notifications are not supported here. On iPhone, add the app to the Home Screen first.', pushDenied: 'Notifications are blocked in the browser settings.',
+    pushUnavail: 'Reminders need the online (Netlify) server.', remindSet: 'Reminders set', testSent: 'Test sent', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
     log_mark: '{who}: marked {s} on {date}', log_clear: '{who}: cleared mark on {date}', log_rate: '{who}: wage set to {rate} on {date}',
     log_dayrate: '{g} wage on {date} set to {rate}', log_addday: '{who}: added to {date}', log_rmday: '{who}: removed from {date}',
     log_lab_add: 'Labourer added: {who}', log_lab_edit: 'Labourer edited: {who} {chg}', log_lab_del: 'Labourer deleted: {who}', confirmRm: 'Remove this person from this day (their attendance for the day is deleted)?', summary: 'Summary', grid: 'Grid', span15: '15 days', spanMonth: 'Month', legend: '✓ full · ◐ morning · ◑ afternoon · ✗ absent · ● listed, not marked',
@@ -34,7 +37,10 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
+    remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
+    pushNo: 'இங்கு அறிவிப்புகள் ஆதரிக்கப்படவில்லை. ஐபோனில் முதலில் செயலியை Home Screen-இல் சேர்க்கவும்.', pushDenied: 'உலாவி அமைப்புகளில் அறிவிப்புகள் தடுக்கப்பட்டுள்ளன.',
+    pushUnavail: 'நினைவூட்டலுக்கு இணைய (Netlify) சர்வர் தேவை.', remindSet: 'நினைவூட்டல் அமைக்கப்பட்டது', testSent: 'சோதனை அனுப்பப்பட்டது', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
     log_mark: '{who}: {date} அன்று {s} குறிக்கப்பட்டது', log_clear: '{who}: {date} அன்று குறியீடு நீக்கப்பட்டது', log_rate: '{who}: {date} அன்று கூலி {rate} ஆக மாற்றப்பட்டது',
     log_dayrate: '{date} அன்று {g} கூலி {rate} ஆக அமைக்கப்பட்டது', log_addday: '{who}: {date} பட்டியலில் சேர்க்கப்பட்டது', log_rmday: '{who}: {date} பட்டியலில் இருந்து நீக்கப்பட்டது',
     log_lab_add: 'தொழிலாளர் சேர்க்கப்பட்டார்: {who}', log_lab_edit: 'தொழிலாளர் திருத்தப்பட்டது: {who} {chg}', log_lab_del: 'தொழிலாளர் நீக்கப்பட்டார்: {who}', confirmRm: 'இந்த நாளுக்கான பட்டியலில் இருந்து நீக்கவா? (இன்றைய வருகை பதிவும் நீக்கப்படும்)', summary: 'சுருக்கம்', grid: 'அட்டவணை', span15: '15 நாட்கள்', spanMonth: 'மாதம்', legend: '✓ முழு · ◐ காலை · ◑ மதியம் · ✗ வரவில்லை · ● பட்டியலில், குறிக்கவில்லை',
@@ -58,7 +64,7 @@ const t = k => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
 /* ---------- storage (IndexedDB, everything cached in memory) ---------- */
 // record: {k, d:{...}, u:updatedAt, del:0|1, dirty:0|1}
 // keys:  L:<id> labourer | A:<date>:<labourId> attendance | R:<date>:<M|F> day wage override
-let idb; const recs = new Map(); const meta = { user: '', lang: '', since: 0, server: '', key: '', lastSync: 0 };
+let idb; const recs = new Map(); const meta = { user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0 };
 function openDB() {
   return new Promise((res, rej) => {
     const r = indexedDB.open('labour-db', 1);
@@ -387,6 +393,48 @@ function exportCSV() {
   a.download = `wages_${repFrom}_${repTo}.csv`; a.click();
 }
 
+/* ---------- push reminders (defaults: 9:15 AM and 5:00 PM IST) ---------- */
+const pushOK = () => 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+const remindCfg = () => ({ on: false, t1: '09:15', t2: '17:00', ...(meta.remind || {}) });
+const apiUrl = p => (meta.server || '').replace(/\/$/, '') + p;
+const apiHdr = () => ({ 'Content-Type': 'application/json', ...(meta.key ? { 'x-sync-key': meta.key } : {}) });
+const b64 = s => Uint8Array.from(atob((s + '='.repeat((4 - s.length % 4) % 4)).replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
+async function pushSubscribe() { // create/refresh this phone's subscription and its reminder settings on the server
+  const reg = await navigator.serviceWorker.ready, c = remindCfg();
+  let sub = await reg.pushManager.getSubscription();
+  if (!sub) {
+    const kr = await fetch(apiUrl('/api/push/key'), { headers: apiHdr() });
+    if (!kr.ok) throw new Error('unavailable');
+    sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64((await kr.json()).key) });
+  }
+  const r = await fetch(apiUrl('/api/push/subscribe'), { method: 'POST', headers: apiHdr(), body: JSON.stringify({
+    sub: sub.toJSON(), times: [c.t1, c.t2].filter(Boolean), tz: Intl.DateTimeFormat().resolvedOptions().timeZone, lang, user: meta.user }) });
+  if (!r.ok) throw new Error('unavailable');
+  return sub;
+}
+async function remindOn() {
+  if (!pushOK()) return toast(t('pushNo'));
+  if ((await Notification.requestPermission()) !== 'granted') return toast(t('pushDenied'));
+  saveMeta('remind', { ...remindCfg(), on: true });
+  try { await pushSubscribe(); toast(t('remindSet')); } catch { saveMeta('remind', { ...remindCfg(), on: false }); toast(t('pushUnavail')); }
+  render();
+}
+async function remindOff() {
+  saveMeta('remind', { ...remindCfg(), on: false });
+  try {
+    const sub = await (await navigator.serviceWorker.ready).pushManager.getSubscription();
+    if (sub) { await fetch(apiUrl('/api/push/unsubscribe'), { method: 'POST', headers: apiHdr(), body: JSON.stringify({ endpoint: sub.endpoint }) }).catch(() => {}); await sub.unsubscribe(); }
+  } catch {}
+  render();
+}
+async function remindTest() {
+  try {
+    const sub = await (await navigator.serviceWorker.ready).pushManager.getSubscription();
+    const r = sub && await fetch(apiUrl('/api/push/test'), { method: 'POST', headers: apiHdr(), body: JSON.stringify({ endpoint: sub.endpoint, lang }) });
+    toast(r && r.ok ? t('testSent') : t('pushUnavail'));
+  } catch { toast(t('pushUnavail')); }
+}
+
 /* ---------- audit log ---------- */
 let logDate = '';
 const FIELD = { name: 'name', g: 'gender', wage: 'wage', phone: 'phone', active: 'active' };
@@ -410,6 +458,10 @@ function logView() {
 function setView() {
   return `<div class="card"><label style="margin-top:0">${esc(t('yourName'))}</label><input id="uname" value="${esc(meta.user)}">
       <p class="mu" style="margin-bottom:0">${esc(t('yourNameHint'))}</p></div>
+    ${(() => { const c = remindCfg(), on = c.on && pushOK() && Notification.permission === 'granted';
+      return `<div class="card"><b>🔔 ${esc(t('remindTitle'))}</b><p class="mu">${esc(t('remindHint'))}</p>` + (!pushOK() ? `<p class="mu">${esc(t('pushNo'))}</p>` :
+      `<div class="two"><div><label>${esc(t('remindT1'))}</label><input type="time" id="rt1" value="${c.t1}"></div><div><label>${esc(t('remindT2'))}</label><input type="time" id="rt2" value="${c.t2}"></div></div>
+      <div class="row" style="margin-top:12px">${on ? `<button class="btn dng grow" data-act="remindoff">${esc(t('turnOff'))}</button><button class="btn sec grow" data-act="remindtest">${esc(t('sendTest'))}</button>` : `<button class="btn grow" data-act="remindon">${esc(t('turnOn'))}</button>`}</div>`) + '</div>'; })()}
     <button class="btn sec full" style="margin-bottom:10px" data-act="tab" data-v="log">🕘 ${esc(t('auditLog'))}</button>
     <div class="card"><label style="margin-top:0">${esc(t('language'))}</label>
       <div class="gsel"><button class="${meta.lang === 'en' ? 'on' : ''}" data-act="lang" data-v="en">English</button><button class="${meta.lang === 'ta' ? 'on' : ''}" data-act="lang" data-v="ta">தமிழ்</button></div>
@@ -460,8 +512,11 @@ document.addEventListener('click', e => {
   else if (act === 'addlab') labDialog();
   else if (act === 'editlab') labDialog(id);
   else if (act === 'csv') exportCSV();
+  else if (act === 'remindon') remindOn();
+  else if (act === 'remindoff') remindOff();
+  else if (act === 'remindtest') remindTest();
   else if (act === 'logall') { logDate = ''; render(); }
-  else if (act === 'lang') { saveMeta('lang', v); lang = v || detectLang(); render(); }
+  else if (act === 'lang') { saveMeta('lang', v); lang = v || detectLang(); render(); if (remindCfg().on) pushSubscribe().catch(() => {}); }
 });
 document.addEventListener('input', e => {
   if (e.target.id === 'q') { q = e.target.value; drawAttList(); }
@@ -473,6 +528,7 @@ document.addEventListener('change', e => {
   else if (el.dataset.rate) { setDayRate(date, el.dataset.rate, el.value.trim()); drawAttList(); }
   else if (el.id === 'rf' || el.id === 'rt') { repFrom = $('#rf').value || repFrom; repTo = $('#rt').value || repTo; render(); }
   else if (el.id === 'logdate') { logDate = el.value; render(); }
+  else if (el.id === 'rt1' || el.id === 'rt2') { saveMeta('remind', { ...remindCfg(), [el.id === 'rt1' ? 't1' : 't2']: el.value }); if (remindCfg().on) pushSubscribe().then(() => toast(t('remindSet'))).catch(() => toast(t('pushUnavail'))); }
   else if (el.id === 'uname') { saveMeta('user', el.value.trim()); toast(t('saved')); }
   else if (el.id === 'srv') saveMeta('server', el.value.trim());
   else if (el.id === 'key') saveMeta('key', el.value);
@@ -494,6 +550,7 @@ function askName() {
   await load();
   render();
   askName();
+  if (remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
   if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
   sync();
