@@ -12,10 +12,10 @@ const I18N = {
     active: 'Currently working', noLabour: 'No labourers yet. Tap + to add.', markAll: 'Mark all full day',
     halfDays: 'Half', fullDays: 'Full', confirmDel: 'Delete this labourer? Past attendance is kept.',
     server: 'Server address (blank = this site)', key: 'Sync key (if set on server)', syncFail: 'Sync failed, will retry',
-    saved: 'Saved', rateFor: 'Wage for this person today', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
+    saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
     log_mark: '{who}: marked {s} on {date}', log_clear: '{who}: cleared mark on {date}', log_rate: '{who}: wage set to {rate} on {date}',
     log_dayrate: '{g} wage on {date} set to {rate}', log_addday: '{who}: added to {date}', log_rmday: '{who}: removed from {date}',
     log_lab_add: 'Labourer added: {who}', log_lab_edit: 'Labourer edited: {who} {chg}', log_lab_del: 'Labourer deleted: {who}', confirmRm: 'Remove this person from this day (their attendance for the day is deleted)?', summary: 'Summary', grid: 'Grid', span15: '15 days', spanMonth: 'Month', legend: '✓ full · ◐ morning · ◑ afternoon · ✗ absent · ● listed, not marked',
@@ -31,10 +31,10 @@ const I18N = {
     active: 'தற்போது பணியில்', noLabour: 'தொழிலாளர் இல்லை. + அழுத்தி சேர்க்கவும்.', markAll: 'அனைவருக்கும் முழு நாள்',
     halfDays: 'அரை', fullDays: 'முழு', confirmDel: 'இந்த தொழிலாளரை நீக்கவா? முந்தைய வருகை பதிவுகள் இருக்கும்.',
     server: 'சர்வர் முகவரி (காலி = இதே தளம்)', key: 'ஒத்திசைவு விசை (சர்வரில் இருந்தால்)', syncFail: 'ஒத்திசைவு தோல்வி, மீண்டும் முயற்சிக்கும்',
-    saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான கூலி', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
+    saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
     log_mark: '{who}: {date} அன்று {s} குறிக்கப்பட்டது', log_clear: '{who}: {date} அன்று குறியீடு நீக்கப்பட்டது', log_rate: '{who}: {date} அன்று கூலி {rate} ஆக மாற்றப்பட்டது',
     log_dayrate: '{date} அன்று {g} கூலி {rate} ஆக அமைக்கப்பட்டது', log_addday: '{who}: {date} பட்டியலில் சேர்க்கப்பட்டது', log_rmday: '{who}: {date} பட்டியலில் இருந்து நீக்கப்பட்டது',
     log_lab_add: 'தொழிலாளர் சேர்க்கப்பட்டார்: {who}', log_lab_edit: 'தொழிலாளர் திருத்தப்பட்டது: {who} {chg}', log_lab_del: 'தொழிலாளர் நீக்கப்பட்டார்: {who}', confirmRm: 'இந்த நாளுக்கான பட்டியலில் இருந்து நீக்கவா? (இன்றைய வருகை பதிவும் நீக்கப்படும்)', summary: 'சுருக்கம்', grid: 'அட்டவணை', span15: '15 நாட்கள்', spanMonth: 'மாதம்', legend: '✓ முழு · ◐ காலை · ◑ மதியம் · ✗ வரவில்லை · ● பட்டியலில், குறிக்கவில்லை',
@@ -131,14 +131,23 @@ function mark(date, lid, s) {
   ensureRoster(date);
   const lab = labById(lid), cur = attOf(date, lid);
   if (cur && cur.s === s) { put(`A:${date}:${lid}`, cur, 1); audit('clear', { date, who: lab.name }); return; } // tap again = clear
-  const base = cur && cur.ov ? cur.rate : (dayRate(date, lab.g) ?? lab.wage);
-  put(`A:${date}:${lid}`, { date, lid, s, rate: base, ov: cur && cur.ov ? 1 : 0 });
+  const pr = personRate(date, lab), base = pr.rate;
+  put(`A:${date}:${lid}`, { date, lid, s, rate: base, ov: pr.ov ? 1 : 0 });
   audit('mark', { date, who: lab.name, s });
 }
-function setPersonRate(date, lid, rate) {
-  const cur = attOf(date, lid); if (!cur) return;
-  put(`A:${date}:${lid}`, { ...cur, rate, ov: 1 });
-  audit('rate', { date, who: labById(lid).name, rate });
+// per-person override for one day: stored on the attendance record, or on the day-list entry if not marked yet
+const dayEntry = (date, lid) => { const r = recs.get(`D:${date}:${lid}`); return r && !r.del ? r.d : null; };
+function personRate(date, lab) { // -> { rate, ov }
+  const a = attOf(date, lab.id); if (a) return { rate: a.rate, ov: !!a.ov };
+  const e = dayEntry(date, lab.id); if (e && e.ov) return { rate: e.rate, ov: true };
+  return { rate: dayRate(date, lab.g) ?? lab.wage, ov: false };
+}
+function setPersonRate(date, lid, rate) { // rate === null -> back to the normal wage
+  const lab = labById(lid), cur = attOf(date, lid), normal = dayRate(date, lab.g) ?? lab.wage;
+  ensureRoster(date);
+  if (cur) put(`A:${date}:${lid}`, { ...cur, rate: rate ?? normal, ov: rate == null ? 0 : 1 });
+  else put(`D:${date}:${lid}`, rate == null ? { date, lid } : { date, lid, rate, ov: 1 });
+  audit('rate', { date, who: lab.name, rate });
 }
 function setDayRate(date, g, val) {
   const has = val !== '' && !isNaN(+val);
@@ -215,18 +224,18 @@ function attView() {
     <input type="date" id="date" value="${date}">
     <button class="btn sec" data-act="day" data-v="1">›</button>
   </div>
+  <div class="row" style="margin-bottom:10px">
+    <input id="q" class="grow" type="search" placeholder="${esc(t('search'))}" value="${esc(q)}">
+    <button class="btn sec" data-act="markall" style="white-space:nowrap">✓ ${esc(t('markAll'))}</button>
+  </div>
+  <div id="att-list"></div>
   <details class="card"><summary>💰 ${esc(t('dayRate'))}</summary>
     <p class="mu">${esc(t('dayRateHint'))}</p>
     <div class="two">
       <div><label>${esc(t('M'))}</label><input type="number" inputmode="decimal" data-rate="M" value="${dr('M') ?? ''}" placeholder="${esc(t('normal'))}"></div>
       <div><label>${esc(t('F'))}</label><input type="number" inputmode="decimal" data-rate="F" value="${dr('F') ?? ''}" placeholder="${esc(t('normal'))}"></div>
     </div>
-  </details>
-  <div class="row" style="margin-bottom:10px">
-    <input id="q" class="grow" type="search" placeholder="${esc(t('search'))}" value="${esc(q)}">
-    <button class="btn sec" data-act="markall" style="white-space:nowrap">✓ ${esc(t('markAll'))}</button>
-  </div>
-  <div id="att-list"></div>`;
+  </details>`;
 }
 function drawAttList() {
   const el = $('#att-list'); if (!el) return;
@@ -240,14 +249,15 @@ function drawAttList() {
   const picker = avail.length ? `<select id="addsel" class="${all.length ? '' : 'big'}"><option value="">${esc(t('addPerson'))}</option>${avail.map(l => `<option value="${l.id}">${esc(l.name)} (${esc(t(l.g))})</option>`).join('')}</select>` : '';
   el.innerHTML = `
   <div class="stats">
+    <div><b>${all.length}</b><small>${esc(t('people'))}</small></div>
     <div><b>${present}</b><small>${esc(t('present'))}</small></div>
     <div><b>${dayEq}</b><small>${esc(t('dayEq'))}</small></div>
-    <div><b>${money(pay)}</b><small>${esc(t('wages'))}</small></div>
+    <div><b>${money(pay)}</b><small>${esc(t('cost'))}</small></div>
   </div>` + (from ? `<p class="mu">↩ ${esc(t('fromPrev'))} ${from}</p>` : '') + (list.length ? list.map(l => {
     const a = attOf(date, l.id), s = a && a.s;
     return `<div class="card">
       <div class="row sp"><div><span class="name">${esc(l.name)}</span> <span class="badge ${l.g}">${esc(t(l.g))}</span></div>
-        <span class="row">${a && factor(a.s) ? `<button class="rate ${a.ov ? 'ov' : ''}" data-act="rate" data-id="${l.id}">${money(a.rate * factor(a.s))} ✎</button>` : `<span class="mu">${money(dayRate(date, l.g) ?? l.wage)}</span>`}
+        <span class="row">${(() => { const pr = personRate(date, l); return `<button class="rate ${pr.ov ? 'ov' : ''}" data-act="rate" data-id="${l.id}">${money(pr.rate)}${pr.ov ? ' ★' : ''} ✎</button>${a && factor(a.s) && factor(a.s) < 1 ? `<span class="mu">= ${money(pr.rate * factor(a.s))}</span>` : ''}`; })()}
           <button class="rate" data-act="rmday" data-id="${l.id}" aria-label="${esc(t('remove'))}">✕</button></span>
       </div>
       ${a ? lastBy(`A:${date}:${l.id}`) : ''}
@@ -433,8 +443,11 @@ document.addEventListener('click', e => {
   else if (act === 'shift') { gridShift(+v); render(); }
   else if (act === 'goday') { date = v; tab = 'att'; render(); }
   else if (act === 'rate') {
-    const a = attOf(date, id), n = prompt(t('rateFor'), a.rate);
-    if (n !== null && n.trim() !== '' && !isNaN(+n)) { setPersonRate(date, id, +n); drawAttList(); }
+    const n = prompt(t('rateFor'), personRate(date, labById(id)).rate);
+    if (n === null) return;
+    if (n.trim() === '') setPersonRate(date, id, null);
+    else if (!isNaN(+n) && +n >= 0) setPersonRate(date, id, +n); else return;
+    drawAttList();
   }
   else if (act === 'toggleact') {
     const l = labById(id), on = l.active === false;
