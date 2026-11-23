@@ -1,4 +1,4 @@
-const CACHE = 'labour-v41';
+const CACHE = 'labour-v42';
 const SHELL = ['./', 'index.html', 'app.js', 'style.css', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', e => {

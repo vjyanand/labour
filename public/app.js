@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', tally: 'Tally', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', tally: 'Tally', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
     addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
     log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
@@ -39,7 +39,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', tally: 'மொத்த கணக்கு', noFuture: 'எதிர்கால தேதிக்கு பதிவு செய்ய முடியாது', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', tally: 'மொத்த கணக்கு', noFuture: 'எதிர்கால தேதிக்கு பதிவு செய்ய முடியாது', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
     addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு பதிவு இல்லை', confirmExp: 'இந்த பதிவை நீக்கவா?', grandTotal: 'மொத்த செலவு', date: 'தேதி',
     log_inc_add: 'வருமானம் சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_inc_edit: 'வருமானம் திருத்தப்பட்டது: {desc} {amt} ({date})', log_inc_del: 'வருமானம் நீக்கப்பட்டது: {desc} {amt} ({date})', log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
@@ -77,7 +77,6 @@ function openDB() {
   });
 }
 const idbAll = st => new Promise(res => { const q = idb.transaction(st).objectStore(st).getAll(); q.onsuccess = () => res(q.result); });
-const idbKeys = st => new Promise(res => { const q = idb.transaction(st).objectStore(st).getAllKeys(); q.onsuccess = () => res(q.result); });
 const idbGet = (st, k) => new Promise(res => { const q = idb.transaction(st).objectStore(st).get(k); q.onsuccess = () => res(q.result); });
 const idbPut = (st, v, k) => idb.transaction(st, 'readwrite').objectStore(st).put(v, k);
 async function load() {
@@ -183,7 +182,7 @@ function setDayRate(date, g, val) {
 }
 
 /* ---------- sync ---------- */
-let syncing = false, syncTimer, online = navigator.onLine, syncErr = false, syncMsg = '';
+let syncing = false, syncTimer, syncErr = false, syncMsg = '';
 const pendingCount = () => [...recs.values()].filter(r => r.dirty).length;
 function scheduleSync() { updateSyncBtn(); clearTimeout(syncTimer); syncTimer = setTimeout(sync, 1500); }
 async function sync(manual) {
