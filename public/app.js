@@ -11,7 +11,7 @@ const I18N = {
     dayRate: 'Today\'s wage override', dayRateHint: 'Set a different full-day wage for all male/female labourers on this day. Leave blank for normal wages.',
     active: 'Currently working', noLabour: 'No labourers yet. Tap + to add.', markAll: 'Mark all full day',
     halfDays: 'Half', fullDays: 'Full', confirmDel: 'Delete this labourer? Past attendance is kept.',
-    server: 'Server address (blank = this site)', key: 'Sync key (if set on server)', syncFail: 'Sync failed, will retry', syncErrShort: 'Sync failed',
+    updatedBy: 'Updated by', server: 'Server address (blank = this site)', key: 'Sync key (if set on server)', syncFail: 'Sync failed, will retry', syncErrShort: 'Sync failed',
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
@@ -35,7 +35,7 @@ const I18N = {
     dayRate: 'இன்றைய கூலி மாற்றம்', dayRateHint: 'இந்த நாளுக்கு ஆண்/பெண் அனைவருக்கும் வேறு முழு நாள் கூலி அமைக்கவும். வழக்கமான கூலிக்கு காலியாக விடவும்.',
     active: 'தற்போது பணியில்', noLabour: 'தொழிலாளர் இல்லை. + அழுத்தி சேர்க்கவும்.', markAll: 'அனைவருக்கும் முழு நாள்',
     halfDays: 'அரை', fullDays: 'முழு', confirmDel: 'இந்த தொழிலாளரை நீக்கவா? முந்தைய வருகை பதிவுகள் இருக்கும்.',
-    server: 'சர்வர் முகவரி (காலி = இதே தளம்)', key: 'ஒத்திசைவு விசை (சர்வரில் இருந்தால்)', syncFail: 'ஒத்திசைவு தோல்வி, மீண்டும் முயற்சிக்கும்', syncErrShort: 'ஒத்திசைவு தோல்வி',
+    updatedBy: 'புதுப்பித்தவர்', server: 'சர்வர் முகவரி (காலி = இதே தளம்)', key: 'ஒத்திசைவு விசை (சர்வரில் இருந்தால்)', syncFail: 'ஒத்திசைவு தோல்வி, மீண்டும் முயற்சிக்கும்', syncErrShort: 'ஒத்திசைவு தோல்வி',
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
@@ -207,13 +207,15 @@ async function sync(manual) {
     const out = await res.json().catch(() => { throw new Error('unexpected reply (not the sync server)'); });
     if (out.now) saveMeta('clockOffset', out.now - Math.round((t0 + Date.now()) / 2));
     for (const s of out.mode === 'view' ? [] : sent) { const cur = recs.get(s.k); if (cur && cur.u === s.u) { cur.dirty = 0; idbPut('rec', cur); } }
+    const others = new Set(), first = !meta.since; // names of other people whose changes just arrived
     for (const r of out.records) {
       const cur = recs.get(r.k);
-      if (!cur || !cur.dirty) { const n = { k: r.k, d: r.d, u: r.u, del: r.del, b: r.b, dirty: 0 }; recs.set(r.k, n); idbPut('rec', n); }
+      if (!cur || !cur.dirty) { if (!first && r.b && r.b !== meta.user && r.b !== '?') others.add(r.b); const n = { k: r.k, d: r.d, u: r.u, del: r.del, b: r.b, dirty: 0 }; recs.set(r.k, n); idbPut('rec', n); }
     }
     const mode = out.mode === 'view' ? 'view' : 'edit', modeChanged = mode !== meta.mode; saveMeta('mode', mode);
     syncMsg = ''; saveMeta('since', out.seq); saveMeta('lastSync', Date.now());
     if (modeChanged) { chrome(); render(); } else if (out.records.length && !document.querySelector('dialog[open]')) render(true);
+    if (others.size) toast(t('updatedBy') + ' ' + [...others].slice(0, 3).join(', '), 3000);
   } catch (e) {
     syncErr = true; syncMsg = (e instanceof TypeError ? 'cannot reach server' : e.message) + ' — ' + url;
     if (manual === true) toast(t('syncFail') + ' · ' + syncMsg.split(' — ')[0]);
@@ -228,13 +230,15 @@ function updateSyncBtn() {
 }
 addEventListener('online', () => { updateSyncBtn(); sync(); });
 addEventListener('offline', updateSyncBtn);
-setInterval(() => { if (pendingCount() || navigator.onLine) sync(); }, 60000);
+// pick up other people's changes quickly while the page is open and visible; a hidden page waits for the next minute
+setInterval(() => { if (document.visibilityState === 'visible' ? navigator.onLine : pendingCount()) sync(); }, 15000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && navigator.onLine) sync(); });
 
 /* ---------- UI shell ---------- */
 let tab = 'att', date = ymd(new Date()), q = '';
 let repFrom = ymd(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), repTo = ymd(new Date());
 const TABS = [['att', '📋', 'attendance'], ['exp', '💰', 'accounts'], ['rep', '📊', 'report'], ['lab', '👥', 'labour'], ['set', '⚙️', 'settings']];
-function toast(m) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), 1800); }
+function toast(m, ms) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), ms || 1800); }
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
   const rb = $('#robadge'); rb.hidden = !ro(); rb.textContent = '👁 ' + t('viewOnly');
