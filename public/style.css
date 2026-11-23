@@ -10,6 +10,7 @@ h1{font-size:18px;margin:0}
 .hr{display:flex;gap:8px;align-items:center}
 .sync{border:0;border-radius:99px;padding:6px 12px;font-size:13px;background:rgba(255,255,255,.2);color:#fff}
 .sync.off{background:#b71c1c}.sync.pend{background:#e65100}
+#robadge[hidden]{display:none}
 .helpbtn{width:34px;height:34px;padding:0;border-radius:50%;font-size:18px;font-weight:700;line-height:34px;text-align:center}
 
 /* ===== Bottom navigation ===== */
@@ -118,3 +119,6 @@ dialog h2{margin:0 0 4px;font-size:18px}
 .hh{margin:14px 0 4px;font-size:15px;color:var(--g)}
 ol.help{margin:0;padding-left:20px}ol.help li{margin:6px 0}
 ol.help a{color:var(--g);font-weight:600;word-break:break-all}
+/* read-only phones: plain status pill instead of the mark buttons */
+.rostatus{display:inline-block;margin-top:8px;padding:4px 14px;border-radius:99px;font-weight:700;font-size:14px;background:var(--bg);color:var(--mu)}
+.rostatus.full{background:var(--g);color:#fff}.rostatus.am,.rostatus.pm{background:var(--am);color:#222}.rostatus.abs{background:var(--re);color:#fff}

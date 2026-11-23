@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', payType: 'Pay type', payDaily: 'Daily wage', payMonthly: 'Monthly salary', monthlySalary: 'Monthly salary (fixed)', monthlyTag: 'Monthly', perMonth: '/ month', monthlySalaries: 'Monthly salaries', monthCol: 'Month', tally: 'Tally', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', viewOnly: 'View only', viewOnlyHint: 'You can see everything, but this phone cannot change anything.', payType: 'Pay type', payDaily: 'Daily wage', payMonthly: 'Monthly salary', monthlySalary: 'Monthly salary (fixed)', monthlyTag: 'Monthly', perMonth: '/ month', monthlySalaries: 'Monthly salaries', monthCol: 'Month', tally: 'Tally', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
     addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
     log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
@@ -39,7 +39,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', payType: 'ஊதிய வகை', payDaily: 'தினக்கூலி', payMonthly: 'மாத சம்பளம்', monthlySalary: 'மாத சம்பளம் (நிலையானது)', monthlyTag: 'மாதம்', perMonth: '/ மாதம்', monthlySalaries: 'மாத சம்பளங்கள்', monthCol: 'மாதம்', tally: 'மொத்த கணக்கு', noFuture: 'எதிர்கால தேதிக்கு பதிவு செய்ய முடியாது', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', viewOnly: 'பார்வை மட்டும்', viewOnlyHint: 'நீங்கள் அனைத்தையும் பார்க்கலாம், ஆனால் இந்த போனில் மாற்றம் செய்ய முடியாது.', payType: 'ஊதிய வகை', payDaily: 'தினக்கூலி', payMonthly: 'மாத சம்பளம்', monthlySalary: 'மாத சம்பளம் (நிலையானது)', monthlyTag: 'மாதம்', perMonth: '/ மாதம்', monthlySalaries: 'மாத சம்பளங்கள்', monthCol: 'மாதம்', tally: 'மொத்த கணக்கு', noFuture: 'எதிர்கால தேதிக்கு பதிவு செய்ய முடியாது', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
     addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு பதிவு இல்லை', confirmExp: 'இந்த பதிவை நீக்கவா?', grandTotal: 'மொத்த செலவு', date: 'தேதி',
     log_inc_add: 'வருமானம் சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_inc_edit: 'வருமானம் திருத்தப்பட்டது: {desc} {amt} ({date})', log_inc_del: 'வருமானம் நீக்கப்பட்டது: {desc} {amt} ({date})', log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
@@ -68,7 +68,7 @@ const t = k => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
 /* ---------- storage (IndexedDB, everything cached in memory) ---------- */
 // record: {k, d:{...}, u:updatedAt, del:0|1, dirty:0|1}
 // keys:  L:<id> labourer | A:<date>:<labourId> attendance | R:<date>:<M|F> day wage override
-let idb; const recs = new Map(); const meta = { clockOffset: 0, user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0 };
+let idb; const recs = new Map(); const meta = { mode: 'edit', clockOffset: 0, user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0 };
 function openDB() {
   return new Promise((res, rej) => {
     const r = indexedDB.open('labour-db', 1);
@@ -92,11 +92,14 @@ const saveMeta = (k, v) => { meta[k] = v; idbPut('meta', v, k); };
 const TZ = 'Asia/Kolkata';
 const istDate = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
 const today = () => istDate.format(new Date(Date.now() + (meta.clockOffset || 0)));
+// 'view' = this phone signed in with the read-only key: nothing can be changed. 'probe' = key just changed, mode not known yet.
+const ro = () => meta.mode === 'view';
 function needName() { // nothing may be changed until this phone has a user name (it's stored with every change)
   if (meta.user) return;
   askName(); throw new Error('user name required');
 }
 function put(k, d, del = 0) {
+  if (ro()) { toast(t('viewOnly')); throw new Error('read only'); }
   needName();
   if (d && d.date && d.date > today()) { toast(t('noFuture')); throw new Error('future date'); }
   const r = { k, d, u: Date.now(), del, dirty: 1, b: meta.user };
@@ -104,6 +107,7 @@ function put(k, d, del = 0) {
 }
 // append-only audit trail: one unique record per action, synced like everything else, never deleted
 function audit(act, o) {
+  if (ro()) throw new Error('read only');
   needName();
   const u = Date.now(), k = `G:${u}:${uid().slice(0, 6)}`;
   const r = { k, d: { act, ...o }, u, del: 0, dirty: 1, b: meta.user || '?' };
@@ -193,7 +197,7 @@ async function sync(manual) {
   syncing = true; syncErr = false; updateSyncBtn();
   const url = (meta.server || '').replace(/\/$/, '') + '/api/sync';
   try {
-    const sent = [...recs.values()].filter(r => r.dirty), t0 = Date.now();
+    const sent = meta.mode === 'edit' ? [...recs.values()].filter(r => r.dirty) : [], t0 = Date.now();
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(meta.key ? { 'x-sync-key': meta.key } : {}) },
@@ -202,13 +206,14 @@ async function sync(manual) {
     if (!res.ok) throw new Error('HTTP ' + res.status + (res.status === 404 ? ' (no sync server at this address)' : res.status === 401 ? ' (wrong sync key)' : ''));
     const out = await res.json().catch(() => { throw new Error('unexpected reply (not the sync server)'); });
     if (out.now) saveMeta('clockOffset', out.now - Math.round((t0 + Date.now()) / 2));
-    for (const s of sent) { const cur = recs.get(s.k); if (cur && cur.u === s.u) { cur.dirty = 0; idbPut('rec', cur); } }
+    for (const s of out.mode === 'view' ? [] : sent) { const cur = recs.get(s.k); if (cur && cur.u === s.u) { cur.dirty = 0; idbPut('rec', cur); } }
     for (const r of out.records) {
       const cur = recs.get(r.k);
       if (!cur || !cur.dirty) { const n = { k: r.k, d: r.d, u: r.u, del: r.del, b: r.b, dirty: 0 }; recs.set(r.k, n); idbPut('rec', n); }
     }
+    const mode = out.mode === 'view' ? 'view' : 'edit', modeChanged = mode !== meta.mode; saveMeta('mode', mode);
     syncMsg = ''; saveMeta('since', out.seq); saveMeta('lastSync', Date.now());
-    if (out.records.length && !document.querySelector('dialog[open]')) render(true);
+    if (modeChanged) { chrome(); render(); } else if (out.records.length && !document.querySelector('dialog[open]')) render(true);
   } catch (e) {
     syncErr = true; syncMsg = (e instanceof TypeError ? 'cannot reach server' : e.message) + ' — ' + url;
     if (manual === true) toast(t('syncFail') + ' · ' + syncMsg.split(' — ')[0]);
@@ -232,6 +237,7 @@ const TABS = [['att', '📋', 'attendance'], ['exp', '💰', 'accounts'], ['rep'
 function toast(m) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), 1800); }
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
+  const rb = $('#robadge'); rb.hidden = !ro(); rb.textContent = '👁 ' + t('viewOnly');
   $('#title').textContent = t('app'); document.title = t('app');
   $('#nav').innerHTML = TABS.map(([k, ic, l]) => `<button data-act="tab" data-v="${k}" class="${tab === k || ((tab === 'log' || tab === 'help') && k === 'set') ? 'on' : ''}"><span>${ic}</span>${esc(t(l))}</button>`).join('');
   updateSyncBtn();
@@ -291,10 +297,10 @@ function attView() {
   <div class="gsel" style="margin-bottom:10px"><button data-act="attmode" data-v="mark" class="${list ? '' : 'on'}">${esc(t('markMode'))}</button><button data-act="attmode" data-v="list" class="${list ? 'on' : ''}">${esc(t('listMode'))}</button></div>
   ${list ? '' : `<div class="row" style="margin-bottom:10px">
     <input id="q" class="grow" type="search" placeholder="${esc(t('search'))}" value="${esc(q)}">
-    <button class="btn sec" data-act="markall" style="white-space:nowrap">✓ ${esc(t('markAll'))}</button>
+    ${ro() ? '' : `<button class="btn sec" data-act="markall" style="white-space:nowrap">✓ ${esc(t('markAll'))}</button>`}
   </div>`}
   <div id="att-list"></div>
-  ${list ? '' : `<details class="card"><summary>💰 ${esc(t('dayRate'))}</summary>
+  ${list || ro() ? '' : `<details class="card"><summary>💰 ${esc(t('dayRate'))}</summary>
     <p class="mu">${esc(t('dayRateHint'))}</p>
     <div class="two">
       <div><label>${esc(t('M'))}</label><input type="number" inputmode="decimal" data-rate="M" value="${dr('M') ?? ''}" placeholder="${esc(t('normal'))}"></div>
@@ -332,11 +338,11 @@ function drawAttList() {
     const a = attOf(date, l.id), s = a && a.s;
     return `<div class="card">
       <div class="row sp"><div><span class="name g${l.g}">${esc(l.name)}</span></div>
-        <span class="row">${(() => { const pr = personRate(date, l); if (pr.monthly) return `<span class="mu">${esc(t('monthlyTag'))}</span>`; return `<button class="rate ${pr.ov ? 'ov' : ''}" data-act="rate" data-id="${l.id}">${money(pr.rate)}${pr.ov ? ' ★' : ''} ✎</button>${a && factor(a.s) && factor(a.s) < 1 ? `<span class="mu">= ${money(pr.rate * factor(a.s))}</span>` : ''}`; })()}
-          <button class="rate" data-act="rmday" data-id="${l.id}" aria-label="${esc(t('remove'))}">✕</button></span>
+        <span class="row">${(() => { const pr = personRate(date, l); if (pr.monthly) return `<span class="mu">${esc(t('monthlyTag'))}</span>`; return `${ro() ? `<span class="mu">${money(pr.rate)}${pr.ov ? ' ★' : ''}</span>` : `<button class="rate ${pr.ov ? 'ov' : ''}" data-act="rate" data-id="${l.id}">${money(pr.rate)}${pr.ov ? ' ★' : ''} ✎</button>`}${a && factor(a.s) && factor(a.s) < 1 ? `<span class="mu">= ${money(pr.rate * factor(a.s))}</span>` : ''}`; })()}
+          ${ro() ? '' : `<button class="rate" data-act="rmday" data-id="${l.id}" aria-label="${esc(t('remove'))}">✕</button>`}</span>
       </div>
       ${a ? lastBy(`A:${date}:${l.id}`) : ''}
-      <div class="seg">${['full', 'am', 'pm', 'abs'].map(k => `<button class="${k} ${s === k ? 'on' : ''}" data-act="mark" data-id="${l.id}" data-s="${k}">${esc(t(k))}</button>`).join('')}</div>
+      ${ro() ? `<span class="rostatus ${s || ''}">${s ? esc(t(s)) : '—'}</span>` : `<div class="seg">${['full', 'am', 'pm', 'abs'].map(k => `<button class="${k} ${s === k ? 'on' : ''}" data-act="mark" data-id="${l.id}" data-s="${k}">${esc(t(k))}</button>`).join('')}</div>`}
     </div>`;
   }).join('') : `<div class="empty">${esc(all.length ? '' : avail.length ? t('emptyDay') : t('noLabour'))}</div>`) + picker;
 }
@@ -362,18 +368,20 @@ function labView() {
   const list = labourers().sort((a, b) => (a.active === false) - (b.active === false) || a.name.localeCompare(b.name)); // active first, then by name
   return (list.length ? list.map(l => `
     <div class="card" style="${l.active === false ? 'opacity:.7' : ''}">
-      <div class="row sp" data-act="editlab" data-id="${l.id}">
+      <div class="row sp" ${ro() ? '' : `data-act="editlab" data-id="${l.id}"`}>
         <div><span class="name g${l.g}">${esc(l.name)}</span>
           ${l.type === 'monthly' ? `<span class="mu">· ${esc(t('monthlyTag'))}</span>` : ''}${l.active === false ? `<span class="mu">· ${esc(t('inactive'))}</span>` : ''}
           </div>
         <b>${money(l.wage)}${l.type === 'monthly' ? ` <span class="mu">${esc(t('perMonth'))}</span>` : ''}</b>
       </div>
+      ${ro() ? '' : `
       <div class="row" style="margin-top:10px">
         <button class="btn sec sm grow" data-act="toggleact" data-id="${l.id}">${esc(t(l.active === false ? 'activate' : 'deactivate'))}</button>
         <button class="btn dng sm grow" data-act="dellab" data-id="${l.id}">${esc(t('del'))}</button>
       </div>
+      `}
     </div>`).join('') : `<div class="empty">${esc(t('noLabour'))}</div>`) +
-    `<div style="height:84px"></div><button class="fab" data-act="addlab" aria-label="${esc(t('add'))}" title="${esc(t('add'))}"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></button>`;
+    (ro() ? '' : `<div style="height:84px"></div><button class="fab" data-act="addlab" aria-label="${esc(t('add'))}" title="${esc(t('add'))}"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></button>`);
 }
 function labDialog(id) {
   const l = id ? labById(id) : { name: '', g: 'M', wage: '', active: true };
@@ -419,6 +427,7 @@ function expView() {
   const inc = acctKind === 'I';
   const chips = (inc ? [['🍌', 'banana'], ['🌿', 'cardamom']] : [['⛽', 'petrol'], ['🍽️', 'food'], ['🚌', 'travel']])
     .map(([ic, k]) => `<button class="chip" data-act="chip" data-v="${k}">${ic} ${esc(t(k))}</button>`).join('');
+  if (ro()) return dateBar() + '<div id="exp-list"></div>';
   return dateBar() + `<div class="gsel" style="margin-bottom:10px"><button data-v="E" class="${inc ? '' : 'on'}" data-act="acct">${esc(t('expense'))}</button><button data-v="I" class="${inc ? 'on' : ''}" data-act="acct">${esc(t('income'))}</button></div>
     <div class="card"><div class="chips">${chips}</div>
     <label>${esc(t('description'))}</label><input id="xdesc" maxlength="120" placeholder="${esc(t('description'))}">
@@ -429,7 +438,7 @@ function drawExpList() {
   const el = $('#exp-list'); if (!el) return;
   const ex = expOf(date), inc = incOf(date), list = [...ex, ...inc].sort((a, b) => a.u - b.u);
   const exT = expSum(ex), inT = expSum(inc), w = dayWages(date);
-  el.innerHTML = list.length ? list.map(e => `<div class="card row sp" data-act="editexp" data-id="${e.id}" data-k="${e.kind}">
+  el.innerHTML = list.length ? list.map(e => `<div class="card row sp" ${ro() ? '' : `data-act="editexp" data-id="${e.id}" data-k="${e.kind}"`}>
       <div><div class="name" style="font-size:16px">${esc(e.desc || t(e.kind === 'I' ? 'income' : 'expense'))}</div>${lastBy(`${e.kind}:${date}:${e.id}`)}</div>
       <b class="${e.kind === 'I' ? 'amt-in' : 'amt-ex'}">${e.kind === 'I' ? '+' : '−'}${money(e.amt)}</b></div>`).join('') +
     `<div class="card"><table><tbody>
@@ -710,9 +719,10 @@ const helpView = () => `<div class="row" style="margin-bottom:10px"><button clas
 /* ---------- settings ---------- */
 function setView() {
   return `<button class="btn ${!meta.user || !meta.key ? '' : 'sec'} full" style="margin-bottom:10px" data-act="tab" data-v="help">❓ Help / உதவி</button>
+    ${ro() ? `<div class="card"><b>👁 ${esc(t('viewOnly'))}</b><p class="mu" style="margin-bottom:0">${esc(t('viewOnlyHint'))}</p></div>` : ''}
     <div class="card"><label style="margin-top:0">${esc(t('yourName'))}</label><input id="uname" value="${esc(meta.user)}">
       <p class="mu" style="margin-bottom:0">${esc(t('yourNameHint'))}</p></div>
-    ${(() => { const c = remindCfg(), on = c.on && pushOK() && Notification.permission === 'granted';
+    ${ro() ? '' : (() => { const c = remindCfg(), on = c.on && pushOK() && Notification.permission === 'granted';
       return `<div class="card"><b>🔔 ${esc(t('remindTitle'))}</b><p class="mu">${esc(t('remindHint'))}</p>` + (!pushOK() ? `<p class="mu">${esc(t('pushNo'))}</p>` :
       `<div class="two"><div><label>${esc(t('remindT1'))}</label><input type="time" id="rt1" value="${c.t1}"></div><div><label>${esc(t('remindT2'))}</label><input type="time" id="rt2" value="${c.t2}"></div></div>
       <div class="row" style="margin-top:12px">${on ? `<button class="btn dng grow" data-act="remindoff">${esc(t('turnOff'))}</button><button class="btn sec grow" data-act="remindtest">${esc(t('sendTest'))}</button>` : `<button class="btn grow" data-act="remindon">${esc(t('turnOn'))}</button>`}</div>`) + '</div>'; })()}
@@ -794,8 +804,8 @@ document.addEventListener('change', e => {
   else if (el.id === 'logdate') { logDate = el.value; render(); }
   else if (el.id === 'rt1' || el.id === 'rt2') { saveMeta('remind', { ...remindCfg(), [el.id === 'rt1' ? 't1' : 't2']: el.value }); if (remindCfg().on) pushSubscribe().then(() => toast(t('remindSet'))).catch(() => toast(t('pushUnavail'))); }
   else if (el.id === 'uname') { const n = el.value.trim(); if (!n) { el.value = meta.user; askName(); return; } saveMeta('user', n); toast(t('saved')); }
-  else if (el.id === 'srv') saveMeta('server', el.value.trim());
-  else if (el.id === 'key') saveMeta('key', el.value);
+  else if (el.id === 'srv') { saveMeta('server', el.value.trim()); saveMeta('mode', 'probe'); sync(true); }
+  else if (el.id === 'key') { saveMeta('key', el.value); saveMeta('mode', 'probe'); sync(true); } // a different key may mean a different role
 });
 
 /* ---------- who is using this phone ---------- */
@@ -814,7 +824,7 @@ function askName() {
 }
 
 // the deliberate abort from needName() is not an error worth logging
-addEventListener('error', e => { if (/user name required|future date/.test(e.message)) e.preventDefault(); });
+addEventListener('error', e => { if (/user name required|future date|read only/.test(e.message)) e.preventDefault(); });
 
 /* ---------- boot ---------- */
 (async () => {
@@ -823,7 +833,7 @@ addEventListener('error', e => { if (/user name required|future date/.test(e.mes
   readHash();
   render();
   loadVersion();
-  if (remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name
+  if (!ro() && remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
   if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
   sync();

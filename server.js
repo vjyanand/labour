@@ -6,6 +6,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const KEY = process.env.SYNC_KEY || '';
+const VIEW_KEY = process.env.VIEW_KEY || ''; // optional: a second key that can read everything but change nothing
 const DATA_FILE = process.env.DATA_FILE || path.join(__dirname, 'data', 'db.json');
 const PUB = path.join(__dirname, 'public');
 
@@ -26,7 +27,12 @@ const MIME = {
 };
 
 function sync(req, res) {
-  if (KEY && req.headers['x-sync-key'] !== KEY) { res.writeHead(401); return res.end('bad key'); }
+  const given = req.headers['x-sync-key'] || '';
+  let mode = 'edit';
+  if (KEY && given !== KEY) {
+    if (VIEW_KEY && given === VIEW_KEY) mode = 'view';
+    else { res.writeHead(401); return res.end('bad key'); }
+  }
   let body = '';
   req.on('data', c => { body += c; if (body.length > 20e6) req.destroy(); });
   req.on('end', () => {
@@ -34,7 +40,7 @@ function sync(req, res) {
     try { msg = JSON.parse(body); } catch { res.writeHead(400); return res.end('bad json'); }
     const since = Number(msg.since) || 0;
     let changed = false;
-    for (const r of msg.records || []) {
+    for (const r of mode === 'edit' ? msg.records || [] : []) { // view-only keys can never write
       if (!r || typeof r.k !== 'string') continue;
       const cur = db.records[r.k];
       if (!cur || r.u >= cur.u) { // last-write-wins
@@ -45,7 +51,7 @@ function sync(req, res) {
     if (changed) save();
     const out = Object.values(db.records).filter(r => r.seq > since);
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ seq: db.seq, now: Date.now(), records: out }));
+    res.end(JSON.stringify({ seq: db.seq, now: Date.now(), mode, records: out }));
   });
 }
 
