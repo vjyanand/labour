@@ -327,7 +327,10 @@ function drawAttList() {
   const expLine = exAmt || inAmt ? `<p class="mu">${exAmt ? `🧾 ${esc(t('expenses'))} ${money(exAmt)} · ${esc(t('grandTotal'))} ${money(pay + exAmt)}` : ''}${exAmt && inAmt ? '<br>' : ''}${inAmt ? `💰 ${esc(t('income'))} ${money(inAmt)} · ${esc(t('net'))} ${money(inAmt - pay - exAmt)}` : ''}</p>` : '';
   const inList = new Set(ids);
   const avail = labourers().filter(l => l.active !== false && !inList.has(l.id)).sort((a, b) => a.name.localeCompare(b.name));
-  const picker = avail.length ? `<select id="addsel" class="${all.length ? '' : 'big'}"><option value="">${esc(t('addPerson'))}</option>${avail.map(l => `<option value="${l.id}">${esc(l.name)} (${esc(t(l.g))})</option>`).join('')}</select>` : '';
+  // add-person list: opens in place so each name can be coloured (blue / pink) on every phone; native dropdowns can't do that
+  const wasOpen = !!el.querySelector('details.picker[open]');
+  const picker = avail.length ? `<details class="picker ${all.length ? '' : 'big'}" ${wasOpen ? 'open' : ''}><summary>${esc(t('addPerson'))}</summary>
+    <div class="plist">${avail.map(l => `<button class="pitem g${l.g}" data-act="addperson" data-id="${l.id}">${esc(l.name)}</button>`).join('')}</div></details>` : '';
   el.innerHTML = `
   <div class="stats">
     <div><b>${all.length}</b><small>${esc(t('people'))}</small></div>
@@ -344,7 +347,7 @@ function drawAttList() {
       ${a ? lastBy(`A:${date}:${l.id}`) : ''}
       ${ro() ? `<span class="rostatus ${s || ''}">${s ? esc(t(s)) : '—'}</span>` : `<div class="seg">${['full', 'am', 'pm', 'abs'].map(k => `<button class="${k} ${s === k ? 'on' : ''}" data-act="mark" data-id="${l.id}" data-s="${k}">${esc(t(k))}</button>`).join('')}</div>`}
     </div>`;
-  }).join('') : `<div class="empty">${esc(all.length ? '' : avail.length ? t('emptyDay') : t('noLabour'))}</div>`) + picker;
+  }).join('') : `<div class="empty">${esc(all.length ? '' : avail.length ? t('emptyDay') : t('noLabour'))}</div>`) + (ro() ? '' : picker);
 }
 
 const fmtT = u => new Date(u).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
@@ -757,6 +760,7 @@ document.addEventListener('click', e => {
     if (a) put(`A:${date}:${id}`, a, 1);
     put(`D:${date}:${id}`, { date, lid: id }, 1); drawAttList();
   }
+  else if (act === 'addperson') { addToDay(date, id); drawAttList(); }
   else if (act === 'attmode') { attMode = v; render(); }
   else if (act === 'addexp') addExpense();
   else if (act === 'editexp') expDialog(id, b.dataset.k);
@@ -798,7 +802,6 @@ document.addEventListener('input', e => {
 document.addEventListener('change', e => {
   const el = e.target;
   if (el.id === 'date' && el.value) { if (el.value > today()) { toast(t('noFuture')); date = today(); } else date = el.value; render(); }
-  else if (el.id === 'addsel') { if (el.value) addToDay(date, el.value); drawAttList(); }
   else if (el.dataset.rate) { setDayRate(date, el.dataset.rate, el.value.trim()); drawAttList(); }
   else if (el.id === 'rf' || el.id === 'rt') { repFrom = $('#rf').value || repFrom; repTo = $('#rt').value || repTo; render(); }
   else if (el.id === 'logdate') { logDate = el.value; render(); }
