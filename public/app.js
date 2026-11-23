@@ -277,6 +277,7 @@ function render(soft) {
     if (h !== lastHash) { if (lastHash) history.pushState(null, '', h); else history.replaceState(null, '', h); lastHash = h; }
   }
   chrome();
+  $('#view').classList.toggle('wide', tab === 'rep' && repMode === 'grid'); // the grid uses the full screen width
   if (soft && tab === 'att' && $('#att-list')) return drawAttList();
   if (soft && tab === 'exp' && $('#exp-list')) return drawExpList();
   if (soft && document.activeElement && ['INPUT', 'SELECT'].includes(document.activeElement.tagName) && tab !== 'lab') return;

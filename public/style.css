@@ -3,6 +3,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Noto Sans Tamil","Latha",sans-serif;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
 main{padding:12px;max-width:640px;margin:0 auto}
+main.wide{max-width:none}
 
 /* ===== Header (title, help button, sync status) ===== */
 header{position:sticky;top:0;z-index:5;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top))}
