@@ -336,7 +336,7 @@ function canDelete(id) {
 
 /* ---------- labour management ---------- */
 function labView() {
-  const list = labourers().sort((a, b) => a.name.localeCompare(b.name));
+  const list = labourers().sort((a, b) => (a.active === false) - (b.active === false) || a.name.localeCompare(b.name)); // active first, then by name
   return (list.length ? list.map(l => `
     <div class="card" style="${l.active === false ? 'opacity:.7' : ''}">
       <div class="row sp" data-act="editlab" data-id="${l.id}">
