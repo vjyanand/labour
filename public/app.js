@@ -246,10 +246,13 @@ function chrome() {
 const SLUG = { att: 'attendance', exp: 'accounts', rep: 'report', lab: 'labour', set: 'settings', log: 'log', help: 'help' };
 const TAB_OF = Object.fromEntries(Object.entries(SLUG).map(([k, v]) => [v, k]));
 let lastHash = '', attMode = 'mark';
-const hashFor = () => '#/' + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' + date : '') + (tab === 'att' && attMode === 'list' ? '/list' : '')
+let urlLang = ''; // optional language in the link: #/ta/report ... (overrides the saved language for that link only)
+const hashFor = () => '#/' + (urlLang ? urlLang + '/' : '') + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' + date : '') + (tab === 'att' && attMode === 'list' ? '/list' : '')
   + (tab === 'rep' ? (repMode === 'grid' ? `/grid/${gridSpan}/${gridAnchor}` : `/summary/${repFrom}/${repTo}`) : '');
 function readHash() {
   const p = location.hash.replace(/^#\/?/, '').split('/');
+  urlLang = I18N[p[0]] ? p.shift() : '';
+  lang = urlLang || (I18N[meta.lang] ? meta.lang : detectLang());
   tab = TAB_OF[p[0]] || 'att';
   if (/^\d{4}-\d\d-\d\d$/.test(p[1] || '')) date = p[1] > today() ? today() : p[1]; // never a future date
   if (tab === 'att') attMode = p[2] === 'list' ? 'list' : 'mark';
@@ -798,7 +801,7 @@ document.addEventListener('click', e => {
   else if (act === 'remindoff') remindOff();
   else if (act === 'remindtest') remindTest();
   else if (act === 'logall') { logDate = ''; render(); }
-  else if (act === 'lang') { saveMeta('lang', v); lang = v || detectLang(); render(); if (remindCfg().on) pushSubscribe().catch(() => {}); }
+  else if (act === 'lang') { saveMeta('lang', v); urlLang = ''; lang = v || detectLang(); render(); if (remindCfg().on) pushSubscribe().catch(() => {}); }
 });
 document.addEventListener('input', e => {
   if (e.target.id === 'q') { q = e.target.value; drawAttList(); }
