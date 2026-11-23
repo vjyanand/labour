@@ -219,7 +219,7 @@ setInterval(() => { if (pendingCount() || navigator.onLine) sync(); }, 60000);
 /* ---------- UI shell ---------- */
 let tab = 'att', date = ymd(new Date()), q = '';
 let repFrom = ymd(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), repTo = ymd(new Date());
-const TABS = [['att', '📋', 'attendance'], ['lab', '👥', 'labour'], ['exp', '💰', 'accounts'], ['rep', '📊', 'report'], ['set', '⚙️', 'settings']];
+const TABS = [['att', '📋', 'attendance'], ['exp', '💰', 'accounts'], ['rep', '📊', 'report'], ['lab', '👥', 'labour'], ['set', '⚙️', 'settings']];
 function toast(m) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), 1800); }
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
