@@ -224,15 +224,30 @@ function toast(m) { const e = $('#toast'); e.textContent = m; e.classList.add('s
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
   $('#title').textContent = t('app'); document.title = t('app');
-  $('#nav').innerHTML = TABS.map(([k, ic, l]) => `<button data-act="tab" data-v="${k}" class="${tab === k || (tab === 'log' && k === 'set') ? 'on' : ''}"><span>${ic}</span>${esc(t(l))}</button>`).join('');
+  $('#nav').innerHTML = TABS.map(([k, ic, l]) => `<button data-act="tab" data-v="${k}" class="${tab === k || ((tab === 'log' || tab === 'help') && k === 'set') ? 'on' : ''}"><span>${ic}</span>${esc(t(l))}</button>`).join('');
   updateSyncBtn();
 }
+// every screen has its own URL: #/attendance/2026-11-22, #/accounts/<date>, #/report, #/labour, #/settings, #/help, #/log
+const SLUG = { att: 'attendance', exp: 'accounts', rep: 'report', lab: 'labour', set: 'settings', log: 'log', help: 'help' };
+const TAB_OF = Object.fromEntries(Object.entries(SLUG).map(([k, v]) => [v, k]));
+let lastHash = '';
+const hashFor = () => '#/' + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' + date : '');
+function readHash() {
+  const p = location.hash.replace(/^#\/?/, '').split('/');
+  tab = TAB_OF[p[0]] || 'att';
+  if (/^\d{4}-\d\d-\d\d$/.test(p[1] || '')) date = p[1];
+}
+addEventListener('popstate', () => { readHash(); lastHash = location.hash; render(); });
 function render(soft) {
+  if (!soft) {
+    const h = hashFor();
+    if (h !== lastHash) { if (lastHash) history.pushState(null, '', h); else history.replaceState(null, '', h); lastHash = h; }
+  }
   chrome();
   if (soft && tab === 'att' && $('#att-list')) return drawAttList();
   if (soft && tab === 'exp' && $('#exp-list')) return drawExpList();
   if (soft && document.activeElement && ['INPUT', 'SELECT'].includes(document.activeElement.tagName) && tab !== 'lab') return;
-  $('#view').innerHTML = { att: attView, lab: labView, exp: expView, rep: repView, set: setView, log: logView }[tab]();
+  $('#view').innerHTML = { att: attView, lab: labView, exp: expView, rep: repView, set: setView, log: logView, help: helpView }[tab]();
   if (tab === 'att') drawAttList();
   if (tab === 'exp') drawExpList();
 }
@@ -591,12 +606,14 @@ const HELP = {
     'இணையம் இல்லாமலும் செயலி வேலை செய்யும். பதிவுகள் போனில் சேமிக்கப்பட்டு, இணையம் வந்ததும் தானாக ஒத்திசைக்கப்படும்.',
     'குறிப்பு: உலாவி மெனுவில் <b>Add to Home screen</b> தேர்ந்தெடுத்து செயலியாக நிறுவலாம். மொழியை அமைப்புகள் → மொழி-யில் மாற்றலாம்.'],
 };
-const helpCard = () => `<details class="card" ${!meta.user || !meta.key ? 'open' : ''}><summary>❓ Help / உதவி</summary>
-  ${['en', 'ta'].sort(l => (l === lang ? -1 : 1)).map(l => `<h3 class="hh">${l === 'en' ? 'English' : 'தமிழ்'}</h3><ol class="help">${HELP[l].map(x => `<li>${x}</li>`).join('')}</ol>`).join('')}</details>`;
+const helpView = () => `<div class="row" style="margin-bottom:10px"><button class="btn sec sm" data-act="tab" data-v="set">‹ ${esc(t('back'))}</button></div>
+  <div class="card"><h2 style="margin:0;font-size:18px">❓ Help / உதவி</h2>
+  ${['en', 'ta'].sort(l => (l === lang ? -1 : 1)).map(l => `<h3 class="hh">${l === 'en' ? 'English' : 'தமிழ்'}</h3><ol class="help">${HELP[l].map(x => `<li>${x}</li>`).join('')}</ol>`).join('')}</div>`;
 
 /* ---------- settings ---------- */
 function setView() {
-  return helpCard() + `<div class="card"><label style="margin-top:0">${esc(t('yourName'))}</label><input id="uname" value="${esc(meta.user)}">
+  return `<button class="btn ${!meta.user || !meta.key ? '' : 'sec'} full" style="margin-bottom:10px" data-act="tab" data-v="help">❓ Help / உதவி</button>
+    <div class="card"><label style="margin-top:0">${esc(t('yourName'))}</label><input id="uname" value="${esc(meta.user)}">
       <p class="mu" style="margin-bottom:0">${esc(t('yourNameHint'))}</p></div>
     ${(() => { const c = remindCfg(), on = c.on && pushOK() && Notification.permission === 'granted';
       return `<div class="card"><b>🔔 ${esc(t('remindTitle'))}</b><p class="mu">${esc(t('remindHint'))}</p>` + (!pushOK() ? `<p class="mu">${esc(t('pushNo'))}</p>` :
@@ -703,6 +720,7 @@ addEventListener('error', e => { if (/user name required/.test(e.message)) e.pre
 /* ---------- boot ---------- */
 (async () => {
   await load();
+  readHash();
   render();
   loadVersion();
   if (remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name
