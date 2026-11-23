@@ -23,7 +23,7 @@ export default async (req) => {
   }
   if (changed) await store.setJSON('db', db);
   const records = Object.values(db.records).filter(r => r.seq > since);
-  return Response.json({ seq: db.seq, records });
+  return Response.json({ seq: db.seq, now: Date.now(), records });
 };
 
 export const config = { path: '/api/sync' };

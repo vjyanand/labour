@@ -15,7 +15,7 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
     addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
     log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
@@ -39,7 +39,7 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', noFuture: 'எதிர்கால தேதிக்கு பதிவு செய்ய முடியாது', weekSpan: 'வாரம்', markMode: 'பதிவு', listMode: 'பட்டியல்', nobodyYet: 'இதுவரை யாரும் வந்ததாகப் பதிவு இல்லை', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
     addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு பதிவு இல்லை', confirmExp: 'இந்த பதிவை நீக்கவா?', grandTotal: 'மொத்த செலவு', date: 'தேதி',
     log_inc_add: 'வருமானம் சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_inc_edit: 'வருமானம் திருத்தப்பட்டது: {desc} {amt} ({date})', log_inc_del: 'வருமானம் நீக்கப்பட்டது: {desc} {amt} ({date})', log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
@@ -68,7 +68,7 @@ const t = k => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
 /* ---------- storage (IndexedDB, everything cached in memory) ---------- */
 // record: {k, d:{...}, u:updatedAt, del:0|1, dirty:0|1}
 // keys:  L:<id> labourer | A:<date>:<labourId> attendance | R:<date>:<M|F> day wage override
-let idb; const recs = new Map(); const meta = { user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0 };
+let idb; const recs = new Map(); const meta = { clockOffset: 0, user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0 };
 function openDB() {
   return new Promise((res, rej) => {
     const r = indexedDB.open('labour-db', 1);
@@ -87,12 +87,16 @@ async function load() {
   lang = I18N[meta.lang] ? meta.lang : detectLang();
 }
 const saveMeta = (k, v) => { meta[k] = v; idbPut('meta', v, k); };
+// "today" comes from the server's clock when we have synced (corrects a wrong phone clock);
+// before the first sync, or if the server never answered, the phone's own date is the fallback
+const today = () => ymd(new Date(Date.now() + (meta.clockOffset || 0)));
 function needName() { // nothing may be changed until this phone has a user name (it's stored with every change)
   if (meta.user) return;
   askName(); throw new Error('user name required');
 }
 function put(k, d, del = 0) {
   needName();
+  if (d && d.date && d.date > today()) { toast(t('noFuture')); throw new Error('future date'); }
   const r = { k, d, u: Date.now(), del, dirty: 1, b: meta.user };
   recs.set(k, r); idbPut('rec', r); scheduleSync(); return r;
 }
@@ -185,7 +189,7 @@ async function sync(manual) {
   syncing = true; syncErr = false; updateSyncBtn();
   const url = (meta.server || '').replace(/\/$/, '') + '/api/sync';
   try {
-    const sent = [...recs.values()].filter(r => r.dirty);
+    const sent = [...recs.values()].filter(r => r.dirty), t0 = Date.now();
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(meta.key ? { 'x-sync-key': meta.key } : {}) },
@@ -193,6 +197,7 @@ async function sync(manual) {
     });
     if (!res.ok) throw new Error('HTTP ' + res.status + (res.status === 404 ? ' (no sync server at this address)' : res.status === 401 ? ' (wrong sync key)' : ''));
     const out = await res.json().catch(() => { throw new Error('unexpected reply (not the sync server)'); });
+    if (out.now) saveMeta('clockOffset', out.now - Math.round((t0 + Date.now()) / 2));
     for (const s of sent) { const cur = recs.get(s.k); if (cur && cur.u === s.u) { cur.dirty = 0; idbPut('rec', cur); } }
     for (const r of out.records) {
       const cur = recs.get(r.k);
@@ -235,7 +240,7 @@ const hashFor = () => '#/' + SLUG[tab] + (tab === 'att' || tab === 'exp' ? '/' +
 function readHash() {
   const p = location.hash.replace(/^#\/?/, '').split('/');
   tab = TAB_OF[p[0]] || 'att';
-  if (/^\d{4}-\d\d-\d\d$/.test(p[1] || '')) date = p[1];
+  if (/^\d{4}-\d\d-\d\d$/.test(p[1] || '')) date = p[1] > today() ? today() : p[1]; // never a future date
   if (tab === 'att') attMode = p[2] === 'list' ? 'list' : 'mark';
 }
 addEventListener('popstate', () => { readHash(); lastHash = location.hash; render(); });
@@ -255,10 +260,10 @@ function render(soft) {
 
 /* ---------- attendance ---------- */
 const weekday = d => new Date(d + 'T00:00:00').toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { weekday: 'short' });
-const dateBar = () => `<div class="wd">${esc(weekday(date))}${date === ymd(new Date()) ? ` · ${esc(t('today'))}` : ''}</div><div class="date">
+const dateBar = () => `<div class="wd">${esc(weekday(date))}${date === today() ? ` · ${esc(t('today'))}` : ''}</div><div class="date">
     <button class="btn sec" data-act="day" data-v="-1">‹</button>
-    <input type="date" id="date" value="${date}">
-    <button class="btn sec" data-act="day" data-v="1">›</button>
+    <input type="date" id="date" value="${date}" max="${today()}">
+    <button class="btn sec" data-act="day" data-v="1" ${date >= today() ? 'disabled' : ''}>›</button>
   </div>`;
 function attView() {
   const dr = g => dayRate(date, g);
@@ -323,7 +328,7 @@ function lastBy(k) { const r = recs.get(k); return r && r.b ? `<div class="mu" s
 
 // a labourer with attendance marked in the last 60 days can't be deleted (make inactive instead)
 function deleteBlockedBy(id) {
-  const cutoff = addDays(ymd(new Date()), -60);
+  const cutoff = addDays(today(), -60);
   let last = '';
   for (const r of live('A:')) if (r.d.lid === id && r.d.date >= cutoff && r.d.date > last) last = r.d.date;
   return last;
@@ -350,7 +355,7 @@ function labView() {
         <button class="btn dng sm grow" data-act="dellab" data-id="${l.id}">${esc(t('del'))}</button>
       </div>
     </div>`).join('') : `<div class="empty">${esc(t('noLabour'))}</div>`) +
-    `<button class="fab" data-act="addlab" aria-label="${esc(t('add'))}">+</button>`;
+    `<div style="height:84px"></div><button class="fab" data-act="addlab" aria-label="${esc(t('add'))}" title="${esc(t('add'))}"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></button>`;
 }
 function labDialog(id) {
   const l = id ? labById(id) : { name: '', g: 'M', wage: '', active: true };
@@ -455,8 +460,8 @@ function repView() {
   const rows = reportRows(), tot = rows.reduce((s, r) => ({ full: s.full + r.full, half: s.half + r.half, pay: s.pay + r.pay }), { full: 0, half: 0, pay: 0 });
   const exps = expRecs(repFrom, repTo), incs = incRecs(repFrom, repTo), exTot = expSum(exps), inTot = expSum(incs), cost = tot.pay + exTot;
   return toggle + `<div class="card two">
-    <div><label>${esc(t('from'))}</label><input type="date" id="rf" value="${repFrom}"></div>
-    <div><label>${esc(t('to'))}</label><input type="date" id="rt" value="${repTo}"></div></div>` +
+    <div><label>${esc(t('from'))}</label><input type="date" id="rf" value="${repFrom}" max="${today()}"></div>
+    <div><label>${esc(t('to'))}</label><input type="date" id="rt" value="${repTo}" max="${today()}"></div></div>` +
     (rows.length || exps.length || incs.length ? (rows.length ? `<div class="card"><table>
       <thead><tr><th>${esc(t('name'))}</th><th>${esc(t('fullDays'))}</th><th>${esc(t('halfDays'))}</th><th>${esc(t('pay'))}</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td class="g${r.g}">${esc(r.name)}</td><td>${r.full}</td><td>${r.half}</td><td>${money(r.pay)}</td></tr>`).join('')}</tbody>
@@ -488,6 +493,11 @@ function gridDays() {
   return days;
 }
 function gridShift(n) {
+  const prev = gridAnchor;
+  shiftGrid(n);
+  if (n > 0 && gridDays()[0] > today()) gridAnchor = prev; // don't scroll into the future
+}
+function shiftGrid(n) {
   const { y, m, a } = gridRange();
   if (gridSpan === 'week') gridAnchor = addDays(gridAnchor, 7 * n);
   else if (gridSpan === 'month') gridAnchor = ymd(new Date(y, m - 1 + n, 1));
@@ -663,7 +673,7 @@ document.addEventListener('click', e => {
   const { act, v, id, s } = b.dataset;
   if (act === 'tab') { tab = v; render(); }
   else if (act === 'sync') sync(true);
-  else if (act === 'day') { date = addDays(date, +v); render(); }
+  else if (act === 'day') { const n = addDays(date, +v); if (n > today()) return; date = n; render(); }
   else if (act === 'mark') { mark(date, id, s); drawAttList(); updateSyncBtn(); }
   else if (act === 'markall') { for (const id of dayList(date).ids) if (!attOf(date, id)) mark(date, id, 'full'); drawAttList(); }
   else if (act === 'rmday') {
@@ -714,7 +724,7 @@ document.addEventListener('input', e => {
 });
 document.addEventListener('change', e => {
   const el = e.target;
-  if (el.id === 'date' && el.value) { date = el.value; render(); }
+  if (el.id === 'date' && el.value) { if (el.value > today()) { toast(t('noFuture')); date = today(); } else date = el.value; render(); }
   else if (el.id === 'addsel') { if (el.value) addToDay(date, el.value); drawAttList(); }
   else if (el.dataset.rate) { setDayRate(date, el.dataset.rate, el.value.trim()); drawAttList(); }
   else if (el.id === 'rf' || el.id === 'rt') { repFrom = $('#rf').value || repFrom; repTo = $('#rt').value || repTo; render(); }
@@ -741,12 +751,15 @@ function askName() {
 }
 
 // the deliberate abort from needName() is not an error worth logging
-addEventListener('error', e => { if (/user name required/.test(e.message)) e.preventDefault(); });
+addEventListener('error', e => { if (/user name required|future date/.test(e.message)) e.preventDefault(); });
 
 /* ---------- boot ---------- */
 (async () => {
   await load();
   readHash();
+  if (!/\d{4}-\d\d-\d\d/.test(location.hash)) date = today();
+  if (date > today()) date = today();
+  repTo = today(); gridAnchor = today(); repFrom = today().slice(0, 8) + '01';
   render();
   loadVersion();
   if (remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name

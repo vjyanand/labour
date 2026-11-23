@@ -45,7 +45,7 @@ function sync(req, res) {
     if (changed) save();
     const out = Object.values(db.records).filter(r => r.seq > since);
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ seq: db.seq, records: out }));
+    res.end(JSON.stringify({ seq: db.seq, now: Date.now(), records: out }));
   });
 }
 
