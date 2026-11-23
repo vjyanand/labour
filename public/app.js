@@ -2,7 +2,7 @@
 /* ---------- i18n ---------- */
 const I18N = {
   en: {
-    app: 'Day Attendance', attendance: 'Attendance', labour: 'Labour', report: 'Report', settings: 'Settings',
+    app: 'Farm Book', attendance: 'Attendance', labour: 'Labour', report: 'Report', settings: 'Settings',
     full: 'Full', am: 'Morning', pm: 'Afternoon', abs: 'Absent',
     M: 'Male', F: 'Female', name: 'Name', phone: 'Phone', wage: 'Daily wage (full day)', add: 'Add labourer', edit: 'Edit',
     save: 'Save', cancel: 'Cancel', del: 'Delete', search: 'Search…', today: 'Today', present: 'Present', total: 'Total',
@@ -26,7 +26,7 @@ const I18N = {
     log_lab_add: 'Labourer added: {who}', log_lab_edit: 'Labourer edited: {who} {chg}', log_lab_del: 'Labourer deleted: {who}', confirmRm: 'Remove this person from this day (their attendance for the day is deleted)?', summary: 'Summary', grid: 'Grid', span15: '15 days', spanMonth: 'Month', legend: '✓ full · ◐ morning · ◑ afternoon · ✗ absent · ● listed, not marked',
   },
   ta: {
-    app: 'நாள் வருகை', attendance: 'வருகை', labour: 'தொழிலாளர்', report: 'அறிக்கை', settings: 'அமைப்புகள்',
+    app: 'பண்ணை கணக்கு', attendance: 'வருகை', labour: 'தொழிலாளர்', report: 'அறிக்கை', settings: 'அமைப்புகள்',
     full: 'முழு நாள்', am: 'காலை', pm: 'மதியம்', abs: 'வரவில்லை',
     M: 'ஆண்', F: 'பெண்', name: 'பெயர்', phone: 'தொலைபேசி', wage: 'தினக்கூலி (முழு நாள்)', add: 'தொழிலாளர் சேர்', edit: 'திருத்து',
     save: 'சேமி', cancel: 'ரத்து', del: 'நீக்கு', search: 'தேடு…', today: 'இன்று', present: 'வந்தவர்', total: 'மொத்தம்',
