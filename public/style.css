@@ -78,3 +78,4 @@ table.grid{width:max-content;min-width:100%;font-size:13px}
 .chip{border:1.5px solid var(--bd);background:#fff;border-radius:99px;padding:8px 14px;font:inherit}
 tr[data-act]{cursor:pointer}
 nav button{font-size:11px}
+.wd{text-align:center;font-size:20px;font-weight:700;color:var(--g);margin:0 0 6px}

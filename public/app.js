@@ -238,7 +238,8 @@ function render(soft) {
 }
 
 /* ---------- attendance ---------- */
-const dateBar = () => `<div class="date">
+const weekday = d => new Date(d + 'T00:00:00').toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { weekday: 'short' });
+const dateBar = () => `<div class="wd">${esc(weekday(date))}${date === ymd(new Date()) ? ` · ${esc(t('today'))}` : ''}</div><div class="date">
     <button class="btn sec" data-act="day" data-v="-1">‹</button>
     <input type="date" id="date" value="${date}">
     <button class="btn sec" data-act="day" data-v="1">›</button>
