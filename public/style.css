@@ -79,3 +79,7 @@ table.grid{width:max-content;min-width:100%;font-size:13px}
 tr[data-act]{cursor:pointer}
 nav button{font-size:11px}
 .wd{text-align:center;font-size:20px;font-weight:700;color:var(--g);margin:0 0 6px}
+.amt-in{color:#2e7d32;font-weight:700}.amt-ex{color:var(--re);font-weight:700}
+.sum td{font-weight:700;border-top:2px solid var(--g)}
+.gsel button[data-v=E].on{background:#fde8e8;border-color:var(--re);color:var(--re)}
+.gsel button[data-v=I].on{background:var(--gl);border-color:var(--g);color:var(--g)}

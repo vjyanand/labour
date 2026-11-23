@@ -15,12 +15,12 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
-    addExp: 'Add expense', noExp: 'No expenses for this day', confirmExp: 'Delete this expense?', grandTotal: 'Grand total', date: 'Date',
-    log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', wagesLabel: 'Wages', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
+    addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
+    log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
     pushNo: 'Notifications are not supported here. On iPhone, add the app to the Home Screen first.', pushDenied: 'Notifications are blocked in the browser settings.',
-    pushUnavail: 'Reminders need the online (Netlify) server.', remindSet: 'Reminders set', testSent: 'Test sent', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
+    pushUnavail: 'Reminders need the online server.', remindSet: 'Reminders set', testSent: 'Test sent', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
     log_mark: '{who}: marked {s} on {date}', log_clear: '{who}: cleared mark on {date}', log_rate: '{who}: wage set to {rate} on {date}',
     log_dayrate: '{g} wage on {date} set to {rate}', log_addday: '{who}: added to {date}', log_rmday: '{who}: removed from {date}',
     log_lab_add: 'Labourer added: {who}', log_lab_edit: 'Labourer edited: {who} {chg}', log_lab_del: 'Labourer deleted: {who}', confirmRm: 'Remove this person from this day (their attendance for the day is deleted)?', summary: 'Summary', grid: 'Grid', span15: '15 days', spanMonth: 'Month', legend: '✓ full · ◐ morning · ◑ afternoon · ✗ absent · ● listed, not marked',
@@ -39,12 +39,12 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
-    addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு செலவு இல்லை', confirmExp: 'இந்த செலவை நீக்கவா?', grandTotal: 'மொத்த தொகை', date: 'தேதி',
-    log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', accounts: 'கணக்கு', expense: 'செலவு', income: 'வருமானம்', addInc: 'வருமானம் சேர்', banana: 'வாழை', cardamom: 'ஏலக்காய்', net: 'நிகர (வருமானம் − செலவு)', wagesLabel: 'கூலி', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
+    addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு பதிவு இல்லை', confirmExp: 'இந்த பதிவை நீக்கவா?', grandTotal: 'மொத்த செலவு', date: 'தேதி',
+    log_inc_add: 'வருமானம் சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_inc_edit: 'வருமானம் திருத்தப்பட்டது: {desc} {amt} ({date})', log_inc_del: 'வருமானம் நீக்கப்பட்டது: {desc} {amt} ({date})', log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
     pushNo: 'இங்கு அறிவிப்புகள் ஆதரிக்கப்படவில்லை. ஐபோனில் முதலில் செயலியை Home Screen-இல் சேர்க்கவும்.', pushDenied: 'உலாவி அமைப்புகளில் அறிவிப்புகள் தடுக்கப்பட்டுள்ளன.',
-    pushUnavail: 'நினைவூட்டலுக்கு இணைய (Netlify) சர்வர் தேவை.', remindSet: 'நினைவூட்டல் அமைக்கப்பட்டது', testSent: 'சோதனை அனுப்பப்பட்டது', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
+    pushUnavail: 'நினைவூட்டலுக்கு இணைய சர்வர் தேவை.', remindSet: 'நினைவூட்டல் அமைக்கப்பட்டது', testSent: 'சோதனை அனுப்பப்பட்டது', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
     log_mark: '{who}: {date} அன்று {s} குறிக்கப்பட்டது', log_clear: '{who}: {date} அன்று குறியீடு நீக்கப்பட்டது', log_rate: '{who}: {date} அன்று கூலி {rate} ஆக மாற்றப்பட்டது',
     log_dayrate: '{date} அன்று {g} கூலி {rate} ஆக அமைக்கப்பட்டது', log_addday: '{who}: {date} பட்டியலில் சேர்க்கப்பட்டது', log_rmday: '{who}: {date} பட்டியலில் இருந்து நீக்கப்பட்டது',
     log_lab_add: 'தொழிலாளர் சேர்க்கப்பட்டார்: {who}', log_lab_edit: 'தொழிலாளர் திருத்தப்பட்டது: {who} {chg}', log_lab_del: 'தொழிலாளர் நீக்கப்பட்டார்: {who}', confirmRm: 'இந்த நாளுக்கான பட்டியலில் இருந்து நீக்கவா? (இன்றைய வருகை பதிவும் நீக்கப்படும்)', summary: 'சுருக்கம்', grid: 'அட்டவணை', span15: '15 நாட்கள்', spanMonth: 'மாதம்', legend: '✓ முழு · ◐ காலை · ◑ மதியம் · ✗ வரவில்லை · ● பட்டியலில், குறிக்கவில்லை',
@@ -219,7 +219,7 @@ setInterval(() => { if (pendingCount() || navigator.onLine) sync(); }, 60000);
 /* ---------- UI shell ---------- */
 let tab = 'att', date = ymd(new Date()), q = '';
 let repFrom = ymd(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), repTo = ymd(new Date());
-const TABS = [['att', '📋', 'attendance'], ['lab', '👥', 'labour'], ['exp', '🧾', 'expenses'], ['rep', '📊', 'report'], ['set', '⚙️', 'settings']];
+const TABS = [['att', '📋', 'attendance'], ['lab', '👥', 'labour'], ['exp', '💰', 'accounts'], ['rep', '📊', 'report'], ['set', '⚙️', 'settings']];
 function toast(m) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), 1800); }
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
@@ -268,7 +268,8 @@ function drawAttList() {
   const list = all.filter(l => !q || l.name.toLowerCase().includes(q.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
   let present = 0, pay = 0, dayEq = 0;
   for (const l of all) { const a = attOf(date, l.id); if (a) { const f = factor(a.s); if (f) present++; dayEq += f; pay += f * a.rate; } }
-  const exAmt = expSum(expOf(date)), expLine = exAmt ? `<p class="mu">🧾 ${esc(t('expenses'))} ${money(exAmt)} · ${esc(t('grandTotal'))} ${money(pay + exAmt)}</p>` : '';
+  const exAmt = expSum(expOf(date)), inAmt = expSum(incOf(date));
+  const expLine = exAmt || inAmt ? `<p class="mu">${exAmt ? `🧾 ${esc(t('expenses'))} ${money(exAmt)} · ${esc(t('grandTotal'))} ${money(pay + exAmt)}` : ''}${exAmt && inAmt ? '<br>' : ''}${inAmt ? `💰 ${esc(t('income'))} ${money(inAmt)} · ${esc(t('net'))} ${money(inAmt - pay - exAmt)}` : ''}</p>` : '';
   const inList = new Set(ids);
   const avail = labourers().filter(l => l.active !== false && !inList.has(l.id)).sort((a, b) => a.name.localeCompare(b.name));
   const picker = avail.length ? `<select id="addsel" class="${all.length ? '' : 'big'}"><option value="">${esc(t('addPerson'))}</option>${avail.map(l => `<option value="${l.id}">${esc(l.name)} (${esc(t(l.g))})</option>`).join('')}</select>` : '';
@@ -354,50 +355,61 @@ function labDialog(id) {
   dlg.showModal();
 }
 
-/* ---------- expenses (free-form, per date): E:<date>:<id> {date, desc, amt} ---------- */
-const expRecs = (from, to) => live('E:').filter(r => r.d.date >= from && r.d.date <= to)
-  .map(r => ({ id: r.k.split(':')[2], ...r.d, u: r.u })).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.u - b.u));
-const expOf = d => expRecs(d, d);
+/* ---------- money: expenses E:<date>:<id> and income I:<date>:<id>, both {date, desc, amt} ---------- */
+const entRecs = (p, from, to) => live(p).filter(r => r.d.date >= from && r.d.date <= to)
+  .map(r => ({ id: r.k.split(':')[2], kind: p[0], ...r.d, u: r.u })).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.u - b.u));
+const expRecs = (from, to) => entRecs('E:', from, to), incRecs = (from, to) => entRecs('I:', from, to);
+const expOf = d => expRecs(d, d), incOf = d => incRecs(d, d);
 const expSum = list => list.reduce((s, e) => s + e.amt, 0);
+const dayWages = d => live(`A:${d}:`).reduce((s, r) => s + factor(r.d.s) * r.d.rate, 0);
+let acctKind = 'E';
 function expView() {
-  const chips = [['⛽', 'petrol'], ['🍽️', 'food'], ['🚌', 'travel']].map(([ic, k]) => `<button class="chip" data-act="chip" data-v="${k}">${ic} ${esc(t(k))}</button>`).join('');
-  return dateBar() + `<div class="card"><div class="chips">${chips}</div>
+  const inc = acctKind === 'I';
+  const chips = (inc ? [['🍌', 'banana'], ['🌿', 'cardamom']] : [['⛽', 'petrol'], ['🍽️', 'food'], ['🚌', 'travel']])
+    .map(([ic, k]) => `<button class="chip" data-act="chip" data-v="${k}">${ic} ${esc(t(k))}</button>`).join('');
+  return dateBar() + `<div class="gsel" style="margin-bottom:10px"><button data-v="E" class="${inc ? '' : 'on'}" data-act="acct">${esc(t('expense'))}</button><button data-v="I" class="${inc ? 'on' : ''}" data-act="acct">${esc(t('income'))}</button></div>
+    <div class="card"><div class="chips">${chips}</div>
     <label>${esc(t('description'))}</label><input id="xdesc" maxlength="120" placeholder="${esc(t('description'))}">
     <label>${esc(t('amount'))}</label><input id="xamt" type="number" inputmode="decimal" min="0" placeholder="₹">
-    <button class="btn full" style="margin-top:12px" data-act="addexp">${esc(t('addExp'))}</button></div><div id="exp-list"></div>`;
+    <button class="btn full" style="margin-top:12px" data-act="addexp">${esc(t(inc ? 'addInc' : 'addExp'))}</button></div><div id="exp-list"></div>`;
 }
 function drawExpList() {
   const el = $('#exp-list'); if (!el) return;
-  const list = expOf(date);
-  el.innerHTML = list.length ? list.map(e => `<div class="card row sp" data-act="editexp" data-id="${e.id}">
-      <div><div class="name" style="font-size:16px">${esc(e.desc || t('expenses'))}</div>${lastBy(`E:${date}:${e.id}`)}</div><b>${money(e.amt)}</b></div>`).join('') +
-    `<div class="card row sp"><b>${esc(t('total'))}</b><b>${money(expSum(list))}</b></div>` : `<div class="empty">${esc(t('noExp'))}</div>`;
+  const ex = expOf(date), inc = incOf(date), list = [...ex, ...inc].sort((a, b) => a.u - b.u);
+  const exT = expSum(ex), inT = expSum(inc), w = dayWages(date);
+  el.innerHTML = list.length ? list.map(e => `<div class="card row sp" data-act="editexp" data-id="${e.id}" data-k="${e.kind}">
+      <div><div class="name" style="font-size:16px">${esc(e.desc || t(e.kind === 'I' ? 'income' : 'expense'))}</div>${lastBy(`${e.kind}:${date}:${e.id}`)}</div>
+      <b class="${e.kind === 'I' ? 'amt-in' : 'amt-ex'}">${e.kind === 'I' ? '+' : '−'}${money(e.amt)}</b></div>`).join('') +
+    `<div class="card"><table><tbody>
+      <tr><td>${esc(t('income'))}</td><td class="amt-in">${money(inT)}</td></tr><tr><td>${esc(t('expenses'))}</td><td>${money(exT)}</td></tr>
+      <tr><td>${esc(t('wages'))}</td><td>${money(w)}</td></tr></tbody>
+      <tfoot><tr><td>${esc(t('net'))}</td><td class="${inT - exT - w < 0 ? 'amt-ex' : 'amt-in'}">${money(inT - exT - w)}</td></tr></tfoot></table></div>` : `<div class="empty">${esc(t('noExp'))}</div>`;
 }
 function addExpense() {
-  const desc = $('#xdesc').value.trim(), amt = +$('#xamt').value;
+  const desc = $('#xdesc').value.trim(), amt = +$('#xamt').value, k = acctKind;
   if (!(amt > 0)) { toast(t('amount') + ' ?'); $('#xamt').focus(); return; }
-  put(`E:${date}:${uid()}`, { date, desc, amt }); audit('exp_add', { date, desc, amt });
+  put(`${k}:${date}:${uid()}`, { date, desc, amt }); audit(k === 'I' ? 'inc_add' : 'exp_add', { date, desc, amt });
   $('#xdesc').value = ''; $('#xamt').value = ''; drawExpList(); toast(t('saved'));
 }
-function expDialog(id) {
-  const k = `E:${date}:${id}`, e = recs.get(k).d, dlg = $('#dlg');
-  dlg.innerHTML = `<form method="dialog" id="expform"><h2>${esc(t('expenses'))} · ${date}</h2>
+function expDialog(id, kind) {
+  const k = `${kind}:${date}:${id}`, e = recs.get(k).d, dlg = $('#dlg'), tag = kind === 'I' ? 'inc' : 'exp';
+  dlg.innerHTML = `<form method="dialog" id="expform"><h2>${esc(t(kind === 'I' ? 'income' : 'expense'))} · ${date}</h2>
     <label>${esc(t('description'))}</label><input name="desc" maxlength="120" value="${esc(e.desc)}">
     <label>${esc(t('amount'))}</label><input name="amt" type="number" inputmode="decimal" min="0" required value="${e.amt}">
     <div class="row" style="margin-top:14px"><button type="button" class="btn dng" id="exdel">${esc(t('del'))}</button><span class="grow"></span>
     <button type="button" class="btn sec" id="excancel">${esc(t('cancel'))}</button><button class="btn">${esc(t('save'))}</button></div></form>`;
   $('#excancel').onclick = () => dlg.close();
-  $('#exdel').onclick = () => { if (!confirm(t('confirmExp'))) return; put(k, e, 1); audit('exp_del', { date, desc: e.desc, amt: e.amt }); dlg.close(); drawExpList(); };
+  $('#exdel').onclick = () => { if (!confirm(t('confirmExp'))) return; put(k, e, 1); audit(tag + '_del', { date, desc: e.desc, amt: e.amt }); dlg.close(); drawExpList(); };
   $('#expform').onsubmit = ev => {
     const f = new FormData(ev.target), amt = +f.get('amt'), desc = f.get('desc').trim();
     if (!(amt > 0)) return ev.preventDefault();
-    put(k, { date, desc, amt }); audit('exp_edit', { date, desc, amt }); drawExpList(); toast(t('saved'));
+    put(k, { date, desc, amt }); audit(tag + '_edit', { date, desc, amt }); drawExpList(); toast(t('saved'));
   };
   dlg.showModal();
 }
-const expTable = list => `<table><thead><tr><th>${esc(t('date'))}</th><th>${esc(t('description'))}</th><th>${esc(t('amount'))}</th></tr></thead>
-  <tbody>${list.map(e => `<tr data-act="goexp" data-v="${e.date}"><td>${e.date.slice(5)}</td><td style="text-align:left">${esc(e.desc || '—')}</td><td>${money(e.amt)}</td></tr>`).join('')}</tbody>
-  <tfoot><tr><td colspan="2">${esc(t('total'))}</td><td>${money(expSum(list))}</td></tr></tfoot></table>`;
+const expTable = (list, cls = '') => `<table><thead><tr><th>${esc(t('date'))}</th><th>${esc(t('description'))}</th><th>${esc(t('amount'))}</th></tr></thead>
+  <tbody>${list.map(e => `<tr data-act="goexp" data-v="${e.date}"><td>${e.date.slice(5)}</td><td style="text-align:left">${esc(e.desc || '—')}</td><td class="${cls}">${money(e.amt)}</td></tr>`).join('')}</tbody>
+  <tfoot><tr><td colspan="2">${esc(t('total'))}</td><td class="${cls}">${money(expSum(list))}</td></tr></tfoot></table>`;
 
 /* ---------- report ---------- */
 function reportRows() {
@@ -415,18 +427,22 @@ function repView() {
   const toggle = `<div class="gsel" style="margin-bottom:10px"><button class="${repMode === 'sum' ? 'on' : ''}" data-act="repmode" data-v="sum">${esc(t('summary'))}</button><button class="${repMode === 'grid' ? 'on' : ''}" data-act="repmode" data-v="grid">${esc(t('grid'))}</button></div>`;
   if (repMode === 'grid') return toggle + gridView();
   const rows = reportRows(), tot = rows.reduce((s, r) => ({ full: s.full + r.full, half: s.half + r.half, pay: s.pay + r.pay }), { full: 0, half: 0, pay: 0 });
-  const exps = expRecs(repFrom, repTo), exTot = expSum(exps);
+  const exps = expRecs(repFrom, repTo), incs = incRecs(repFrom, repTo), exTot = expSum(exps), inTot = expSum(incs), cost = tot.pay + exTot;
   return toggle + `<div class="card two">
     <div><label>${esc(t('from'))}</label><input type="date" id="rf" value="${repFrom}"></div>
     <div><label>${esc(t('to'))}</label><input type="date" id="rt" value="${repTo}"></div></div>` +
-    (rows.length || exps.length ? (rows.length ? `<div class="card"><table>
+    (rows.length || exps.length || incs.length ? (rows.length ? `<div class="card"><table>
       <thead><tr><th>${esc(t('name'))}</th><th>${esc(t('fullDays'))}</th><th>${esc(t('halfDays'))}</th><th>${esc(t('pay'))}</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td class="g${r.g}">${esc(r.name)}</td><td>${r.full}</td><td>${r.half}</td><td>${money(r.pay)}</td></tr>`).join('')}</tbody>
       <tfoot><tr><td>${esc(t('total'))}</td><td>${tot.full}</td><td>${tot.half}</td><td>${money(tot.pay)}</td></tr></tfoot></table></div>` : '') +
       (exps.length ? `<div class="card"><b>🧾 ${esc(t('expenses'))}</b>${expTable(exps)}</div>` : '') +
+      (incs.length ? `<div class="card"><b>💰 ${esc(t('income'))}</b>${expTable(incs, 'amt-in')}</div>` : '') +
       `<div class="card"><table><tbody>
         <tr><td>${esc(t('wages'))}</td><td>${money(tot.pay)}</td></tr><tr><td>${esc(t('expenses'))}</td><td>${money(exTot)}</td></tr>
-        </tbody><tfoot><tr><td>${esc(t('grandTotal'))}</td><td>${money(tot.pay + exTot)}</td></tr></tfoot></table></div>
+        <tr class="sum"><td>${esc(t('grandTotal'))}</td><td>${money(cost)}</td></tr>
+        <tr><td>${esc(t('income'))}</td><td class="amt-in">${money(inTot)}</td></tr>
+        <tr class="sum"><td>${esc(t('net'))}</td><td class="${inTot - cost < 0 ? 'amt-ex' : 'amt-in'}">${money(inTot - cost)}</td></tr>
+        </tbody></table></div>
       <button class="btn sec full" data-act="csv">⬇ ${esc(t('export'))}</button>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 let repMode = 'sum', gridSpan = '15', gridAnchor = ymd(new Date());
@@ -448,6 +464,7 @@ function gridView() {
   const rows = [...ids].map(labById).filter(Boolean).sort((p, q) => p.name.localeCompare(q.name));
   const colPay = days.map(() => 0);
   const exps = expRecs(days[0], days[days.length - 1]), colExp = days.map(d => expSum(exps.filter(e => e.date === d)));
+  const incs = incRecs(days[0], days[days.length - 1]), colInc = days.map(d => expSum(incs.filter(e => e.date === d)));
   const SYM = { full: '✓', am: '◐', pm: '◑', abs: '✗' };
   const body = rows.map(l => {
     let eq = 0, pay = 0;
@@ -459,22 +476,25 @@ function gridView() {
     return `<tr><td class="nm g${l.g}">${esc(l.name)}</td>${cells}<td><b>${eq}</b></td><td>${money(pay)}</td></tr>`;
   }).join('');
   const title = new Date(y, m - 1, 1).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { month: 'long', year: 'numeric' });
-  const tot = colPay.reduce((p, q) => p + q, 0), exTot = colExp.reduce((p, q) => p + q, 0);
+  const tot = colPay.reduce((p, q) => p + q, 0), exTot = colExp.reduce((p, q) => p + q, 0), inTot = colInc.reduce((p, q) => p + q, 0);
   const small = (arr, act) => arr.map((p, i) => `<td class="c" style="font-size:10px"${act ? ` data-act="goexp" data-v="${days[i]}"` : ''}>${p ? Math.round(p) : ''}</td>`).join('');
   return `<div class="row" style="margin-bottom:10px"><div class="gsel grow"><button class="${gridSpan === '15' ? 'on' : ''}" data-act="span" data-v="15">${esc(t('span15'))}</button><button class="${gridSpan === 'month' ? 'on' : ''}" data-act="span" data-v="month">${esc(t('spanMonth'))}</button></div></div>
   <div class="date"><button class="btn sec" data-act="shift" data-v="-1">‹</button><div class="grow card" style="margin:0;text-align:center;font-weight:600">${esc(title)} · ${a}–${b}</div><button class="btn sec" data-act="shift" data-v="1">›</button></div>` +
-  (rows.length || exps.length ? `<div class="gridwrap"><table class="grid"><thead><tr><th class="nm">${esc(t('name'))}</th>${days.map(d => `<th>${+d.slice(8)}</th>`).join('')}<th>${esc(t('days'))}</th><th>${esc(t('pay'))}</th></tr></thead>
+  (rows.length || exps.length || incs.length ? `<div class="gridwrap"><table class="grid"><thead><tr><th class="nm">${esc(t('name'))}</th>${days.map(d => `<th>${+d.slice(8)}</th>`).join('')}<th>${esc(t('days'))}</th><th>${esc(t('pay'))}</th></tr></thead>
     <tbody>${body}</tbody>
     <tfoot><tr><td class="nm">${esc(t('wages'))}</td>${small(colPay)}<td></td><td>${money(tot)}</td></tr>
       <tr><td class="nm">${esc(t('expenses'))}</td>${small(colExp, true)}<td></td><td>${money(exTot)}</td></tr>
-      <tr><td class="nm">${esc(t('grandTotal'))}</td>${small(colPay.map((p, i) => p + colExp[i]))}<td></td><td>${money(tot + exTot)}</td></tr></tfoot></table></div>
-    <p class="mu">${esc(t('legend'))}</p>` + (exps.length ? `<div class="card"><b>🧾 ${esc(t('expenses'))}</b>${expTable(exps)}</div>` : '') : `<div class="empty">${esc(t('noRecords'))}</div>`);
+      <tr><td class="nm">${esc(t('grandTotal'))}</td>${small(colPay.map((p, i) => p + colExp[i]))}<td></td><td>${money(tot + exTot)}</td></tr>
+      <tr><td class="nm">${esc(t('income'))}</td>${small(colInc, true)}<td></td><td class="amt-in">${money(inTot)}</td></tr>
+      <tr><td class="nm">${esc(t('net'))}</td>${small(colPay.map((p, i) => colInc[i] - p - colExp[i]))}<td></td><td class="${inTot - tot - exTot < 0 ? 'amt-ex' : 'amt-in'}">${money(inTot - tot - exTot)}</td></tr></tfoot></table></div>
+    <p class="mu">${esc(t('legend'))}</p>` + (exps.length ? `<div class="card"><b>🧾 ${esc(t('expenses'))}</b>${expTable(exps)}</div>` : '') + (incs.length ? `<div class="card"><b>💰 ${esc(t('income'))}</b>${expTable(incs, 'amt-in')}</div>` : '') : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 function exportCSV() {
-  const rows = reportRows(), exps = expRecs(repFrom, repTo), wagesTot = rows.reduce((s, r) => s + r.pay, 0);
+  const rows = reportRows(), exps = expRecs(repFrom, repTo), incs = incRecs(repFrom, repTo), wagesTot = rows.reduce((s, r) => s + r.pay, 0);
   const lines = [[t('name'), t('gender'), t('fullDays'), t('halfDays'), t('pay')], ...rows.map(r => [r.name, t(r.g), r.full, r.half, r.pay]), [t('wages'), '', '', '', wagesTot],
     [], [t('date'), t('description'), t('amount')], ...exps.map(e => [e.date, e.desc, e.amt]), [t('expenses'), '', expSum(exps)],
-    [], [t('grandTotal'), '', '', '', wagesTot + expSum(exps)]]
+    [], [t('income'), t('description'), t('amount')], ...incs.map(e => [e.date, e.desc, e.amt]), [t('income'), '', expSum(incs)],
+    [], [t('grandTotal'), '', '', '', wagesTot + expSum(exps)], [t('net'), '', '', '', expSum(incs) - wagesTot - expSum(exps)]]
     .map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], { type: 'text/csv' }));
@@ -594,7 +614,8 @@ document.addEventListener('click', e => {
     put(`D:${date}:${id}`, { date, lid: id }, 1); drawAttList();
   }
   else if (act === 'addexp') addExpense();
-  else if (act === 'editexp') expDialog(id);
+  else if (act === 'editexp') expDialog(id, b.dataset.k);
+  else if (act === 'acct') { acctKind = v; render(); }
   else if (act === 'chip') { $('#xdesc').value = t(v); $('#xamt').focus(); }
   else if (act === 'goexp') { date = v; tab = 'exp'; render(); }
   else if (act === 'repmode') { repMode = v; render(); }
