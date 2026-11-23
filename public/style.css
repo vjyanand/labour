@@ -74,3 +74,7 @@ table.grid{width:max-content;min-width:100%;font-size:13px}
 .gsel button[data-g=F]{color:var(--f);border-color:var(--fl)}
 .gsel button[data-g=M].on{background:var(--ml);border-color:var(--m);color:var(--m)}
 .gsel button[data-g=F].on{background:var(--fl);border-color:var(--f);color:var(--f)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--bd);background:#fff;border-radius:99px;padding:8px 14px;font:inherit}
+tr[data-act]{cursor:pointer}
+nav button{font-size:11px}

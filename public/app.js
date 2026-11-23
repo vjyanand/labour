@@ -15,7 +15,9 @@ const I18N = {
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
     lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
-    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
+    addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
+    addExp: 'Add expense', noExp: 'No expenses for this day', confirmExp: 'Delete this expense?', grandTotal: 'Grand total', date: 'Date',
+    log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
     remindT1: 'First reminder', remindT2: 'Second reminder', turnOn: 'Turn on', turnOff: 'Turn off', sendTest: 'Send test',
     pushNo: 'Notifications are not supported here. On iPhone, add the app to the Home Screen first.', pushDenied: 'Notifications are blocked in the browser settings.',
     pushUnavail: 'Reminders need the online (Netlify) server.', remindSet: 'Reminders set', testSent: 'Test sent', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
@@ -37,7 +39,9 @@ const I18N = {
     saved: 'சேமிக்கப்பட்டது', rateFor: 'இன்று இவருக்கான முழு நாள் கூலி (வழக்கமான கூலிக்கு காலியாக விடவும்)', gender: 'பாலினம்', pay: 'கூலி', normal: 'வழக்கம்', inactive: 'பணியில் இல்லை',
     noRecords: 'இந்த காலத்தில் வருகை பதிவு இல்லை', installHint: 'குறிப்பு: "Add to Home screen" மூலம் செயலியாக நிறுவலாம்.',
     lastSync: 'கடைசி ஒத்திசைவு', never: 'இல்லை', dayEq: 'நாள் கணக்கு',
-    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
+    addPerson: '+ இந்நாளுக்கு தொழிலாளர் சேர்', emptyDay: 'இந்த நாளுக்கு பட்டியலில் யாரும் இல்லை. கீழே உள்ள பட்டியலில் இருந்து தொழிலாளரை தேர்ந்தெடுக்கவும்.', fromPrev: 'பட்டியல் எடுக்கப்பட்ட நாள்', remove: 'நீக்கு', expenses: 'செலவுகள்', description: 'விவரம்', amount: 'தொகை', petrol: 'பெட்ரோல்', food: 'உணவு', travel: 'பயணம்',
+    addExp: 'செலவு சேர்', noExp: 'இந்த நாளுக்கு செலவு இல்லை', confirmExp: 'இந்த செலவை நீக்கவா?', grandTotal: 'மொத்த தொகை', date: 'தேதி',
+    log_exp_add: 'செலவு சேர்க்கப்பட்டது: {desc} {amt} ({date})', log_exp_edit: 'செலவு திருத்தப்பட்டது: {desc} {amt} ({date})', log_exp_del: 'செலவு நீக்கப்பட்டது: {desc} {amt} ({date})', cannotDel: 'நீக்க முடியாது: கடந்த 60 நாட்களுக்குள் ({date}) இவருக்கு வருகை பதிவு செய்யப்பட்டுள்ளது. அதற்குப் பதிலாக "பணியில் இல்லை" ஆக்கவும்.', version: 'செயலி பதிப்பு', changeLog: 'மாற்றங்களின் பதிவு', built: 'உருவாக்கியது', localChanges: 'உள்ளூர் மாற்றங்கள்', remindTitle: 'தினசரி நினைவூட்டல்கள்', remindHint: 'வருகை பதிவு செய்ய நினைவூட்டும் அறிவிப்புகள். பதிவு செய்ய வேண்டியது இருக்கும்போது மட்டுமே அனுப்பப்படும்.',
     remindT1: 'முதல் நினைவூட்டல்', remindT2: 'இரண்டாம் நினைவூட்டல்', turnOn: 'இயக்கு', turnOff: 'நிறுத்து', sendTest: 'சோதனை அனுப்பு',
     pushNo: 'இங்கு அறிவிப்புகள் ஆதரிக்கப்படவில்லை. ஐபோனில் முதலில் செயலியை Home Screen-இல் சேர்க்கவும்.', pushDenied: 'உலாவி அமைப்புகளில் அறிவிப்புகள் தடுக்கப்பட்டுள்ளன.',
     pushUnavail: 'நினைவூட்டலுக்கு இணைய (Netlify) சர்வர் தேவை.', remindSet: 'நினைவூட்டல் அமைக்கப்பட்டது', testSent: 'சோதனை அனுப்பப்பட்டது', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
@@ -177,7 +181,6 @@ const pendingCount = () => [...recs.values()].filter(r => r.dirty).length;
 function scheduleSync() { updateSyncBtn(); clearTimeout(syncTimer); syncTimer = setTimeout(sync, 1500); }
 async function sync(manual) {
   if (syncing) return;
-  if (!meta.user) { if (manual === true) askName(); return; } // no name, no sync
   if (!navigator.onLine) { if (manual === true) toast(t('offline')); return; }
   syncing = true; syncErr = false; updateSyncBtn();
   try {
@@ -212,7 +215,7 @@ setInterval(() => { if (pendingCount() || navigator.onLine) sync(); }, 60000);
 /* ---------- UI shell ---------- */
 let tab = 'att', date = ymd(new Date()), q = '';
 let repFrom = ymd(new Date(new Date().getFullYear(), new Date().getMonth(), 1)), repTo = ymd(new Date());
-const TABS = [['att', '📋', 'attendance'], ['lab', '👥', 'labour'], ['rep', '📊', 'report'], ['set', '⚙️', 'settings']];
+const TABS = [['att', '📋', 'attendance'], ['lab', '👥', 'labour'], ['exp', '🧾', 'expenses'], ['rep', '📊', 'report'], ['set', '⚙️', 'settings']];
 function toast(m) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), 1800); }
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
@@ -223,20 +226,23 @@ function chrome() {
 function render(soft) {
   chrome();
   if (soft && tab === 'att' && $('#att-list')) return drawAttList();
+  if (soft && tab === 'exp' && $('#exp-list')) return drawExpList();
   if (soft && document.activeElement && ['INPUT', 'SELECT'].includes(document.activeElement.tagName) && tab !== 'lab') return;
-  $('#view').innerHTML = { att: attView, lab: labView, rep: repView, set: setView, log: logView }[tab]();
+  $('#view').innerHTML = { att: attView, lab: labView, exp: expView, rep: repView, set: setView, log: logView }[tab]();
   if (tab === 'att') drawAttList();
+  if (tab === 'exp') drawExpList();
 }
 
 /* ---------- attendance ---------- */
-function attView() {
-  const dr = g => dayRate(date, g);
-  return `
-  <div class="date">
+const dateBar = () => `<div class="date">
     <button class="btn sec" data-act="day" data-v="-1">‹</button>
     <input type="date" id="date" value="${date}">
     <button class="btn sec" data-act="day" data-v="1">›</button>
-  </div>
+  </div>`;
+function attView() {
+  const dr = g => dayRate(date, g);
+  return `
+  ${dateBar()}
   <div class="row" style="margin-bottom:10px">
     <input id="q" class="grow" type="search" placeholder="${esc(t('search'))}" value="${esc(q)}">
     <button class="btn sec" data-act="markall" style="white-space:nowrap">✓ ${esc(t('markAll'))}</button>
@@ -257,6 +263,7 @@ function drawAttList() {
   const list = all.filter(l => !q || l.name.toLowerCase().includes(q.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
   let present = 0, pay = 0, dayEq = 0;
   for (const l of all) { const a = attOf(date, l.id); if (a) { const f = factor(a.s); if (f) present++; dayEq += f; pay += f * a.rate; } }
+  const exAmt = expSum(expOf(date)), expLine = exAmt ? `<p class="mu">🧾 ${esc(t('expenses'))} ${money(exAmt)} · ${esc(t('grandTotal'))} ${money(pay + exAmt)}</p>` : '';
   const inList = new Set(ids);
   const avail = labourers().filter(l => l.active !== false && !inList.has(l.id)).sort((a, b) => a.name.localeCompare(b.name));
   const picker = avail.length ? `<select id="addsel" class="${all.length ? '' : 'big'}"><option value="">${esc(t('addPerson'))}</option>${avail.map(l => `<option value="${l.id}">${esc(l.name)} (${esc(t(l.g))})</option>`).join('')}</select>` : '';
@@ -266,7 +273,7 @@ function drawAttList() {
     <div><b>${present}</b><small>${esc(t('present'))}</small></div>
     <div><b>${dayEq}</b><small>${esc(t('dayEq'))}</small></div>
     <div><b>${money(pay)}</b><small>${esc(t('cost'))}</small></div>
-  </div>` + (from ? `<p class="mu">↩ ${esc(t('fromPrev'))} ${from}</p>` : '') + (list.length ? list.map(l => {
+  </div>` + expLine + (from ? `<p class="mu">↩ ${esc(t('fromPrev'))} ${from}</p>` : '') + (list.length ? list.map(l => {
     const a = attOf(date, l.id), s = a && a.s;
     return `<div class="card">
       <div class="row sp"><div><span class="name g${l.g}">${esc(l.name)}</span></div>
@@ -342,6 +349,51 @@ function labDialog(id) {
   dlg.showModal();
 }
 
+/* ---------- expenses (free-form, per date): E:<date>:<id> {date, desc, amt} ---------- */
+const expRecs = (from, to) => live('E:').filter(r => r.d.date >= from && r.d.date <= to)
+  .map(r => ({ id: r.k.split(':')[2], ...r.d, u: r.u })).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.u - b.u));
+const expOf = d => expRecs(d, d);
+const expSum = list => list.reduce((s, e) => s + e.amt, 0);
+function expView() {
+  const chips = [['⛽', 'petrol'], ['🍽️', 'food'], ['🚌', 'travel']].map(([ic, k]) => `<button class="chip" data-act="chip" data-v="${k}">${ic} ${esc(t(k))}</button>`).join('');
+  return dateBar() + `<div class="card"><div class="chips">${chips}</div>
+    <label>${esc(t('description'))}</label><input id="xdesc" maxlength="120" placeholder="${esc(t('description'))}">
+    <label>${esc(t('amount'))}</label><input id="xamt" type="number" inputmode="decimal" min="0" placeholder="₹">
+    <button class="btn full" style="margin-top:12px" data-act="addexp">${esc(t('addExp'))}</button></div><div id="exp-list"></div>`;
+}
+function drawExpList() {
+  const el = $('#exp-list'); if (!el) return;
+  const list = expOf(date);
+  el.innerHTML = list.length ? list.map(e => `<div class="card row sp" data-act="editexp" data-id="${e.id}">
+      <div><div class="name" style="font-size:16px">${esc(e.desc || t('expenses'))}</div>${lastBy(`E:${date}:${e.id}`)}</div><b>${money(e.amt)}</b></div>`).join('') +
+    `<div class="card row sp"><b>${esc(t('total'))}</b><b>${money(expSum(list))}</b></div>` : `<div class="empty">${esc(t('noExp'))}</div>`;
+}
+function addExpense() {
+  const desc = $('#xdesc').value.trim(), amt = +$('#xamt').value;
+  if (!(amt > 0)) { toast(t('amount') + ' ?'); $('#xamt').focus(); return; }
+  put(`E:${date}:${uid()}`, { date, desc, amt }); audit('exp_add', { date, desc, amt });
+  $('#xdesc').value = ''; $('#xamt').value = ''; drawExpList(); toast(t('saved'));
+}
+function expDialog(id) {
+  const k = `E:${date}:${id}`, e = recs.get(k).d, dlg = $('#dlg');
+  dlg.innerHTML = `<form method="dialog" id="expform"><h2>${esc(t('expenses'))} · ${date}</h2>
+    <label>${esc(t('description'))}</label><input name="desc" maxlength="120" value="${esc(e.desc)}">
+    <label>${esc(t('amount'))}</label><input name="amt" type="number" inputmode="decimal" min="0" required value="${e.amt}">
+    <div class="row" style="margin-top:14px"><button type="button" class="btn dng" id="exdel">${esc(t('del'))}</button><span class="grow"></span>
+    <button type="button" class="btn sec" id="excancel">${esc(t('cancel'))}</button><button class="btn">${esc(t('save'))}</button></div></form>`;
+  $('#excancel').onclick = () => dlg.close();
+  $('#exdel').onclick = () => { if (!confirm(t('confirmExp'))) return; put(k, e, 1); audit('exp_del', { date, desc: e.desc, amt: e.amt }); dlg.close(); drawExpList(); };
+  $('#expform').onsubmit = ev => {
+    const f = new FormData(ev.target), amt = +f.get('amt'), desc = f.get('desc').trim();
+    if (!(amt > 0)) return ev.preventDefault();
+    put(k, { date, desc, amt }); audit('exp_edit', { date, desc, amt }); drawExpList(); toast(t('saved'));
+  };
+  dlg.showModal();
+}
+const expTable = list => `<table><thead><tr><th>${esc(t('date'))}</th><th>${esc(t('description'))}</th><th>${esc(t('amount'))}</th></tr></thead>
+  <tbody>${list.map(e => `<tr data-act="goexp" data-v="${e.date}"><td>${e.date.slice(5)}</td><td style="text-align:left">${esc(e.desc || '—')}</td><td>${money(e.amt)}</td></tr>`).join('')}</tbody>
+  <tfoot><tr><td colspan="2">${esc(t('total'))}</td><td>${money(expSum(list))}</td></tr></tfoot></table>`;
+
 /* ---------- report ---------- */
 function reportRows() {
   const by = {};
@@ -358,13 +410,18 @@ function repView() {
   const toggle = `<div class="gsel" style="margin-bottom:10px"><button class="${repMode === 'sum' ? 'on' : ''}" data-act="repmode" data-v="sum">${esc(t('summary'))}</button><button class="${repMode === 'grid' ? 'on' : ''}" data-act="repmode" data-v="grid">${esc(t('grid'))}</button></div>`;
   if (repMode === 'grid') return toggle + gridView();
   const rows = reportRows(), tot = rows.reduce((s, r) => ({ full: s.full + r.full, half: s.half + r.half, pay: s.pay + r.pay }), { full: 0, half: 0, pay: 0 });
+  const exps = expRecs(repFrom, repTo), exTot = expSum(exps);
   return toggle + `<div class="card two">
     <div><label>${esc(t('from'))}</label><input type="date" id="rf" value="${repFrom}"></div>
     <div><label>${esc(t('to'))}</label><input type="date" id="rt" value="${repTo}"></div></div>` +
-    (rows.length ? `<div class="card"><table>
+    (rows.length || exps.length ? (rows.length ? `<div class="card"><table>
       <thead><tr><th>${esc(t('name'))}</th><th>${esc(t('fullDays'))}</th><th>${esc(t('halfDays'))}</th><th>${esc(t('pay'))}</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td class="g${r.g}">${esc(r.name)}</td><td>${r.full}</td><td>${r.half}</td><td>${money(r.pay)}</td></tr>`).join('')}</tbody>
-      <tfoot><tr><td>${esc(t('total'))}</td><td>${tot.full}</td><td>${tot.half}</td><td>${money(tot.pay)}</td></tr></tfoot></table></div>
+      <tfoot><tr><td>${esc(t('total'))}</td><td>${tot.full}</td><td>${tot.half}</td><td>${money(tot.pay)}</td></tr></tfoot></table></div>` : '') +
+      (exps.length ? `<div class="card"><b>🧾 ${esc(t('expenses'))}</b>${expTable(exps)}</div>` : '') +
+      `<div class="card"><table><tbody>
+        <tr><td>${esc(t('wages'))}</td><td>${money(tot.pay)}</td></tr><tr><td>${esc(t('expenses'))}</td><td>${money(exTot)}</td></tr>
+        </tbody><tfoot><tr><td>${esc(t('grandTotal'))}</td><td>${money(tot.pay + exTot)}</td></tr></tfoot></table></div>
       <button class="btn sec full" data-act="csv">⬇ ${esc(t('export'))}</button>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 let repMode = 'sum', gridSpan = '15', gridAnchor = ymd(new Date());
@@ -385,6 +442,7 @@ function gridView() {
   for (const d of days) dayMembers(d).forEach(id => ids.add(id));
   const rows = [...ids].map(labById).filter(Boolean).sort((p, q) => p.name.localeCompare(q.name));
   const colPay = days.map(() => 0);
+  const exps = expRecs(days[0], days[days.length - 1]), colExp = days.map(d => expSum(exps.filter(e => e.date === d)));
   const SYM = { full: '✓', am: '◐', pm: '◑', abs: '✗' };
   const body = rows.map(l => {
     let eq = 0, pay = 0;
@@ -396,16 +454,22 @@ function gridView() {
     return `<tr><td class="nm g${l.g}">${esc(l.name)}</td>${cells}<td><b>${eq}</b></td><td>${money(pay)}</td></tr>`;
   }).join('');
   const title = new Date(y, m - 1, 1).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { month: 'long', year: 'numeric' });
-  const tot = colPay.reduce((p, q) => p + q, 0);
+  const tot = colPay.reduce((p, q) => p + q, 0), exTot = colExp.reduce((p, q) => p + q, 0);
+  const small = (arr, act) => arr.map((p, i) => `<td class="c" style="font-size:10px"${act ? ` data-act="goexp" data-v="${days[i]}"` : ''}>${p ? Math.round(p) : ''}</td>`).join('');
   return `<div class="row" style="margin-bottom:10px"><div class="gsel grow"><button class="${gridSpan === '15' ? 'on' : ''}" data-act="span" data-v="15">${esc(t('span15'))}</button><button class="${gridSpan === 'month' ? 'on' : ''}" data-act="span" data-v="month">${esc(t('spanMonth'))}</button></div></div>
   <div class="date"><button class="btn sec" data-act="shift" data-v="-1">‹</button><div class="grow card" style="margin:0;text-align:center;font-weight:600">${esc(title)} · ${a}–${b}</div><button class="btn sec" data-act="shift" data-v="1">›</button></div>` +
-  (rows.length ? `<div class="gridwrap"><table class="grid"><thead><tr><th class="nm">${esc(t('name'))}</th>${days.map(d => `<th>${+d.slice(8)}</th>`).join('')}<th>${esc(t('days'))}</th><th>${esc(t('pay'))}</th></tr></thead>
+  (rows.length || exps.length ? `<div class="gridwrap"><table class="grid"><thead><tr><th class="nm">${esc(t('name'))}</th>${days.map(d => `<th>${+d.slice(8)}</th>`).join('')}<th>${esc(t('days'))}</th><th>${esc(t('pay'))}</th></tr></thead>
     <tbody>${body}</tbody>
-    <tfoot><tr><td class="nm">${esc(t('total'))}</td>${colPay.map(p => `<td class="c" style="font-size:10px">${p ? Math.round(p) : ''}</td>`).join('')}<td></td><td>${money(tot)}</td></tr></tfoot></table></div>
-    <p class="mu">${esc(t('legend'))}</p>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
+    <tfoot><tr><td class="nm">${esc(t('wages'))}</td>${small(colPay)}<td></td><td>${money(tot)}</td></tr>
+      <tr><td class="nm">${esc(t('expenses'))}</td>${small(colExp, true)}<td></td><td>${money(exTot)}</td></tr>
+      <tr><td class="nm">${esc(t('grandTotal'))}</td>${small(colPay.map((p, i) => p + colExp[i]))}<td></td><td>${money(tot + exTot)}</td></tr></tfoot></table></div>
+    <p class="mu">${esc(t('legend'))}</p>` + (exps.length ? `<div class="card"><b>🧾 ${esc(t('expenses'))}</b>${expTable(exps)}</div>` : '') : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 function exportCSV() {
-  const lines = [[t('name'), t('gender'), t('fullDays'), t('halfDays'), t('pay')], ...reportRows().map(r => [r.name, t(r.g), r.full, r.half, r.pay])]
+  const rows = reportRows(), exps = expRecs(repFrom, repTo), wagesTot = rows.reduce((s, r) => s + r.pay, 0);
+  const lines = [[t('name'), t('gender'), t('fullDays'), t('halfDays'), t('pay')], ...rows.map(r => [r.name, t(r.g), r.full, r.half, r.pay]), [t('wages'), '', '', '', wagesTot],
+    [], [t('date'), t('description'), t('amount')], ...exps.map(e => [e.date, e.desc, e.amt]), [t('expenses'), '', expSum(exps)],
+    [], [t('grandTotal'), '', '', '', wagesTot + expSum(exps)]]
     .map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], { type: 'text/csv' }));
@@ -463,7 +527,7 @@ function fmtChg(c) {
   return '(' + c.map(([k, a, b]) => `${esc(t(FIELD[k] || k))}: ${esc(val(k, a))} → ${esc(val(k, b))}`).join(', ') + ')';
 }
 function logText(o) {
-  const v = { who: esc(o.who), s: esc(t(o.s)), date: o.date, rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: fmtChg(o.chg) };
+  const v = { who: esc(o.who), s: esc(t(o.s)), date: o.date, rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: fmtChg(o.chg), desc: esc(o.desc || ''), amt: o.amt == null ? '' : money(o.amt) };
   return (t('log_' + o.act)).replace(/\{(\w+)\}/g, (m, k) => v[k] ?? '');
 }
 function logView() {
@@ -523,6 +587,10 @@ document.addEventListener('click', e => {
     if (a) put(`A:${date}:${id}`, a, 1);
     put(`D:${date}:${id}`, { date, lid: id }, 1); drawAttList();
   }
+  else if (act === 'addexp') addExpense();
+  else if (act === 'editexp') expDialog(id);
+  else if (act === 'chip') { $('#xdesc').value = t(v); $('#xamt').focus(); }
+  else if (act === 'goexp') { date = v; tab = 'exp'; render(); }
   else if (act === 'repmode') { repMode = v; render(); }
   else if (act === 'span') { gridSpan = v; render(); }
   else if (act === 'shift') { gridShift(+v); render(); }
@@ -583,11 +651,13 @@ function askName() {
   dlg.showModal();
 }
 
+// the deliberate abort from needName() is not an error worth logging
+addEventListener('error', e => { if (/user name required/.test(e.message)) e.preventDefault(); });
+
 /* ---------- boot ---------- */
 (async () => {
   await load();
   render();
-  askName();
   loadVersion();
   if (remindCfg().on && pushOK() && Notification.permission === 'granted' && navigator.onLine) pushSubscribe().catch(() => {}); // refresh language/timezone/name
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
