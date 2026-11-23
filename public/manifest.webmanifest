@@ -1,6 +1,7 @@
 {
   "name": "Day Attendance / நாள் வருகை",
   "short_name": "Day Attendance",
+  "description": "Farm labour attendance, wages and accounts — https://l.iavian.net",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
