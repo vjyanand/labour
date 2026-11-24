@@ -51,17 +51,16 @@ label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}
 .gsel.three{grid-template-columns:repeat(3,1fr)}
 .gsel button{border:1.5px solid var(--bd);background:#fff;border-radius:10px;padding:11px;font:inherit}
 .gsel button.on{border-color:var(--g);background:var(--gl);font-weight:700}
-/* gender buttons in the labourer form use the same colours as the names */
-.gsel button[data-g=M]{color:var(--m);border-color:var(--ml)}
-.gsel button[data-g=F]{color:var(--f);border-color:var(--fl)}
-.gsel button[data-g=M].on{background:var(--ml);border-color:var(--m);color:var(--m)}
-.gsel button[data-g=F].on{background:var(--fl);border-color:var(--f);color:var(--f)}
+/* gender buttons in the labourer form show the same icons as the names */
+.gsel button[data-g=M]::before{content:'\1F6B9 '}
+.gsel button[data-g=F]::before{content:'\1F6BA '}
 /* expense / income switch on the Accounts screen */
 .gsel button[data-v=E].on{background:#fde8e8;border-color:var(--re);color:var(--re)}
 .gsel button[data-v=I].on{background:var(--gl);border-color:var(--g);color:var(--g)}
 
-/* ===== Names coloured by gender ===== */
-.gM{color:var(--m)}.gF{color:var(--f)}
+/* ===== Gender icon before names ===== */
+.gM::before,.gF::before{margin-right:4px;font-weight:400}
+.gM::before{content:'\1F6B9'}.gF::before{content:'\1F6BA'}
 .name.gM,.name.gF,.grid .nm.gM,.grid .nm.gF,td.gM,td.gF{font-weight:700}
 
 /* ===== Attendance ===== */
