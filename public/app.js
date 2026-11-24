@@ -23,7 +23,7 @@ const I18N = {
     pushUnavail: 'Reminders need the online server.', remindSet: 'Reminders set', testSent: 'Test sent', people: 'People', cost: 'Cost', auto: 'Auto (follow browser language)', deactivate: 'Make inactive', activate: 'Make active', yourName: 'Your name', yourNameHint: 'Saved with every change you make, so the team can see who did what.', auditLog: 'Audit log', allDates: 'All dates', noLog: 'No log entries', back: 'Back', lastBy: 'by',
     log_mark: '{who}: marked {s} on {date}', log_clear: '{who}: cleared mark on {date}', log_rate: '{who}: wage set to {rate} on {date}',
     log_dayrate: '{g} wage on {date} set to {rate}', log_addday: '{who}: added to {date}', log_rmday: '{who}: removed from {date}',
-    log_lab_add: 'Labourer added: {who}', log_lab_edit: 'Labourer edited: {who} {chg}', log_lab_del: 'Labourer deleted: {who}', confirmRm: 'Remove this person from this day (their attendance for the day is deleted)?', summary: 'Summary', grid: 'Grid', span15: '15 days', spanMonth: 'Month', legend: '✓ full · ◐ morning · ◑ afternoon · ✗ absent · ● listed, not marked',
+    log_lab_add: 'Labourer added: {who}', log_lab_edit: 'Labourer edited: {who} {chg}', log_lab_del: 'Labourer deleted: {who}', confirmRm: 'Remove this person from this day (their attendance for the day is deleted)?', summary: 'Summary', grid: 'Grid', span15: '15 days', spanMonth: 'Month', legend: '✓ full · ◐ morning · ◑ afternoon · ✗ absent',
   },
   ta: {
     app: 'பண்ணை கணக்கு', attendance: 'வருகை', labour: 'நபர்கள்', report: 'அறிக்கை', settings: 'அமைப்புகள்',
@@ -47,7 +47,7 @@ const I18N = {
     pushUnavail: 'நினைவூட்டலுக்கு இணைய சர்வர் தேவை.', remindSet: 'நினைவூட்டல் அமைக்கப்பட்டது', testSent: 'சோதனை அனுப்பப்பட்டது', people: 'மொத்த நபர்', cost: 'செலவு', auto: 'தானியங்கி (உலாவி மொழி)', deactivate: 'பணியில் இல்லை', activate: 'பணியில் சேர்', yourName: 'உங்கள் பெயர்', yourNameHint: 'நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் சேமிக்கப்படும்; யார் என்ன செய்தார் என்று தெரியும்.', auditLog: 'தணிக்கை பதிவு', allDates: 'அனைத்து நாட்கள்', noLog: 'பதிவுகள் இல்லை', back: 'பின்', lastBy: 'செய்தவர்',
     log_mark: '{who}: {date} அன்று {s} குறிக்கப்பட்டது', log_clear: '{who}: {date} அன்று குறியீடு நீக்கப்பட்டது', log_rate: '{who}: {date} அன்று கூலி {rate} ஆக மாற்றப்பட்டது',
     log_dayrate: '{date} அன்று {g} கூலி {rate} ஆக அமைக்கப்பட்டது', log_addday: '{who}: {date} பட்டியலில் சேர்க்கப்பட்டது', log_rmday: '{who}: {date} பட்டியலில் இருந்து நீக்கப்பட்டது',
-    log_lab_add: 'தொழிலாளர் சேர்க்கப்பட்டார்: {who}', log_lab_edit: 'தொழிலாளர் திருத்தப்பட்டது: {who} {chg}', log_lab_del: 'தொழிலாளர் நீக்கப்பட்டார்: {who}', confirmRm: 'இந்த நாளுக்கான பட்டியலில் இருந்து நீக்கவா? (இன்றைய வருகை பதிவும் நீக்கப்படும்)', summary: 'சுருக்கம்', grid: 'அட்டவணை', span15: '15 நாட்கள்', spanMonth: 'மாதம்', legend: '✓ முழு · ◐ காலை · ◑ மதியம் · ✗ வரவில்லை · ● பட்டியலில், குறிக்கவில்லை',
+    log_lab_add: 'தொழிலாளர் சேர்க்கப்பட்டார்: {who}', log_lab_edit: 'தொழிலாளர் திருத்தப்பட்டது: {who} {chg}', log_lab_del: 'தொழிலாளர் நீக்கப்பட்டார்: {who}', confirmRm: 'இந்த நாளுக்கான பட்டியலில் இருந்து நீக்கவா? (இன்றைய வருகை பதிவும் நீக்கப்படும்)', summary: 'சுருக்கம்', grid: 'அட்டவணை', span15: '15 நாட்கள்', spanMonth: 'மாதம்', legend: '✓ முழு · ◐ காலை · ◑ மதியம் · ✗ வரவில்லை',
   },
 };
 
@@ -582,7 +582,7 @@ function gridView() {
     const cells = days.map((d, i) => {
       const at = attOf(d, l.id);
       if (at) { const f = factor(at.s); eq += f; pay += f * at.rate; colPay[i] += f * at.rate; return `<td class="c ${at.s}" data-act="goday" data-v="${d}">${SYM[at.s]}</td>`; }
-      return dayMembers(d).has(l.id) ? `<td class="c" data-act="goday" data-v="${d}">●</td>` : '<td class="c"></td>';
+      return '<td class="c"></td>';
     }).join('');
     const sep = classes.size > 1 && wageClass(l) !== lastClass
       ? `<tr class="grpsep"><td class="nm">${l.type === 'monthly' ? esc(t('monthlyTag')) : money(l.wage)}</td><td colspan="${2 + days.length}"></td></tr>` : '';
