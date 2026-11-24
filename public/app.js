@@ -595,7 +595,7 @@ function gridView() {
   const tot = colPay.reduce((p, q) => p + q, 0), exTot = colExp.reduce((p, q) => p + q, 0), inTot = colInc.reduce((p, q) => p + q, 0);
   const mdue = monthlyDue(days[0], days[days.length - 1]), mTot = mdue.reduce((n, x) => n + x.amt, 0);
   const dayHead = days.map(d => `<th>${gridSpan === 'week' ? `${esc(fd(d, { weekday: 'short' }))}<br>` : ''}${+d.slice(8)}</th>`).join('');
-  const small = (arr, act) => arr.map((p, i) => `<td class="c" style="font-size:10px"${act ? ` data-act="goexp" data-v="${days[i]}"` : ''}>${p ? (p < 0 ? '−' : '') + Math.abs(Math.round(p)) : ''}</td>`).join('');
+  const small = (arr, act) => arr.map((p, i) => `<td class="c n" style="font-size:10px"${act ? ` data-act="goexp" data-v="${days[i]}"` : ''}>${p ? (p < 0 ? '−' : '') + Math.abs(Math.round(p)) : ''}</td>`).join('');
   return `<div class="row" style="margin-bottom:10px"><div class="gsel three grow"><button class="${gridSpan === 'week' ? 'on' : ''}" data-act="span" data-v="week">${esc(t('weekSpan'))}</button><button class="${gridSpan === '15' ? 'on' : ''}" data-act="span" data-v="15">${esc(t('span15'))}</button><button class="${gridSpan === 'month' ? 'on' : ''}" data-act="span" data-v="month">${esc(t('spanMonth'))}</button></div></div>
   <div class="date"><button class="btn sec" data-act="shift" data-v="-1">‹</button><div class="grow card" style="margin:0;text-align:center;font-weight:600">${esc(heading)}</div><button class="btn sec" data-act="shift" data-v="1">›</button></div>` +
   (rows.length || exps.length || incs.length || mdue.length ? `
