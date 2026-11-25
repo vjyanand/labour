@@ -281,7 +281,15 @@ const SYNC_ICON = {
   off: CLOUD + '<path d="M3.5 3.5l17 17"/>',
   bad: CLOUD + '<path d="M12 10.5v3M12 15.8h.01"/>',
 };
+// last successful sync and the data version, in front of the icon (always short, in either language)
+const infoTime = new Intl.DateTimeFormat('en-IN', { timeZone: TZ, hour: 'numeric', minute: '2-digit', hour12: true });
+function updateSyncInfo() {
+  const el = $('#syncinfo'); if (!el) return;
+  el.innerHTML = meta.lastSync ? `<span>⟳ ${dmy(istDate.format(new Date(meta.lastSync)))}, ${esc(infoTime.format(new Date(meta.lastSync)))}</span><span>DB v${esc(meta.since || '—')}</span>` : '';
+  el.title = `${t('lastSync')} · ${t('dataVer')}`;
+}
 function updateSyncBtn() {
+  updateSyncInfo();
   const b = $('#syncbtn'), p = pendingCount();
   const state = !navigator.onLine ? 'off' : syncing && busy ? 'busy' : syncErr ? 'bad' : p ? 'pend' : 'ok';
   const label = { off: t('offline'), busy: t('syncNow'), bad: t('syncErrShort'), pend: `${p} ${t('pending')}`, ok: t('synced') }[state];
@@ -304,7 +312,7 @@ const TABS = [['att', '📋', 'attendance'], ['exp', '💰', 'accounts'], ['rep'
 function toast(m, ms) { const e = $('#toast'); e.textContent = m; e.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('show'), ms || 1800); }
 function chrome() {
   document.documentElement.lang = lang === 'ta' ? 'ta' : 'en';
-  const rb = $('#robadge'); rb.hidden = !ro(); rb.textContent = '👁 ' + t('viewOnly');
+  const rb = $('#robadge'); rb.hidden = !ro(); rb.textContent = '👁'; rb.title = t('viewOnly'); rb.setAttribute('aria-label', t('viewOnly'));
   $('#title').textContent = t('app'); document.title = t('app');
   $('#nav').innerHTML = TABS.map(([k, ic, l]) => `<button data-act="tab" data-v="${k}" class="${tab === k || ((tab === 'log' || tab === 'help') && k === 'set') ? 'on' : ''}"><span>${ic}</span>${esc(t(l))}</button>`).join('');
   updateSyncBtn();
