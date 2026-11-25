@@ -14,7 +14,7 @@ const I18N = {
     updatedBy: 'Updated by', server: 'Server address (blank = this site)', key: 'Sync key (if set on server)', syncFail: 'Sync failed, will retry', syncErrShort: 'Sync failed',
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
-    lastSync: 'Last sync', never: 'never', dayEq: 'Day-equivalents',
+    lastSync: 'Last sync', dataVer: 'Data version', never: 'never', dayEq: 'Day-equivalents',
     addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', viewOnly: 'View only', viewOnlyHint: 'You can see everything, but this phone cannot change anything.', payType: 'Pay type', payDaily: 'Daily wage', payMonthly: 'Monthly salary', monthlySalary: 'Monthly salary (fixed)', monthlyTag: 'Monthly', perMonth: '/ month', monthlySalaries: 'Monthly salaries', monthCol: 'Month', tally: 'Tally', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
     addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
     log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
@@ -31,7 +31,7 @@ const I18N = {
     M: 'ஆண்', F: 'பெண்', name: 'பெயர்', phone: 'தொலைபேசி', wage: 'தினக்கூலி (முழு நாள்)', add: 'தொழிலாளர் சேர்', edit: 'திருத்து',
     save: 'சேமி', cancel: 'ரத்து', del: 'நீக்கு', search: 'தேடு…', today: 'இன்று', present: 'வந்தவர்', total: 'மொத்தம்',
     wages: 'கூலி', days: 'நாட்கள்', from: 'முதல்', to: 'வரை', export: 'CSV பதிவிறக்கு', language: 'மொழி',
-    syncNow: 'இப்போது ஒத்திசை', online: 'இணைப்பில்', offline: 'இணைப்பு இல்லை', pending: 'நிலுவை', synced: 'ஒத்திசைந்தது',
+    syncNow: 'இப்போது ஒத்திசை', dataVer: 'தரவு பதிப்பு', online: 'இணைப்பில்', offline: 'இணைப்பு இல்லை', pending: 'நிலுவை', synced: 'ஒத்திசைந்தது',
     dayRate: 'இன்றைய கூலி மாற்றம்', dayRateHint: 'இந்த நாளுக்கு ஆண்/பெண் அனைவருக்கும் வேறு முழு நாள் கூலி அமைக்கவும். வழக்கமான கூலிக்கு காலியாக விடவும்.',
     active: 'தற்போது பணியில்', noLabour: 'தொழிலாளர் இல்லை. + அழுத்தி சேர்க்கவும்.', markAll: 'அனைவருக்கும் முழு நாள்',
     halfDays: 'அரை', fullDays: 'முழு', confirmDel: 'இந்த தொழிலாளரை நீக்கவா? முந்தைய வருகை பதிவுகள் இருக்கும்.',
@@ -765,7 +765,7 @@ function setView() {
     <div class="card" id="synccard"><label style="margin-top:0">${esc(t('server'))}</label><input id="srv" value="${esc(meta.server)}" placeholder="https://example.com">
       <label>${esc(t('key'))}</label><input id="key" type="password" value="${esc(meta.key)}">
       ${syncErr && syncMsg ? `<p style="color:var(--re);font-size:14px">⚠ ${esc(syncMsg)}</p>` : ''}
-      <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? fmtT(meta.lastSync) : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
+      <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? fmtT(meta.lastSync) : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}<br>${esc(t('dataVer'))}: ${meta.since || '—'}</p>
       <button class="btn full" data-act="sync">⟳ ${esc(t('syncNow'))}</button></div>
     ${verCard()}
     <p class="mu">${esc(t('installHint'))}</p>`;
