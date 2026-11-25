@@ -297,6 +297,10 @@ const dateBar = () => `<div class="wd"><span>${esc(weekday(date))}${date === tod
     <input type="date" id="date" value="${date}" max="${today()}">
     <button class="btn sec" data-act="day" data-v="1" ${date >= today() ? 'disabled' : ''}>›</button>
   </div>`;
+// attendance order: daily wage (low to high, monthly-salary people last), then male before female, then name.
+// Uses the normal wage, so changing one day's rate doesn't move anyone around.
+const payRank = l => (l.type === 'monthly' ? Number.MAX_SAFE_INTEGER : +l.wage || 0);
+const byPaySexName = (p, q) => payRank(p) - payRank(q) || (p.g === 'F') - (q.g === 'F') || p.name.localeCompare(q.name);
 function attView() {
   const dr = g => dayRate(date, g);
   const list = attMode === 'list';
@@ -319,7 +323,7 @@ function attView() {
 function drawAttList() {
   const el = $('#att-list'); if (!el) return;
   if (attMode === 'list') { // quick view: only who came, no buttons
-    const rows = labourers().map(l => ({ l, a: attOf(date, l.id) })).filter(x => x.a && factor(x.a.s)).sort((p, q) => p.l.name.localeCompare(q.l.name));
+    const rows = labourers().map(l => ({ l, a: attOf(date, l.id) })).filter(x => x.a && factor(x.a.s)).sort((p, q) => byPaySexName(p.l, q.l));
     const eq = rows.reduce((n, x) => n + factor(x.a.s), 0), tot = rows.reduce((n, x) => n + factor(x.a.s) * x.a.rate, 0);
     el.innerHTML = rows.length ? `<div class="card"><div class="row sp" style="margin-bottom:6px"><b style="font-size:18px">${rows.length} ${esc(t('present'))}</b><span class="mu">${eq} ${esc(t('dayEq'))}</span></div>
       ${rows.map(x => `<div class="row sp lrow"><span class="name g${x.l.g}">${esc(x.l.name)}</span><span class="mu">${esc(t(x.a.s))}</span>${x.l.type === 'monthly' ? `<span class="mu">${esc(t('monthlyTag'))}</span>` : `<b>${money(factor(x.a.s) * x.a.rate)}</b>`}</div>`).join('')}
@@ -328,7 +332,7 @@ function drawAttList() {
   }
   const { ids, from } = dayList(date);
   const all = ids.map(labById).filter(Boolean);
-  const list = all.filter(l => !q || l.name.toLowerCase().includes(q.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
+  const list = all.filter(l => !q || l.name.toLowerCase().includes(q.toLowerCase())).sort(byPaySexName);
   let present = 0, pay = 0, dayEq = 0;
   for (const l of all) { const a = attOf(date, l.id); if (a) { const f = factor(a.s); if (f) present++; dayEq += f; pay += f * a.rate; } }
   const exAmt = expSum(expOf(date)), inAmt = expSum(incOf(date));
