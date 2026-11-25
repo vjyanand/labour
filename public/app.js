@@ -517,7 +517,7 @@ const expTable = (list, cls = '') => `<table><thead><tr><th>${esc(t('date'))}</t
 // the broad picture: capital / own-money spending listed after the tally, and what is left once it is counted
 const capSection = (list, net) => list.length ? `<div class="secthead">🏦 ${esc(t('capital'))}</div><div class="card">${expTable(list)}</div>
   <div class="secthead">🌍 ${esc(t('overall'))}</div><div class="card"><table><tbody>
-    <tr><td>${esc(t('net'))}</td><td>${money(net)}</td></tr><tr><td>${esc(t('capital'))}</td><td>${money(expSum(list))}</td></tr>
+    <tr><td>${esc(t('net'))}</td><td>${money(net)}</td></tr><tr><td>− ${esc(t('capital'))}</td><td class="amt-ex">${money(-expSum(list))}</td></tr>
     <tr class="sum"><td>${esc(t('netAfterCap'))}</td><td class="${net - expSum(list) < 0 ? 'amt-ex' : 'amt-in'}">${money(net - expSum(list))}</td></tr></tbody></table></div>` : '';
 function firstEntryDate() {
   let first = today();
