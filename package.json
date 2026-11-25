@@ -2,13 +2,16 @@
   "name": "labour-attendance",
   "private": true,
   "type": "commonjs",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "build": "node scripts/version.mjs",
     "prestart": "node scripts/version.mjs",
     "start": "node server.js"
   },
   "dependencies": {
-    "@netlify/blobs": "^8.1.0",
+    "@netlify/blobs": "^11.1.11",
     "web-push": "^4.0.0"
   }
 }
