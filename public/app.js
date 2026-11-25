@@ -57,6 +57,8 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 10));
 const pad = n => String(n).padStart(2, '0');
 const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+// every date shown to people is mm/dd/yy; stored values stay yyyy-mm-dd so they sort and compare correctly
+const mdy = s => s ? `${s.slice(5, 7)}/${s.slice(8, 10)}/${s.slice(2, 4)}` : '';
 const addDays = (s, n) => { const d = new Date(s + 'T00:00:00'); d.setDate(d.getDate() + n); return ymd(d); };
 const money = n => (n < 0 ? '−' : '') + '₹' + (Math.round(Math.abs(n) * 100) / 100).toLocaleString('en-IN');
 const factor = s => (s === 'full' ? 1 : s === 'am' || s === 'pm' ? 0.5 : 0);
@@ -292,9 +294,10 @@ function render(soft) {
 
 /* ---------- attendance ---------- */
 const weekday = d => new Date(d + 'T00:00:00').toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { weekday: 'short' });
+const dateInput = (id, value, attrs = '', empty = 'mm/dd/yy') => `<span class="dpick"><span>${esc(value ? mdy(value) : empty)} 📅</span><input type="date" id="${id}" value="${value}" aria-label="${esc(t('date'))}" ${attrs}></span>`;
 const dateBar = () => `<div class="wd"><span>${esc(weekday(date))}${date === today() ? ` · ${esc(t('today'))}` : ''}</span>${date !== today() ? `<button class="todaybtn" data-act="today">${esc(t('today'))}</button>` : ''}</div><div class="date">
     <button class="btn sec" data-act="day" data-v="-1">‹</button>
-    <input type="date" id="date" value="${date}" max="${today()}">
+    ${dateInput('date', date, `max="${today()}"`)}
     <button class="btn sec" data-act="day" data-v="1" ${date >= today() ? 'disabled' : ''}>›</button>
   </div>`;
 // attendance order: daily wage (low to high, monthly-salary people last), then female before male, then name.
@@ -349,7 +352,7 @@ function drawAttList() {
     <div><b>${present}</b><small>${esc(t('present'))}</small></div>
     <div><b>${dayEq}</b><small>${esc(t('dayEq'))}</small></div>
     <div><b>${money(pay)}</b><small>${esc(t('cost'))}</small></div>
-  </div>` + expLine + (from ? `<p class="mu">↩ ${esc(t('fromPrev'))} ${from}</p>` : '') + (list.length ? list.map(l => {
+  </div>` + expLine + (from ? `<p class="mu">↩ ${esc(t('fromPrev'))} ${mdy(from)}</p>` : '') + (list.length ? list.map(l => {
     const a = attOf(date, l.id), s = a && a.s;
     return `<div class="card">
       <div class="row sp"><div><span class="name g${l.g}">${esc(l.name)}</span></div>
@@ -362,7 +365,7 @@ function drawAttList() {
   }).join('') : `<div class="empty">${esc(all.length ? '' : avail.length ? t('emptyDay') : t('noLabour'))}</div>`) + (ro() ? '' : picker);
 }
 
-const fmtT = u => new Date(u).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+const fmtT = u => `${mdy(istDate.format(new Date(u)))}, ${new Date(u).toLocaleTimeString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ, hour: '2-digit', minute: '2-digit' })}`;
 function lastBy(k) { const r = recs.get(k); return r && r.b ? `<div class="mu" style="margin-top:6px">✎ ${esc(t('lastBy'))} ${esc(r.b)} · ${fmtT(r.u)}</div>` : ''; }
 
 // a labourer with attendance marked in the last 60 days can't be deleted (make inactive instead)
@@ -374,7 +377,7 @@ function deleteBlockedBy(id) {
 }
 function canDelete(id) {
   const last = deleteBlockedBy(id);
-  if (last) alert(t('cannotDel').replace('{date}', last));
+  if (last) alert(t('cannotDel').replace('{date}', mdy(last)));
   return !last;
 }
 
@@ -484,7 +487,7 @@ function expDialog(id, kind) {
   dlg.showModal();
 }
 const expTable = (list, cls = '') => `<table><thead><tr><th>${esc(t('date'))}</th><th>${esc(t('description'))}</th><th>${esc(t('amount'))}</th></tr></thead>
-  <tbody>${list.map(e => `<tr data-act="goexp" data-v="${e.date}"><td>${e.date.slice(5)}</td><td style="text-align:left">${esc(e.desc || '—')}</td><td class="${cls}">${money(e.amt)}</td></tr>`).join('')}</tbody>
+  <tbody>${list.map(e => `<tr data-act="goexp" data-v="${e.date}"><td>${mdy(e.date)}</td><td style="text-align:left">${esc(e.desc || '—')}</td><td class="${cls}">${money(e.amt)}</td></tr>`).join('')}</tbody>
   <tfoot><tr><td colspan="2">${esc(t('total'))}</td><td class="${cls}">${money(expSum(list))}</td></tr></tfoot></table>`;
 
 /* ---------- report ---------- */
@@ -524,8 +527,8 @@ function repView() {
   const exps = expRecs(repFrom, repTo), incs = incRecs(repFrom, repTo), exTot = expSum(exps), inTot = expSum(incs);
   const mdue = monthlyDue(repFrom, repTo), mTot = mdue.reduce((n, x) => n + x.amt, 0), cost = tot.pay + mTot + exTot;
   return toggle + `<div class="card two">
-    <div><label>${esc(t('from'))}</label><input type="date" id="rf" value="${repFrom}" max="${today()}"></div>
-    <div><label>${esc(t('to'))}</label><input type="date" id="rt" value="${repTo}" max="${today()}"></div></div>` +
+    <div><label>${esc(t('from'))}</label>${dateInput('rf', repFrom, `max="${today()}"`)}</div>
+    <div><label>${esc(t('to'))}</label>${dateInput('rt', repTo, `max="${today()}"`)}</div></div>` +
     (rows.length || exps.length || incs.length || mdue.length ? (rows.length ? `<div class="secthead">👷 ${esc(t('wages'))}</div><div class="card"><table>
       <thead><tr><th>${esc(t('name'))}</th><th>${esc(t('fullDays'))}</th><th>${esc(t('halfDays'))}</th><th>${esc(t('pay'))}</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td class="g${r.g}">${esc(r.name)}</td><td>${r.full}</td><td>${r.half}</td><td>${r.monthly ? '—' : money(r.pay)}</td></tr>`).join('')}</tbody>
@@ -569,7 +572,7 @@ function shiftGrid(n) {
   else { const i = (y * 12 + m - 1) * 2 + (a === 16 ? 1 : 0) + n; gridAnchor = ymd(new Date(Math.floor(i / 24), Math.floor((i % 24) / 2), i % 2 ? 16 : 1)); }
 }
 function gridView() {
-  const { y, m, a, b } = gridRange(), days = gridDays();
+  const days = gridDays();
   const ids = new Set();
   for (const d of days) dayMembers(d).forEach(id => ids.add(id));
   const wageClass = l => (l.type === 'monthly' ? 'M' : l.wage);          // people paid the same daily rate form one class
@@ -594,8 +597,7 @@ function gridView() {
     return `${sep}<tr><td class="nm g${l.g}">${esc(l.name)}</td><td><b>${eq}</b></td><td>${l.type === 'monthly' ? '—' : money(pay)}</td>${cells}</tr>`;
   }).join('');
   const loc = lang === 'ta' ? 'ta-IN' : 'en-IN', fd = (d, o) => new Date(d + 'T00:00:00').toLocaleDateString(loc, o);
-  const heading = gridSpan === 'week' ? `${fd(days[0], { day: 'numeric', month: 'short' })} – ${fd(days[6], { day: 'numeric', month: 'short', year: 'numeric' })}`
-    : `${fd(`${y}-${pad(m)}-01`, { month: 'long', year: 'numeric' })} · ${a}–${b}`;
+  const heading = `${mdy(days[0])} – ${mdy(days[days.length - 1])}`;
   const tot = colPay.reduce((p, q) => p + q, 0), exTot = colExp.reduce((p, q) => p + q, 0), inTot = colInc.reduce((p, q) => p + q, 0);
   const mdue = monthlyDue(days[0], days[days.length - 1]), mTot = mdue.reduce((n, x) => n + x.amt, 0);
   const dayHead = days.map(d => `<th class="dh">${gridSpan === 'week' ? `${esc(fd(d, { weekday: 'short' }))}<br>` : ''}${+d.slice(8)}</th>`).join('');
@@ -626,8 +628,8 @@ function exportCSV() {
   const mdue = monthlyDue(repFrom, repTo), mTot = mdue.reduce((n, x) => n + x.amt, 0);
   const lines = [[t('name'), t('gender'), t('fullDays'), t('halfDays'), t('pay')], ...rows.map(r => [r.name, t(r.g), r.full, r.half, r.pay]), [t('wages'), '', '', '', wagesTot],
     ...(mdue.length ? [[], [t('name'), t('monthCol'), t('amount')], ...mdue.map(x => [x.name, x.ym, x.amt]), [t('monthlySalaries'), '', mTot]] : []),
-    [], [t('date'), t('description'), t('amount')], ...exps.map(e => [e.date, e.desc, e.amt]), [t('expenses'), '', expSum(exps)],
-    [], [t('income'), t('description'), t('amount')], ...incs.map(e => [e.date, e.desc, e.amt]), [t('income'), '', expSum(incs)],
+    [], [t('date'), t('description'), t('amount')], ...exps.map(e => [mdy(e.date), e.desc, e.amt]), [t('expenses'), '', expSum(exps)],
+    [], [t('income'), t('description'), t('amount')], ...incs.map(e => [mdy(e.date), e.desc, e.amt]), [t('income'), '', expSum(incs)],
     [], [t('grandTotal'), '', '', '', wagesTot + mTot + expSum(exps)], [t('net'), '', '', '', expSum(incs) - wagesTot - mTot - expSum(exps)]]
     .map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
   const a = document.createElement('a');
@@ -686,13 +688,13 @@ function fmtChg(c) {
   return '(' + c.map(([k, a, b]) => `${esc(t(FIELD[k] || k))}: ${esc(val(k, a))} → ${esc(val(k, b))}`).join(', ') + ')';
 }
 function logText(o) {
-  const v = { who: esc(o.who), s: esc(t(o.s)), date: o.date, rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: fmtChg(o.chg), desc: esc(o.desc || ''), amt: o.amt == null ? '' : money(o.amt) };
+  const v = { who: esc(o.who), s: esc(t(o.s)), date: mdy(o.date), rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: fmtChg(o.chg), desc: esc(o.desc || ''), amt: o.amt == null ? '' : money(o.amt) };
   return (t('log_' + o.act)).replace(/\{(\w+)\}/g, (m, k) => v[k] ?? '');
 }
 function logView() {
   const items = live('G:').filter(r => !logDate || r.d.date === logDate).sort((a, b) => b.u - a.u).slice(0, 300);
   return `<div class="row" style="margin-bottom:10px"><button class="btn sec sm" data-act="tab" data-v="set">‹ ${esc(t('back'))}</button>
-    <input type="date" id="logdate" value="${logDate}" class="grow"><button class="btn sec sm" data-act="logall">${esc(t('allDates'))}</button></div>` +
+    ${dateInput('logdate', logDate)}<button class="btn sec sm" data-act="logall">${esc(t('allDates'))}</button></div>` +
     (items.length ? items.map(r => `<div class="card"><div>${logText(r.d)}</div><div class="mu">${esc(r.b)} · ${fmtT(r.u)}</div></div>`).join('') : `<div class="empty">${esc(t('noLog'))}</div>`);
 }
 
@@ -701,7 +703,7 @@ let ver = null;
 async function loadVersion() {
   try { const r = await fetch('version.json'); if (r.ok) { ver = await r.json(); if (tab === 'set') render(true); } } catch {}
 }
-const fmtD = d => d ? new Date(d).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ, day: '2-digit', month: 'short', year: 'numeric' }) : '';
+const fmtD = d => d ? mdy(istDate.format(new Date(d))) : '';
 function verCard() {
   if (!ver) return '';
   return `<div class="card"><div class="row sp"><b>${esc(t('version'))}</b><span><code>${esc(ver.short || '—')}</code>${ver.dirty ? ` <span class="mu">+ ${esc(t('localChanges'))}</span>` : ''}</span></div>
@@ -748,7 +750,7 @@ function setView() {
     <div class="card" id="synccard"><label style="margin-top:0">${esc(t('server'))}</label><input id="srv" value="${esc(meta.server)}" placeholder="https://example.com">
       <label>${esc(t('key'))}</label><input id="key" type="password" value="${esc(meta.key)}">
       ${syncErr && syncMsg ? `<p style="color:var(--re);font-size:14px">⚠ ${esc(syncMsg)}</p>` : ''}
-      <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? new Date(meta.lastSync).toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-IN', { timeZone: TZ }) : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
+      <p class="mu">${esc(t('lastSync'))}: ${meta.lastSync ? fmtT(meta.lastSync) : esc(t('never'))} · ${pendingCount()} ${esc(t('pending'))}</p>
       <button class="btn full" data-act="sync">⟳ ${esc(t('syncNow'))}</button></div>
     ${verCard()}
     <p class="mu">${esc(t('installHint'))}</p>`;
@@ -815,6 +817,8 @@ document.addEventListener('click', e => {
 document.addEventListener('input', e => {
   if (e.target.id === 'q') { q = e.target.value; drawAttList(); }
 });
+// open the calendar on a tap or click anywhere on a date field (desktop browsers don't do this by themselves)
+document.addEventListener('click', e => { if (e.target.matches('input[type=date]')) try { e.target.showPicker(); } catch {} });
 document.addEventListener('change', e => {
   const el = e.target;
   if (el.id === 'date' && el.value) { if (el.value > today()) { toast(t('noFuture')); date = today(); } else date = el.value; render(); }

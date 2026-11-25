@@ -68,7 +68,11 @@ label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}
 .todaybtn{border:1.5px solid var(--g);background:var(--gl);color:var(--g);border-radius:99px;padding:3px 14px;font:inherit;font-size:14px;font-weight:700}
 .date{display:flex;gap:6px;margin-bottom:10px}
 .date button{width:46px}
-.date input{text-align:center;font-weight:600}
+.date .dpick>span{font-weight:600}
+.dpick{position:relative;display:block;flex:1;min-width:0}
+.dpick>span{display:block;padding:11px;border:1px solid var(--bd);border-radius:10px;background:#fff;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dpick input{position:absolute;inset:0;height:100%;opacity:0;cursor:pointer}
+.dpick:focus-within>span{outline:2px solid var(--g)}
 .seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
 .seg button{border:1.5px solid var(--bd);background:#fff;border-radius:10px;padding:11px 2px;font:inherit;font-size:14px;color:var(--tx)}
 .seg button.on.full{background:var(--g);border-color:var(--g);color:#fff}
