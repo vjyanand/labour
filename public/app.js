@@ -14,7 +14,7 @@ const I18N = {
     updatedBy: 'Updated by', server: 'Server address (blank = this site)', key: 'Sync key (if set on server)', syncFail: 'Sync failed, will retry', syncErrShort: 'Sync failed',
     saved: 'Saved', rateFor: 'Full-day wage for this person today (leave blank to use the normal wage)', gender: 'Gender', pay: 'Pay', normal: 'normal', inactive: 'inactive',
     noRecords: 'No attendance in this period', installHint: 'Tip: use "Add to Home screen" to install the app.',
-    lastSync: 'Last sync', dataVer: 'Data version', never: 'never', dayEq: 'Day-equivalents',
+    lastSync: 'Last sync', dataVer: 'Data version', capital: 'Capital / own money', capHint: 'Capital / own money (keep out of monthly tally)', overall: 'Overall', netAfterCap: 'Net after capital', allTime: 'All time', never: 'never', dayEq: 'Day-equivalents',
     addPerson: '+ Add labourer to this day', emptyDay: 'No one is listed for this day. Pick labourers from the dropdown below.', fromPrev: 'List copied from', remove: 'Remove', viewOnly: 'View only', viewOnlyHint: 'You can see everything, but this phone cannot change anything.', payType: 'Pay type', payDaily: 'Daily wage', payMonthly: 'Monthly salary', monthlySalary: 'Monthly salary (fixed)', monthlyTag: 'Monthly', perMonth: '/ month', monthlySalaries: 'Monthly salaries', monthCol: 'Month', tally: 'Tally', noFuture: 'Future dates are not allowed', weekSpan: 'Week', markMode: 'Mark', listMode: 'List', nobodyYet: 'No one is marked present yet', accounts: 'Accounts', expense: 'Expense', income: 'Income', addInc: 'Add income', banana: 'Banana', cardamom: 'Cardamom', net: 'Net (income − cost)', expenses: 'Expenses', description: 'Description', amount: 'Amount', petrol: 'Petrol', food: 'Food', travel: 'Travel',
     addExp: 'Add expense', noExp: 'No entries for this day', confirmExp: 'Delete this entry?', grandTotal: 'Total cost', date: 'Date',
     log_inc_add: 'Income added: {desc} {amt} ({date})', log_inc_edit: 'Income edited: {desc} {amt} ({date})', log_inc_del: 'Income deleted: {desc} {amt} ({date})', log_exp_add: 'Expense added: {desc} {amt} ({date})', log_exp_edit: 'Expense edited: {desc} {amt} ({date})', log_exp_del: 'Expense deleted: {desc} {amt} ({date})', cannotDel: 'Cannot delete: attendance was marked for this person on {date} (within the last 60 days). Make them inactive instead.', version: 'App version', changeLog: 'Change log', built: 'Built', localChanges: 'local changes', remindTitle: 'Daily reminders', remindHint: 'Push notifications asking you to mark attendance. Sent only when there is attendance still to mark.',
@@ -31,7 +31,7 @@ const I18N = {
     M: 'ஆண்', F: 'பெண்', name: 'பெயர்', phone: 'தொலைபேசி', wage: 'தினக்கூலி (முழு நாள்)', add: 'தொழிலாளர் சேர்', edit: 'திருத்து',
     save: 'சேமி', cancel: 'ரத்து', del: 'நீக்கு', search: 'தேடு…', today: 'இன்று', present: 'வந்தவர்', total: 'மொத்தம்',
     wages: 'கூலி', days: 'நாட்கள்', from: 'முதல்', to: 'வரை', export: 'CSV பதிவிறக்கு', language: 'மொழி',
-    syncNow: 'இப்போது ஒத்திசை', dataVer: 'தரவு பதிப்பு', online: 'இணைப்பில்', offline: 'இணைப்பு இல்லை', pending: 'நிலுவை', synced: 'ஒத்திசைந்தது',
+    syncNow: 'இப்போது ஒத்திசை', dataVer: 'தரவு பதிப்பு', capital: 'முதலீடு / சொந்தப் பணம்', capHint: 'முதலீடு / சொந்தப் பணம் (மாதக் கணக்கில் சேர்க்காது)', overall: 'ஒட்டுமொத்தம்', netAfterCap: 'முதலீட்டுக்குப் பின் நிகரம்', allTime: 'அனைத்துக் காலம்', online: 'இணைப்பில்', offline: 'இணைப்பு இல்லை', pending: 'நிலுவை', synced: 'ஒத்திசைந்தது',
     dayRate: 'இன்றைய கூலி மாற்றம்', dayRateHint: 'இந்த நாளுக்கு ஆண்/பெண் அனைவருக்கும் வேறு முழு நாள் கூலி அமைக்கவும். வழக்கமான கூலிக்கு காலியாக விடவும்.',
     active: 'தற்போது பணியில்', noLabour: 'தொழிலாளர் இல்லை. + அழுத்தி சேர்க்கவும்.', markAll: 'அனைவருக்கும் முழு நாள்',
     halfDays: 'அரை', fullDays: 'முழு', confirmDel: 'இந்த தொழிலாளரை நீக்கவா? முந்தைய வருகை பதிவுகள் இருக்கும்.',
@@ -353,7 +353,7 @@ function drawAttList() {
   const list = all.filter(l => !q || l.name.toLowerCase().includes(q.toLowerCase())).sort(byPaySexName);
   let present = 0, pay = 0, dayEq = 0;
   for (const l of all) { const a = attOf(date, l.id); if (a) { const f = factor(a.s); if (f) present++; dayEq += f; pay += f * a.rate; } }
-  const exAmt = expSum(expOf(date)), inAmt = expSum(incOf(date));
+  const exAmt = expSum(running(expOf(date))), inAmt = expSum(incOf(date));
   const expLine = exAmt || inAmt ? `<p class="mu">${exAmt ? `🧾 ${esc(t('expenses'))} ${money(exAmt)} · ${esc(t('grandTotal'))} ${money(pay + exAmt)}` : ''}${exAmt && inAmt ? '<br>' : ''}${inAmt ? `💰 ${esc(t('income'))} ${money(inAmt)} · ${esc(t('net'))} ${money(inAmt - pay - exAmt)}` : ''}</p>` : '';
   const inList = new Set(ids);
   const avail = labourers().filter(l => l.active !== false && !inList.has(l.id)).sort((a, b) => a.name.localeCompare(b.name));
@@ -449,11 +449,15 @@ function labDialog(id) {
 }
 
 /* ---------- money: expenses E:<date>:<id> and income I:<date>:<id>, both {date, desc, amt} ---------- */
+// an expense with cap:1 is capital / the owner's own money: left out of the day and period tallies, shown on its own
 const entRecs = (p, from, to) => live(p).filter(r => r.d.date >= from && r.d.date <= to)
   .map(r => ({ id: r.k.split(':')[2], kind: p[0], ...r.d, u: r.u })).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.u - b.u));
 const expRecs = (from, to) => entRecs('E:', from, to), incRecs = (from, to) => entRecs('I:', from, to);
 const expOf = d => expRecs(d, d), incOf = d => incRecs(d, d);
 const expSum = list => list.reduce((s, e) => s + e.amt, 0);
+const running = list => list.filter(e => !e.cap), capital = list => list.filter(e => e.cap);
+const capTag = e => (e.cap ? '🏦 ' : '');
+const capCheck = (attrs, on) => `<label class="row" style="color:var(--tx);font-size:16px"><input type="checkbox" ${attrs} style="width:auto" ${on ? 'checked' : ''}> 🏦 ${esc(t('capHint'))}</label>`;
 const dayWages = d => live(`A:${d}:`).reduce((s, r) => s + factor(r.d.s) * r.d.rate, 0);
 let acctKind = 'E';
 function expView() {
@@ -465,39 +469,43 @@ function expView() {
     <div class="card"><div class="chips">${chips}</div>
     <label>${esc(t('description'))}</label><input id="xdesc" maxlength="120" placeholder="${esc(t('description'))}">
     <label>${esc(t('amount'))}</label><input id="xamt" type="number" inputmode="decimal" min="0" placeholder="₹">
+    ${inc ? '' : capCheck('id="xcap"', false)}
     <button class="btn full" style="margin-top:12px" data-act="addexp">${esc(t(inc ? 'addInc' : 'addExp'))}</button></div><div id="exp-list"></div>`;
 }
 function drawExpList() {
   const el = $('#exp-list'); if (!el) return;
   const ex = expOf(date), inc = incOf(date), list = [...ex, ...inc].sort((a, b) => a.u - b.u);
-  const exT = expSum(ex), inT = expSum(inc), w = dayWages(date);
+  const exT = expSum(running(ex)), capT = expSum(capital(ex)), inT = expSum(inc), w = dayWages(date);
   el.innerHTML = list.length ? list.map(e => `<div class="card row sp" ${ro() ? '' : `data-act="editexp" data-id="${e.id}" data-k="${e.kind}"`}>
-      <div><div class="name" style="font-size:16px">${esc(e.desc || t(e.kind === 'I' ? 'income' : 'expense'))}</div>${lastBy(`${e.kind}:${date}:${e.id}`)}</div>
+      <div><div class="name" style="font-size:16px">${capTag(e)}${esc(e.desc || t(e.kind === 'I' ? 'income' : 'expense'))}</div>${lastBy(`${e.kind}:${date}:${e.id}`)}</div>
       <b class="${e.kind === 'I' ? 'amt-in' : 'amt-ex'}">${e.kind === 'I' ? '+' : '−'}${money(e.amt)}</b></div>`).join('') +
     `<div class="card"><table><tbody>
       <tr><td>${esc(t('income'))}</td><td class="amt-in">${money(inT)}</td></tr><tr><td>${esc(t('expenses'))}</td><td>${money(exT)}</td></tr>
       <tr><td>${esc(t('wages'))}</td><td>${money(w)}</td></tr></tbody>
-      <tfoot><tr><td>${esc(t('net'))}</td><td class="${inT - exT - w < 0 ? 'amt-ex' : 'amt-in'}">${money(inT - exT - w)}</td></tr></tfoot></table></div>` : `<div class="empty">${esc(t('noExp'))}</div>`;
+      <tfoot><tr><td>${esc(t('net'))}</td><td class="${inT - exT - w < 0 ? 'amt-ex' : 'amt-in'}">${money(inT - exT - w)}</td></tr></tfoot></table>
+      ${capT ? `<p class="mu">🏦 ${esc(t('capital'))}: ${money(capT)}</p>` : ''}</div>` : `<div class="empty">${esc(t('noExp'))}</div>`;
 }
 function addExpense() {
-  const desc = $('#xdesc').value.trim(), amt = +$('#xamt').value, k = acctKind;
+  const desc = $('#xdesc').value.trim(), amt = +$('#xamt').value, k = acctKind, flag = k === 'E' && $('#xcap').checked ? { cap: 1 } : {};
   if (!(amt > 0)) { toast(t('amount') + ' ?'); $('#xamt').focus(); return; }
-  put(`${k}:${date}:${uid()}`, { date, desc, amt }); audit(k === 'I' ? 'inc_add' : 'exp_add', { date, desc, amt });
-  $('#xdesc').value = ''; $('#xamt').value = ''; drawExpList(); toast(t('saved'));
+  put(`${k}:${date}:${uid()}`, { date, desc, amt, ...flag }); audit(k === 'I' ? 'inc_add' : 'exp_add', { date, desc, amt, ...flag });
+  $('#xdesc').value = ''; $('#xamt').value = ''; if ($('#xcap')) $('#xcap').checked = false; drawExpList(); toast(t('saved'));
 }
 function expDialog(id, kind) {
   const k = `${kind}:${date}:${id}`, e = recs.get(k).d, dlg = $('#dlg'), tag = kind === 'I' ? 'inc' : 'exp';
-  dlg.innerHTML = `<form method="dialog" id="expform"><h2>${esc(t(kind === 'I' ? 'income' : 'expense'))} · ${date}</h2>
+  dlg.innerHTML = `<form method="dialog" id="expform"><h2>${esc(t(kind === 'I' ? 'income' : 'expense'))} · ${dmy(date)}</h2>
     <label>${esc(t('description'))}</label><input name="desc" maxlength="120" value="${esc(e.desc)}">
     <label>${esc(t('amount'))}</label><input name="amt" type="number" inputmode="decimal" min="0" required value="${e.amt}">
+    ${kind === 'E' ? capCheck('name="cap"', e.cap) : ''}
     <div class="row" style="margin-top:14px"><button type="button" class="btn dng" id="exdel">${esc(t('del'))}</button><span class="grow"></span>
     <button type="button" class="btn sec" id="excancel">${esc(t('cancel'))}</button><button class="btn">${esc(t('save'))}</button></div></form>`;
   $('#excancel').onclick = () => dlg.close();
-  $('#exdel').onclick = () => { if (!confirm(t('confirmExp'))) return; put(k, e, 1); audit(tag + '_del', { date, desc: e.desc, amt: e.amt }); dlg.close(); drawExpList(); };
+  $('#exdel').onclick = () => { if (!confirm(t('confirmExp'))) return; put(k, e, 1); audit(tag + '_del', { date, desc: e.desc, amt: e.amt, ...(e.cap ? { cap: 1 } : {}) }); dlg.close(); drawExpList(); };
   $('#expform').onsubmit = ev => {
     const f = new FormData(ev.target), amt = +f.get('amt'), desc = f.get('desc').trim();
     if (!(amt > 0)) return ev.preventDefault();
-    put(k, { date, desc, amt }); audit(tag + '_edit', { date, desc, amt }); drawExpList(); toast(t('saved'));
+    const flag = f.get('cap') ? { cap: 1 } : {};
+    put(k, { date, desc, amt, ...flag }); audit(tag + '_edit', { date, desc, amt, ...flag }); drawExpList(); toast(t('saved'));
   };
   dlg.showModal();
 }
@@ -506,6 +514,16 @@ const expTable = (list, cls = '') => `<table><thead><tr><th>${esc(t('date'))}</t
   <tfoot><tr><td colspan="2">${esc(t('total'))}</td><td class="${cls}">${money(expSum(list))}</td></tr></tfoot></table>`;
 
 /* ---------- report ---------- */
+// the broad picture: capital / own-money spending listed after the tally, and what is left once it is counted
+const capSection = (list, net) => list.length ? `<div class="secthead">🏦 ${esc(t('capital'))}</div><div class="card">${expTable(list)}</div>
+  <div class="secthead">🌍 ${esc(t('overall'))}</div><div class="card"><table><tbody>
+    <tr><td>${esc(t('net'))}</td><td>${money(net)}</td></tr><tr><td>${esc(t('capital'))}</td><td>${money(expSum(list))}</td></tr>
+    <tr class="sum"><td>${esc(t('netAfterCap'))}</td><td class="${net - expSum(list) < 0 ? 'amt-ex' : 'amt-in'}">${money(net - expSum(list))}</td></tr></tbody></table></div>` : '';
+function firstEntryDate() {
+  let first = today();
+  for (const r of recs.values()) if (!r.del && 'AEI'.includes(r.k[0]) && r.d.date < first) first = r.d.date;
+  return first;
+}
 function reportRows() {
   const by = {};
   for (const r of live('A:')) {
@@ -539,12 +557,13 @@ function repView() {
   const toggle = `<div class="gsel" style="margin-bottom:10px"><button class="${repMode === 'sum' ? 'on' : ''}" data-act="repmode" data-v="sum">${esc(t('summary'))}</button><button class="${repMode === 'grid' ? 'on' : ''}" data-act="repmode" data-v="grid">${esc(t('grid'))}</button></div>`;
   if (repMode === 'grid') return toggle + gridView();
   const rows = reportRows(), tot = rows.reduce((s, r) => ({ full: s.full + r.full, half: s.half + r.half, pay: s.pay + r.pay }), { full: 0, half: 0, pay: 0 });
-  const exps = expRecs(repFrom, repTo), incs = incRecs(repFrom, repTo), exTot = expSum(exps), inTot = expSum(incs);
+  const all = expRecs(repFrom, repTo), exps = running(all), caps = capital(all), incs = incRecs(repFrom, repTo), exTot = expSum(exps), inTot = expSum(incs);
   const mdue = monthlyDue(repFrom, repTo), mTot = mdue.reduce((n, x) => n + x.amt, 0), cost = tot.pay + mTot + exTot;
   return toggle + `<div class="card two">
     <div><label>${esc(t('from'))}</label>${dateInput('rf', repFrom, `max="${today()}"`)}</div>
-    <div><label>${esc(t('to'))}</label>${dateInput('rt', repTo, `max="${today()}"`)}</div></div>` +
-    (rows.length || exps.length || incs.length || mdue.length ? (rows.length ? `<div class="secthead">👷 ${esc(t('wages'))}</div><div class="card"><table>
+    <div><label>${esc(t('to'))}</label>${dateInput('rt', repTo, `max="${today()}"`)}</div></div>
+    <button class="btn sec full" style="margin-bottom:10px" data-act="alltime">${esc(t('allTime'))}</button>` +
+    (rows.length || all.length || incs.length || mdue.length ? (rows.length ? `<div class="secthead">👷 ${esc(t('wages'))}</div><div class="card"><table>
       <thead><tr><th>${esc(t('name'))}</th><th>${esc(t('fullDays'))}</th><th>${esc(t('halfDays'))}</th><th>${esc(t('pay'))}</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td class="g${r.g}">${esc(r.name)}</td><td>${r.full}</td><td>${r.half}</td><td>${r.monthly ? '—' : money(r.pay)}</td></tr>`).join('')}</tbody>
       <tfoot><tr><td>${esc(t('total'))}</td><td>${tot.full}</td><td>${tot.half}</td><td>${money(tot.pay)}</td></tr></tfoot></table></div>` : '') +
@@ -556,7 +575,7 @@ function repView() {
         <tr class="sum"><td>${esc(t('grandTotal'))}</td><td>${money(cost)}</td></tr>
         <tr><td>${esc(t('income'))}</td><td class="amt-in">${money(inTot)}</td></tr>
         <tr class="sum"><td>${esc(t('net'))}</td><td class="${inTot - cost < 0 ? 'amt-ex' : 'amt-in'}">${money(inTot - cost)}</td></tr>
-        </tbody></table></div>
+        </tbody></table></div>${capSection(caps, inTot - cost)}
       <button class="btn sec full" data-act="csv">⬇ ${esc(t('export'))}</button>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 let repMode = 'sum', gridSpan = '15', gridAnchor = ymd(new Date());
@@ -595,7 +614,7 @@ function gridView() {
   const rows = [...ids].map(labById).filter(Boolean).sort((p, q) => rank(p) - rank(q) || p.name.localeCompare(q.name));
   const classes = new Set(rows.map(wageClass));
   const colPay = days.map(() => 0);
-  const exps = expRecs(days[0], days[days.length - 1]), colExp = days.map(d => expSum(exps.filter(e => e.date === d)));
+  const all = expRecs(days[0], days[days.length - 1]), exps = running(all), caps = capital(all), colExp = days.map(d => expSum(exps.filter(e => e.date === d)));
   const incs = incRecs(days[0], days[days.length - 1]), colInc = days.map(d => expSum(incs.filter(e => e.date === d)));
   const SYM = { full: '✓', am: '◐', pm: '◑', abs: '✗' };
   let lastClass = null;
@@ -619,7 +638,7 @@ function gridView() {
   const small = (arr, act) => arr.map((p, i) => `<td class="c" style="font-size:10px"${act ? ` data-act="goexp" data-v="${days[i]}"` : ''}>${p ? (p < 0 ? '−' : '') + Math.abs(Math.round(p)) : ''}</td>`).join('');
   return `<div class="row" style="margin-bottom:10px"><div class="gsel three grow"><button class="${gridSpan === 'week' ? 'on' : ''}" data-act="span" data-v="week">${esc(t('weekSpan'))}</button><button class="${gridSpan === '15' ? 'on' : ''}" data-act="span" data-v="15">${esc(t('span15'))}</button><button class="${gridSpan === 'month' ? 'on' : ''}" data-act="span" data-v="month">${esc(t('spanMonth'))}</button></div></div>
   <div class="date"><button class="btn sec" data-act="shift" data-v="-1">‹</button><div class="grow card" style="margin:0;text-align:center;font-weight:600">${esc(heading)}</div><button class="btn sec" data-act="shift" data-v="1">›</button></div>` +
-  (rows.length || exps.length || incs.length || mdue.length ? `
+  (rows.length || all.length || incs.length || mdue.length ? `
     <div class="secthead">👷 ${esc(t('wages'))}</div>
     ${rows.length ? `<div class="gridwrap"><table class="grid"><thead><tr><th class="nm">${esc(t('name'))}</th><th>${esc(t('days'))}</th><th>${esc(t('pay'))}</th>${dayHead}</tr></thead>
       <tbody>${body}</tbody>
@@ -636,16 +655,18 @@ function gridView() {
       <tr class="sum"><td class="nm">${esc(t('grandTotal'))}</td><td>${money(tot + mTot + exTot)}</td>${small(colPay.map((p, i) => p + colExp[i]))}</tr>
       <tr><td class="nm">${esc(t('income'))}</td><td class="amt-in">${money(inTot)}</td>${small(colInc, true)}</tr>
       <tr class="sum"><td class="nm">${esc(t('net'))}</td><td class="${inTot - tot - mTot - exTot < 0 ? 'amt-ex' : 'amt-in'}">${money(inTot - tot - mTot - exTot)}</td>${small(colPay.map((p, i) => colInc[i] - p - colExp[i]))}</tr>
-    </tbody></table></div>` : `<div class="empty">${esc(t('noRecords'))}</div>`);
+    </tbody></table></div>${capSection(caps, inTot - tot - mTot - exTot)}` : `<div class="empty">${esc(t('noRecords'))}</div>`);
 }
 function exportCSV() {
-  const rows = reportRows(), exps = expRecs(repFrom, repTo), incs = incRecs(repFrom, repTo), wagesTot = rows.reduce((s, r) => s + r.pay, 0);
+  const rows = reportRows(), all = expRecs(repFrom, repTo), exps = running(all), caps = capital(all), incs = incRecs(repFrom, repTo), wagesTot = rows.reduce((s, r) => s + r.pay, 0);
   const mdue = monthlyDue(repFrom, repTo), mTot = mdue.reduce((n, x) => n + x.amt, 0);
   const lines = [[t('name'), t('gender'), t('fullDays'), t('halfDays'), t('pay')], ...rows.map(r => [r.name, t(r.g), r.full, r.half, r.pay]), [t('wages'), '', '', '', wagesTot],
     ...(mdue.length ? [[], [t('name'), t('monthCol'), t('amount')], ...mdue.map(x => [x.name, x.ym, x.amt]), [t('monthlySalaries'), '', mTot]] : []),
     [], [t('date'), t('description'), t('amount')], ...exps.map(e => [dmy(e.date), e.desc, e.amt]), [t('expenses'), '', expSum(exps)],
     [], [t('income'), t('description'), t('amount')], ...incs.map(e => [dmy(e.date), e.desc, e.amt]), [t('income'), '', expSum(incs)],
-    [], [t('grandTotal'), '', '', '', wagesTot + mTot + expSum(exps)], [t('net'), '', '', '', expSum(incs) - wagesTot - mTot - expSum(exps)]]
+    [], [t('grandTotal'), '', '', '', wagesTot + mTot + expSum(exps)], [t('net'), '', '', '', expSum(incs) - wagesTot - mTot - expSum(exps)],
+    ...(caps.length ? [[], [t('capital'), t('description'), t('amount')], ...caps.map(e => [dmy(e.date), e.desc, e.amt]), [t('capital'), '', expSum(caps)],
+      [t('netAfterCap'), '', '', '', expSum(incs) - wagesTot - mTot - expSum(all)]] : [])]
     .map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], { type: 'text/csv' }));
@@ -703,7 +724,7 @@ function fmtChg(c) {
   return '(' + c.map(([k, a, b]) => `${esc(t(FIELD[k] || k))}: ${esc(val(k, a))} → ${esc(val(k, b))}`).join(', ') + ')';
 }
 function logText(o) {
-  const v = { who: esc(o.who), s: esc(t(o.s)), date: dmy(o.date), rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: fmtChg(o.chg), desc: esc(o.desc || ''), amt: o.amt == null ? '' : money(o.amt) };
+  const v = { who: esc(o.who), s: esc(t(o.s)), date: dmy(o.date), rate: o.rate == null ? esc(t('normal')) : money(o.rate), g: esc(t(o.g || '')), chg: fmtChg(o.chg), desc: capTag(o) + esc(o.desc || ''), amt: o.amt == null ? '' : money(o.amt) };
   return (t('log_' + o.act)).replace(/\{(\w+)\}/g, (m, k) => v[k] ?? '');
 }
 function logView() {
@@ -801,6 +822,7 @@ document.addEventListener('click', e => {
   else if (act === 'chip') { $('#xdesc').value = t(v); $('#xamt').focus(); }
   else if (act === 'goexp') { date = v; tab = 'exp'; render(); }
   else if (act === 'repmode') { repMode = v; render(); }
+  else if (act === 'alltime') { repFrom = firstEntryDate().slice(0, 8) + '01'; repTo = today(); render(); } // from the 1st, so that month's salaries count
   else if (act === 'span') { gridSpan = v; render(); }
   else if (act === 'shift') { gridShift(+v); render(); }
   else if (act === 'goday') { date = v; tab = 'att'; render(); }
