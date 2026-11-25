@@ -208,11 +208,14 @@ const pendingCount = () => (ro() ? 0 : [...recs.values()].filter(r => r.dirty).l
 function scheduleSync(ms = 1500) { updateSyncBtn(); clearTimeout(syncTimer); syncTimer = setTimeout(sync, ms); }
 // `again`: something changed while a sync was running. `loading`: still downloading the first copy, page by page.
 // `connection` goes up when the server or key changes, so a reply from the old one is thrown away.
-let again = false, loading = false, connection = 0;
+// `busy`: show the syncing icon. Quiet background checks that finish quickly leave the button as it is.
+let again = false, loading = false, busy = false, connection = 0;
 async function sync(manual) {
   if (syncing) { again = true; return; }
   if (!navigator.onLine) { if (manual === true) toast(t('offline')); return; }
+  busy = manual === true || syncErr || !meta.lastSync || pendingCount() > 0;
   syncing = true; again = false; syncErr = false; updateSyncBtn();
+  const slow = setTimeout(() => { busy = true; updateSyncBtn(); }, 1000);
   const abort = new AbortController(), timeout = setTimeout(() => abort.abort(), 30000); // a hung request must not block later syncs
   const url = (meta.server || '').replace(/\/$/, '') + '/api/sync', conn = connection;
   try {
@@ -252,7 +255,7 @@ async function sync(manual) {
     syncErr = true; syncMsg = (e instanceof TypeError || e.name === 'AbortError' ? 'cannot reach server' : e.message) + ' — ' + url;
     if (manual === true) toast(t('syncFail') + ' · ' + syncMsg.split(' — ')[0]);
   } finally {
-    clearTimeout(timeout); syncing = false;
+    clearTimeout(timeout); clearTimeout(slow); syncing = false;
     if (again && !syncErr) scheduleSync(200); // after a failure the regular timer retries
     updateSyncBtn(); if (tab === 'set' && !document.querySelector('dialog[open]')) render(true);
   }
@@ -269,11 +272,23 @@ function newConnection() {
   connection++; saveMeta('mode', 'probe');
   startOver('').catch(() => {}).then(() => sync(true));
 }
+// header button: one cloud icon per state, with the count of unsent changes
+const CLOUD = '<path d="M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.4 9.1 4.75 4.75 0 0 0 7 18.5Z"/>';
+const SYNC_ICON = {
+  ok: CLOUD + '<path d="M9 13.5l2.2 2.2 4-4"/>',
+  busy: '<path d="M20 11a8 8 0 0 0-14.5-4M4 4v4h4M4 13a8 8 0 0 0 14.5 4M20 20v-4h-4"/>',
+  pend: CLOUD + '<path d="M12 16v-5M9.7 13l2.3-2.3 2.3 2.3"/>',
+  off: CLOUD + '<path d="M3.5 3.5l17 17"/>',
+  bad: CLOUD + '<path d="M12 10.5v3M12 15.8h.01"/>',
+};
 function updateSyncBtn() {
   const b = $('#syncbtn'), p = pendingCount();
-  b.className = 'sync ' + (!navigator.onLine ? 'off' : syncErr ? 'off' : p ? 'pend' : '');
-  b.textContent = !navigator.onLine ? '⛔ ' + t('offline') + (p ? ` · ${p}` : '')
-    : syncing ? '⟳ …' : syncErr ? '⚠ ' + t('syncErrShort') + (p ? ` · ${p}` : '') : p ? `⟳ ${p} ${t('pending')}` : '✓ ' + t('synced');
+  const state = !navigator.onLine ? 'off' : syncing && busy ? 'busy' : syncErr ? 'bad' : p ? 'pend' : 'ok';
+  const label = { off: t('offline'), busy: t('syncNow'), bad: t('syncErrShort'), pend: `${p} ${t('pending')}`, ok: t('synced') }[state];
+  const count = p && state !== 'ok' && state !== 'busy' ? String(p) : '';
+  b.className = 'sync ' + state; b.title = label; b.setAttribute('aria-label', label);
+  const html = `<svg viewBox="0 0 24 24" aria-hidden="true">${SYNC_ICON[state]}</svg>${count ? `<b>${count}</b>` : ''}`;
+  if (b.dataset.shown !== html) { b.dataset.shown = html; b.innerHTML = html; } // unchanged: leave the spin running
 }
 addEventListener('online', () => { updateSyncBtn(); sync(); });
 addEventListener('offline', updateSyncBtn);
@@ -785,14 +800,14 @@ const HELP = {
     'Open <b>Settings</b> (⚙️, bottom right).',
     'Type your name in the <b>Your name</b> box. It is saved with every change you make, so everyone can see who did what. You will also be asked for it the first time you mark attendance or change anything.',
     'In the <b>Sync key</b> box, type the key the farm owner gave you. Leave <b>Server address</b> empty.',
-    'Tap <b>Sync now</b>. The top button should say <b>✓ Synced</b>. If it says <b>⚠ Sync failed</b>, read the reason shown under the box: <i>HTTP 401</i> means the key is wrong; <i>cannot reach server</i> means check your internet.',
+    'Tap <b>Sync now</b>. The top button should turn <b>green with a ✓ cloud</b>. If it turns <b>red</b>, read the reason shown under the box: <i>HTTP 401</i> means the key is wrong; <i>cannot reach server</i> means check your internet.',
     'The app works without internet. Everything is saved on your phone and syncs by itself when the internet comes back.',
     'Tip: you can change the language in Settings → Language.'],
   ta: ['Android-இல் Chrome அல்லது iPhone-இல் Safari-யில் <a href="https://l.iavian.net">https://l.iavian.net</a> திறக்கவும். பிறகு உலாவி மெனுவில் <b>Add to Home screen</b> தேர்ந்தெடுத்து செயலியாக நிறுவவும்.',
     'கீழே வலது பக்கம் உள்ள <b>அமைப்புகள்</b> (⚙️) தொடவும்.',
     '<b>உங்கள் பெயர்</b> பெட்டியில் உங்கள் பெயரை எழுதவும். நீங்கள் செய்யும் ஒவ்வொரு மாற்றத்துடனும் இது சேமிக்கப்படும்; யார் என்ன செய்தார் என்று எல்லோருக்கும் தெரியும். முதல் முறை வருகை பதிவு செய்யும்போதும் பெயர் கேட்கப்படும்.',
     '<b>ஒத்திசைவு விசை</b> பெட்டியில் பண்ணை உரிமையாளர் கொடுத்த விசையை எழுதவும். <b>சர்வர் முகவரி</b> பெட்டியை காலியாக விடவும்.',
-    '<b>இப்போது ஒத்திசை</b> தொடவும். மேலே <b>✓ ஒத்திசைந்தது</b> என்று வர வேண்டும். <b>⚠ ஒத்திசைவு தோல்வி</b> என்றால் பெட்டிக்கு கீழே உள்ள காரணத்தைப் பார்க்கவும்: <i>HTTP 401</i> என்றால் விசை தவறு; <i>cannot reach server</i> என்றால் இணையத்தைச் சரிபார்க்கவும்.',
+    '<b>இப்போது ஒத்திசை</b> தொடவும். மேலே உள்ள பொத்தான் <b>✓ உடன் பச்சை</b> நிறமாக வேண்டும். <b>சிவப்பு</b> நிறமானால் பெட்டிக்கு கீழே உள்ள காரணத்தைப் பார்க்கவும்: <i>HTTP 401</i> என்றால் விசை தவறு; <i>cannot reach server</i> என்றால் இணையத்தைச் சரிபார்க்கவும்.',
     'இணையம் இல்லாமலும் செயலி வேலை செய்யும். பதிவுகள் போனில் சேமிக்கப்பட்டு, இணையம் வந்ததும் தானாக ஒத்திசைக்கப்படும்.',
     'குறிப்பு: மொழியை அமைப்புகள் → மொழி-யில் மாற்றலாம்.'],
 };
