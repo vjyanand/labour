@@ -70,7 +70,7 @@ const t = k => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
 /* ---------- storage (IndexedDB, everything cached in memory) ---------- */
 // record: {k, d:{...}, u:updatedAt, del:0|1, dirty:0|1}
 // keys:  L:<id> labourer | A:<date>:<labourId> attendance | R:<date>:<M|F> day wage override
-let idb; const recs = new Map(); const meta = { mode: 'edit', clockOffset: 0, user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0, syncGen: 0 };
+let idb; const recs = new Map(); const meta = { mode: 'edit', clockOffset: 0, user: '', remind: null, lang: '', since: 0, dbId: '', server: '', key: '', lastSync: 0, syncGen: 0 };
 function openDB() {
   return new Promise((res, rej) => {
     const r = indexedDB.open('labour-db', 1);
@@ -204,14 +204,17 @@ function setDayRate(date, g, val) {
 
 /* ---------- sync ---------- */
 let syncing = false, syncTimer, syncErr = false, syncMsg = '';
-const pendingCount = () => [...recs.values()].filter(r => r.dirty).length;
-function scheduleSync() { updateSyncBtn(); clearTimeout(syncTimer); syncTimer = setTimeout(sync, 1500); }
+const pendingCount = () => (ro() ? 0 : [...recs.values()].filter(r => r.dirty).length);
+function scheduleSync(ms = 1500) { updateSyncBtn(); clearTimeout(syncTimer); syncTimer = setTimeout(sync, ms); }
+// `again`: something changed while a sync was running. `loading`: still downloading the first copy, page by page.
+// `connection` goes up when the server or key changes, so a reply from the old one is thrown away.
+let again = false, loading = false, connection = 0;
 async function sync(manual) {
-  if (syncing) return;
+  if (syncing) { again = true; return; }
   if (!navigator.onLine) { if (manual === true) toast(t('offline')); return; }
-  syncing = true; syncErr = false; updateSyncBtn();
+  syncing = true; again = false; syncErr = false; updateSyncBtn();
   const abort = new AbortController(), timeout = setTimeout(() => abort.abort(), 30000); // a hung request must not block later syncs
-  const url = (meta.server || '').replace(/\/$/, '') + '/api/sync';
+  const url = (meta.server || '').replace(/\/$/, '') + '/api/sync', conn = connection;
   try {
     const queue = meta.mode === 'edit' ? [...recs.values()].filter(r => r.dirty) : [], sent = queue.slice(0, 500), t0 = Date.now();
     const res = await fetch(url, {
@@ -219,25 +222,52 @@ async function sync(manual) {
       headers: { 'Content-Type': 'application/json', ...(meta.key ? { 'x-sync-key': meta.key } : {}) },
       body: JSON.stringify({ since: meta.since, records: sent.map(({ k, d, u, del, b }) => ({ k, d, u, del, b })) }),
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status + (res.status === 404 ? ' (no sync server at this address)' : res.status === 401 ? ' (wrong sync key)' : ''));
-    const out = await res.json().catch(() => { throw new Error('unexpected reply (not the sync server)'); });
-    if (out.now) saveMeta('clockOffset', out.now - Math.round((t0 + Date.now()) / 2));
-    for (const s of out.mode === 'view' ? [] : sent) { const cur = recs.get(s.k); if (cur && cur.u === s.u) { cur.dirty = 0; idbPut('rec', cur); } }
-    const others = new Set(), first = !meta.since; // names of other people whose changes just arrived
-    for (const r of out.records) {
-      const cur = recs.get(r.k);
-      if (!cur || !cur.dirty) { if (!first && r.b && r.b !== meta.user && r.b !== '?') others.add(r.b); const n = { k: r.k, d: r.d, u: r.u, del: r.del, b: r.b, dirty: 0 }; recs.set(r.k, n); idbPut('rec', n); }
+    if (!res.ok) throw new Error('HTTP ' + res.status + (res.status === 404 ? ' (no sync server at this address)' : res.status === 401 ? ' (wrong sync key)' : res.status === 503 ? ' (server busy)' : ''));
+    const out = await res.json().catch(() => null);
+    if (!SyncCore.validReply(out)) throw new Error('unexpected reply (not the sync server)');
+    if (conn !== connection) again = true;
+    else {
+      if (out.now) saveMeta('clockOffset', out.now - Math.round((t0 + Date.now()) / 2));
+      const mode = out.mode === 'view' ? 'view' : 'edit', modeChanged = mode !== meta.mode;
+      if (SyncCore.wasReset(meta, out)) { // the server's data was replaced or rolled back: compare everything again
+        saveMeta('mode', mode);
+        await startOver(out.dbId || '');
+        again = true;
+      } else {
+        const first = !meta.since || loading;
+        const { writes, changed } = SyncCore.applyReply(recs, sent, out);
+        const next = { mode, since: out.seq, dbId: out.dbId || meta.dbId, lastSync: Date.now() };
+        await SyncCore.commit(idb, writes, next, mode === 'view');
+        if (conn === connection) Object.assign(meta, next);
+        loading = first && !!out.more;
+        // more to download, more to upload, or a new connection that has just been allowed to upload
+        if (out.more || queue.length > sent.length || (modeChanged && pendingCount())) again = true;
+        syncMsg = '';
+        if (modeChanged) { chrome(); render(); } else if (changed.length && !document.querySelector('dialog[open]')) render(true);
+        const others = first ? [] : [...new Set(changed.map(r => r.b).filter(b => b && b !== meta.user && b !== '?'))]; // whose changes just arrived
+        if (others.length) toast(t('updatedBy') + ' ' + others.slice(0, 3).join(', '), 3000);
+      }
     }
-    const mode = out.mode === 'view' ? 'view' : 'edit', modeChanged = mode !== meta.mode; saveMeta('mode', mode);
-    syncMsg = ''; saveMeta('since', out.seq); saveMeta('lastSync', Date.now());
-    if (modeChanged) { chrome(); render(); } else if (out.records.length && !document.querySelector('dialog[open]')) render(true);
-    if (queue.length > sent.length) scheduleSync(); // large backlog goes in batches
-    if (others.size) toast(t('updatedBy') + ' ' + [...others].slice(0, 3).join(', '), 3000);
   } catch (e) {
     syncErr = true; syncMsg = (e instanceof TypeError || e.name === 'AbortError' ? 'cannot reach server' : e.message) + ' — ' + url;
     if (manual === true) toast(t('syncFail') + ' · ' + syncMsg.split(' — ')[0]);
+  } finally {
+    clearTimeout(timeout); syncing = false;
+    if (again && !syncErr) scheduleSync(200); // after a failure the regular timer retries
+    updateSyncBtn(); if (tab === 'set' && !document.querySelector('dialog[open]')) render(true);
   }
-  clearTimeout(timeout); syncing = false; updateSyncBtn(); if (tab === 'set' && !document.querySelector('dialog[open]')) render(true);
+}
+// Forget the sync position and (if allowed to write) offer the server every record on this phone; newest wins.
+function startOver(dbId) {
+  const writes = meta.mode === 'view' ? [] : [...recs.values()].map(r => ({ ...r, dirty: 1 }));
+  for (const r of writes) recs.set(r.k, r);
+  Object.assign(meta, { since: 0, dbId });
+  return SyncCore.commit(idb, writes, { since: 0, dbId }, false);
+}
+// a different server or key: download everything again, and upload what it doesn't have
+function newConnection() {
+  connection++; saveMeta('mode', 'probe');
+  startOver('').catch(() => {}).then(() => sync(true));
 }
 function updateSyncBtn() {
   const b = $('#syncbtn'), p = pendingCount();
@@ -249,7 +279,8 @@ addEventListener('online', () => { updateSyncBtn(); sync(); });
 addEventListener('offline', updateSyncBtn);
 // pick up other people's changes quickly while the page is open and visible; a hidden page waits for the next minute
 setInterval(() => { if (document.visibilityState === 'visible' ? navigator.onLine : pendingCount()) sync(); }, 15000);
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && navigator.onLine) sync(); });
+// sync on coming back, and send anything unsent the moment the app is left
+document.addEventListener('visibilitychange', () => { if (navigator.onLine && (document.visibilityState === 'visible' || pendingCount())) sync(); });
 
 /* ---------- UI shell ---------- */
 let tab = 'att', date = ymd(new Date()), q = '';
@@ -864,8 +895,8 @@ document.addEventListener('change', e => {
   else if (el.id === 'logdate') { logDate = el.value; render(); }
   else if (el.id === 'rt1' || el.id === 'rt2') { saveMeta('remind', { ...remindCfg(), [el.id === 'rt1' ? 't1' : 't2']: el.value }); if (remindCfg().on) pushSubscribe().then(() => toast(t('remindSet'))).catch(() => toast(t('pushUnavail'))); }
   else if (el.id === 'uname') { const n = el.value.trim(); if (!n) { el.value = meta.user; askName(); return; } saveMeta('user', n); toast(t('saved')); }
-  else if (el.id === 'srv') { saveMeta('server', el.value.trim()); saveMeta('mode', 'probe'); sync(true); }
-  else if (el.id === 'key') { saveMeta('key', el.value); saveMeta('mode', 'probe'); sync(true); } // a different key may mean a different role
+  else if (el.id === 'srv') { saveMeta('server', el.value.trim()); newConnection(); }
+  else if (el.id === 'key') { saveMeta('key', el.value); newConnection(); } // a different key may mean a different role
 });
 
 /* ---------- who is using this phone ---------- */

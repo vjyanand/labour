@@ -1,5 +1,5 @@
-const CACHE = 'labour-v69';
-const SHELL = ['./', 'index.html', 'app.js', 'style.css', 'manifest.webmanifest', 'icon.svg'];
+const CACHE = 'labour-v70';
+const SHELL = ['./', 'index.html', 'sync-core.js', 'app.js', 'style.css', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

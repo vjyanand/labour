@@ -8,7 +8,8 @@
   "scripts": {
     "build": "node scripts/version.mjs",
     "prestart": "node scripts/version.mjs",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
   },
   "dependencies": {
     "@netlify/blobs": "^11.1.11",
