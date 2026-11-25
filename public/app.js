@@ -297,10 +297,10 @@ const dateBar = () => `<div class="wd"><span>${esc(weekday(date))}${date === tod
     <input type="date" id="date" value="${date}" max="${today()}">
     <button class="btn sec" data-act="day" data-v="1" ${date >= today() ? 'disabled' : ''}>›</button>
   </div>`;
-// attendance order: daily wage (low to high, monthly-salary people last), then male before female, then name.
+// attendance order: daily wage (low to high, monthly-salary people last), then female before male, then name.
 // Uses the normal wage, so changing one day's rate doesn't move anyone around.
 const payRank = l => (l.type === 'monthly' ? Number.MAX_SAFE_INTEGER : +l.wage || 0);
-const byPaySexName = (p, q) => payRank(p) - payRank(q) || (p.g === 'F') - (q.g === 'F') || p.name.localeCompare(q.name);
+const byPaySexName = (p, q) => payRank(p) - payRank(q) || (p.g === 'M') - (q.g === 'M') || p.name.localeCompare(q.name);
 function attView() {
   const dr = g => dayRate(date, g);
   const list = attMode === 'list';
