@@ -40,16 +40,17 @@ function sync(req, res) {
     try { msg = JSON.parse(body); } catch { res.writeHead(400); return res.end('bad json'); }
     const since = Number(msg.since) || 0;
     let changed = false;
+    const newer = new Set(); // sent records the server didn't take: the phone must get the winning copy back
     for (const r of mode === 'edit' ? msg.records || [] : []) { // view-only keys can never write
       if (!r || typeof r.k !== 'string') continue;
       const cur = db.records[r.k];
-      if (!cur || r.u >= cur.u) { // last-write-wins
+      if (!cur || r.u > cur.u) { // last-write-wins
         db.records[r.k] = { k: r.k, d: r.d, u: r.u, del: r.del ? 1 : 0, b: String(r.b || ''), seq: ++db.seq };
         changed = true;
-      }
+      } else if (r.u !== cur.u || JSON.stringify(r.d) !== JSON.stringify(cur.d)) newer.add(r.k);
     }
     if (changed) save();
-    const out = Object.values(db.records).filter(r => r.seq > since);
+    const out = Object.values(db.records).filter(r => r.seq > since || newer.has(r.k));
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ seq: db.seq, now: Date.now(), mode, records: out }));
   });

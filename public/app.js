@@ -70,7 +70,7 @@ const t = k => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
 /* ---------- storage (IndexedDB, everything cached in memory) ---------- */
 // record: {k, d:{...}, u:updatedAt, del:0|1, dirty:0|1}
 // keys:  L:<id> labourer | A:<date>:<labourId> attendance | R:<date>:<M|F> day wage override
-let idb; const recs = new Map(); const meta = { mode: 'edit', clockOffset: 0, user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0 };
+let idb; const recs = new Map(); const meta = { mode: 'edit', clockOffset: 0, user: '', remind: null, lang: '', since: 0, server: '', key: '', lastSync: 0, syncGen: 0 };
 function openDB() {
   return new Promise((res, rej) => {
     const r = indexedDB.open('labour-db', 1);
@@ -86,6 +86,17 @@ async function load() {
   (await idbAll('rec')).forEach(r => recs.set(r.k, r));
   for (const k of Object.keys(meta)) { const v = await idbGet('meta', k); if (v !== undefined) meta[k] = v; }
   lang = I18N[meta.lang] ? meta.lang : detectLang();
+  if (meta.syncGen < 1) await fullResync();
+}
+// One-time repair: older versions could lose a change on the server. Fetch everything again and send this
+// phone's copy of every record; the server keeps whichever is newest.
+async function fullResync() {
+  if (meta.mode !== 'view') {
+    const tx = idb.transaction('rec', 'readwrite');
+    for (const r of recs.values()) { r.dirty = 1; tx.objectStore('rec').put(r); }
+    await new Promise((ok, no) => { tx.oncomplete = ok; tx.onabort = () => no(tx.error); });
+  }
+  saveMeta('since', 0); saveMeta('syncGen', 1);
 }
 const saveMeta = (k, v) => { meta[k] = v; idbPut('meta', v, k); };
 // "today" comes from the server's clock when we have synced (corrects a wrong phone clock);
@@ -93,7 +104,8 @@ const saveMeta = (k, v) => { meta[k] = v; idbPut('meta', v, k); };
 // The farm runs on Indian time: "today" is always the IST date, whatever timezone the phone is set to.
 const TZ = 'Asia/Kolkata';
 const istDate = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
-const today = () => istDate.format(new Date(Date.now() + (meta.clockOffset || 0)));
+const now = () => Date.now() + Math.round(meta.clockOffset || 0);
+const today = () => istDate.format(new Date(now()));
 // 'view' = this phone signed in with the read-only key: nothing can be changed. 'probe' = key just changed, mode not known yet.
 const ro = () => meta.mode === 'view';
 function needName() { // nothing may be changed until this phone has a user name (it's stored with every change)
@@ -104,14 +116,15 @@ function put(k, d, del = 0) {
   if (ro()) { toast(t('viewOnly')); throw new Error('read only'); }
   needName();
   if (d && d.date && d.date > today()) { toast(t('noFuture')); throw new Error('future date'); }
-  const r = { k, d, u: Date.now(), del, dirty: 1, b: meta.user };
+  const u = Math.max(now(), (recs.get(k)?.u || 0) + 1);
+  const r = { k, d, u, del, dirty: 1, b: meta.user };
   recs.set(k, r); idbPut('rec', r); scheduleSync(); return r;
 }
 // append-only audit trail: one unique record per action, synced like everything else, never deleted
 function audit(act, o) {
   if (ro()) throw new Error('read only');
   needName();
-  const u = Date.now(), k = `G:${u}:${uid().slice(0, 6)}`;
+  const u = now(), k = `G:${u}:${uid().slice(0, 6)}`;
   const r = { k, d: { act, ...o }, u, del: 0, dirty: 1, b: meta.user || '?' };
   recs.set(k, r); idbPut('rec', r); scheduleSync();
 }
@@ -197,11 +210,12 @@ async function sync(manual) {
   if (syncing) return;
   if (!navigator.onLine) { if (manual === true) toast(t('offline')); return; }
   syncing = true; syncErr = false; updateSyncBtn();
+  const abort = new AbortController(), timeout = setTimeout(() => abort.abort(), 30000); // a hung request must not block later syncs
   const url = (meta.server || '').replace(/\/$/, '') + '/api/sync';
   try {
-    const sent = meta.mode === 'edit' ? [...recs.values()].filter(r => r.dirty) : [], t0 = Date.now();
+    const queue = meta.mode === 'edit' ? [...recs.values()].filter(r => r.dirty) : [], sent = queue.slice(0, 500), t0 = Date.now();
     const res = await fetch(url, {
-      method: 'POST',
+      method: 'POST', signal: abort.signal,
       headers: { 'Content-Type': 'application/json', ...(meta.key ? { 'x-sync-key': meta.key } : {}) },
       body: JSON.stringify({ since: meta.since, records: sent.map(({ k, d, u, del, b }) => ({ k, d, u, del, b })) }),
     });
@@ -217,12 +231,13 @@ async function sync(manual) {
     const mode = out.mode === 'view' ? 'view' : 'edit', modeChanged = mode !== meta.mode; saveMeta('mode', mode);
     syncMsg = ''; saveMeta('since', out.seq); saveMeta('lastSync', Date.now());
     if (modeChanged) { chrome(); render(); } else if (out.records.length && !document.querySelector('dialog[open]')) render(true);
+    if (queue.length > sent.length) scheduleSync(); // large backlog goes in batches
     if (others.size) toast(t('updatedBy') + ' ' + [...others].slice(0, 3).join(', '), 3000);
   } catch (e) {
-    syncErr = true; syncMsg = (e instanceof TypeError ? 'cannot reach server' : e.message) + ' — ' + url;
+    syncErr = true; syncMsg = (e instanceof TypeError || e.name === 'AbortError' ? 'cannot reach server' : e.message) + ' — ' + url;
     if (manual === true) toast(t('syncFail') + ' · ' + syncMsg.split(' — ')[0]);
   }
-  syncing = false; updateSyncBtn(); if (tab === 'set' && !document.querySelector('dialog[open]')) render(true);
+  clearTimeout(timeout); syncing = false; updateSyncBtn(); if (tab === 'set' && !document.querySelector('dialog[open]')) render(true);
 }
 function updateSyncBtn() {
   const b = $('#syncbtn'), p = pendingCount();
